@@ -103,6 +103,7 @@ typedef struct	s_fast_power
 */
 
 int				ft_printf(const char *format, ...);
+int				ft_dprintf(int fd, const char *format, ...);
 int				ft_parse_format(const char *format, va_list argp,
 									t_printf_arg *arg);
 int				ft_parse_flags(const char *format, t_printf_arg *arg);

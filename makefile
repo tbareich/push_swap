@@ -2,7 +2,7 @@
 
 NAME = push_swap
 PUSH_SWAP_HEADER = push_swap.h
-OBJS = push_swap.o checker.o src/check_args.o
+OBJS = push_swap.o checker.o src/check_args.o src/error.o
 PRINTF = ft_printf
 PRINTF_LIB =  ft_printf/libftprintf.a
 

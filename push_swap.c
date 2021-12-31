@@ -1,11 +1,8 @@
-#include <unistd.h>
-#include "ft_printf/ft_printf.h"
+#include "push_swap.h"
 
 
 int	main(int ac, char **av)
 {
-	(void) ac;
-	(void) av;
-	ft_printf("From push swap program");
+	check_args(ac, av);
 	return (0);
 }

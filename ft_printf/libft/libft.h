@@ -177,6 +177,8 @@ int				arrlst_size(t_arrlst arrlst);
 char			*ft_strjoin_free(char const *s1, char const *s2, int option);
 char			*ft_strdup_free(char **s1);
 void			*ft_realloc(void *ptr, size_t pre_size, size_t size);
-
+void			ft_swap(int *elem1, int *elem2);
 int				get_int_len(int nbr);
+char			is_numeric(char *str);
+
 #endif
