@@ -1,25 +1,35 @@
 
+
 NAME = push_swap
-OBJS = push_swap.o
+PUSH_SWAP_HEADER = push_swap.h
+OBJS = push_swap.o checker.o src/check_args.o
 PRINTF = ft_printf
 PRINTF_LIB =  ft_printf/libftprintf.a
 
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra
 
-all: $(NAME)
 
-$(NAME): $(OBJS)
-	cd $(PRINTF) && $(MAKE)
-	$(CC) $(CFLAGS) $(OBJS) $(PRINTF_LIB) -o $(NAME)
+all: sub-make $(NAME)
+
+sub-make:
+	@$(MAKE) -C $(PRINTF)
+
+$(NAME): $(OBJS) $(PUSH_SWAP_HEADER)
+	@$(CC) $(CFLAGS) $(OBJS) $(PRINTF_LIB) -o $(NAME)
+
+%.o: %.c
+	$(CC) $(CFLAGS) -c -o $@  $<
 
 clean:
 	@rm -rf $(OBJS)
 	@rm -rf $(LIBFT)
-	cd $(PRINTF) &&  $(MAKE) clean
+	@$(MAKE) -C $(PRINTF) clean
 
 fclean: clean
 	@rm -f $(NAME)
-	@rm -f $(PRINTF)/libftprintf.a
+	@rm -f $(PRINTF_LIB)
 
-re: fclean all
+re: fclean  all
+
+.PHONY: all clean fclean re
