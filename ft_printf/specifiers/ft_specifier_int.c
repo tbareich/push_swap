@@ -29,6 +29,20 @@ static long long	switcher(va_list argp, t_printf_arg *arg)
 	return (nbr);
 }
 
+static void			specifier_int_helper(t_printf_arg *arg,
+								char **str, unsigned *len, long long nbr)
+{
+	if (arg->flags & APOSTROPHE)
+		*str = separated_number(str);
+	if (arg->flags & PLUS || arg->flags & SPACE || nbr < 0)
+		--arg->width;
+	*len = ft_strlen(*str);
+	if (arg->precision_set && arg->precision == 0 && nbr == 0)
+		*len = 0;
+	if (arg->precision < *len)
+		arg->precision = *len;
+}
+
 void				ft_specifier_int(va_list argp, t_printf_arg *arg)
 {
 	char			*str;
@@ -37,11 +51,7 @@ void				ft_specifier_int(va_list argp, t_printf_arg *arg)
 
 	nbr = switcher(argp, arg);
 	error_handler(0, str = ft_snumtoa(ABS(nbr)));
-	(arg->flags & APOSTROPHE) && (str = separated_number(&str));
-	len = ft_strlen(str);
-	(arg->flags & PLUS || arg->flags & SPACE || nbr < 0) && --arg->width;
-	arg->precision_set && arg->precision == 0 && nbr == 0 && (len = 0);
-	arg->precision < len && (arg->precision = len);
+	specifier_int_helper(arg, &str, &len, nbr);
 	if (!(arg->flags & MINUS) && (!(arg->flags & ZERO)))
 		pad_spaces(arg->width, arg->precision, 1, arg);
 	if ((arg->flags & PLUS) && nbr >= 0)

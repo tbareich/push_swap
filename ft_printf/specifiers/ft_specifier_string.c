@@ -21,8 +21,8 @@ void	ft_specifier_string(va_list argp, t_printf_arg *arg)
 	if (str == NULL)
 		str = "(null)";
 	length = ft_strlen(str);
-	(arg->precision_set && length > arg->precision)
-	&& (length = arg->precision);
+	if (arg->precision_set && length > arg->precision)
+		length = arg->precision	;
 	if (arg->flags & ZERO && !(arg->flags & MINUS))
 		pad_zeros(arg->width, length, 1, arg);
 	else if (!(arg->flags & ZERO) && !(arg->flags & MINUS))

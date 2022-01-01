@@ -18,7 +18,7 @@ void	*ft_memccpy(void *dst, const void *src, int c, size_t n)
 	size_t	m;
 
 	p = ft_memchr(src, c, n);
-	m = p ? p - src + 1 : n;
+	m = p ? (size_t)(p - src + 1) : n;
 	ft_memcpy(dst, src, m);
 	return (!p ? (NULL) : (dst + m));
 }

@@ -49,6 +49,23 @@ static void					convert_hex(unsigned long long nbr, char *hex,
 	}
 }
 
+static void					handel_hex_zero(t_printf_arg *arg, char hex[16], 
+								unsigned count)
+{
+	if (!((*hex == '0') && (arg->precision_set == 1 && arg->precision == 0)))
+		arg->printed += write(arg->fd, hex, count);
+}
+
+static void					handel_hex_nonzero_hash_flag(t_printf_arg *arg,
+								char hex[16], char *specifier)
+{
+	if (arg->flags & HASH && *hex != '0')
+	{
+		arg->printed += write(arg->fd, "0", 1);
+		arg->printed += write(arg->fd, &specifier, 1);
+	}
+}
+
 void						ft_specifier_hex(va_list argp, t_printf_arg *arg,
 							char specifier)
 {
@@ -61,17 +78,14 @@ void						ft_specifier_hex(va_list argp, t_printf_arg *arg,
 	convert_hex((nbr = switcher(argp, arg)), hex, &count, specifier);
 	i = count > arg->precision ? count : arg->precision;
 	i += (arg->flags & HASH && *hex != '0') ? 2 : 0;
-	((*hex == '0') && (arg->precision_set == 1 && arg->precision == 0)) &&
-	(i = 0);
+	if ((*hex == '0') && (arg->precision_set == 1 && arg->precision == 0))
+		i = 0;
 	if (!(arg->flags & ZERO))
 		pad_spaces(arg->width, i, !(arg->flags & MINUS), arg);
-	(arg->flags & HASH && *hex != '0') &&
-	(arg->printed += write(arg->fd, "0", 1)) &&
-	(arg->printed += write(arg->fd, &specifier, 1));
+	handel_hex_nonzero_hash_flag(arg, hex, &specifier);
 	if (arg->flags & ZERO)
 		pad_zeros(arg->width, i, !(arg->flags & MINUS), arg);
 	pad_zeros(arg->precision, count, (arg->precision) > 0, arg);
-	!((*hex == '0') && (arg->precision_set == 1 && arg->precision == 0)) &&
-	(arg->printed += write(arg->fd, hex, count));
+	handel_hex_zero(arg, hex, count);
 	pad_spaces(arg->width, i, (arg->flags & MINUS), arg);
 }

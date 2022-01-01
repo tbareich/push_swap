@@ -49,16 +49,17 @@ void						ft_specifier_octal(va_list argp, t_printf_arg *arg)
 	conver_octal((nbr = switcher(argp, arg)), octal, &count);
 	i = count > arg->precision ? count : arg->precision;
 	i += (i == count && nbr && arg->flags & HASH) ? 1 : 0;
-	((*octal == '0') && (arg->precision_set == 1 && arg->precision == 0)) &&
-	(i = 0);
+	if ((*octal == '0') && (arg->precision_set == 1 && arg->precision == 0))
+		i = 0;
 	(arg->flags & ZERO) ? pad_zeros(arg->width, i, !(arg->flags & MINUS), arg) :
 					pad_spaces(arg->width, i, !(arg->flags & MINUS), arg);
-	(arg->flags & HASH) && (arg->printed += write(arg->fd, "0", 1));
+	if (arg->flags & HASH)
+		arg->printed += write(arg->fd, "0", 1);
 	pad_zeros(arg->precision, count + (arg->flags & HASH && nbr ? 1 : 0),
 					(arg->precision) > 0, arg);
-	(*octal != '0' || !(arg->flags & HASH)) && ((arg->precision_set == 1 &&
+	if ((*octal != '0' || !(arg->flags & HASH)) && ((arg->precision_set == 1 &&
 	arg->precision != 0) || arg->precision_set == 0 || (arg->precision_set == 1
-	&& arg->precision == 0 && *octal != '0'))
-	&& (arg->printed += write(arg->fd, octal, count));
+	&& arg->precision == 0 && *octal != '0')))
+		arg->printed += write(arg->fd, octal, count);
 	pad_spaces(arg->width, i, (arg->flags & MINUS), arg);
 }

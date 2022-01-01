@@ -39,11 +39,15 @@ void						ft_specifier_uint(va_list argp, t_printf_arg *arg,
 	(specifier == 'U') && (arg->length |= LONG);
 	nbr = switcher(argp, arg);
 	error_handler(0, str = ft_unumtoa(nbr));
-	(arg->flags & APOSTROPHE) && (str = separated_number(&str));
+	if (arg->flags & APOSTROPHE)
+		str = separated_number(&str);
 	len = ft_strlen(str);
-	(arg->flags & PLUS || arg->flags & SPACE) && --arg->width;
-	arg->precision_set && arg->precision == 0 && nbr == 0 && (len = 0);
-	arg->precision < len && (arg->precision = len);
+	if (arg->flags & PLUS || arg->flags & SPACE)
+		--arg->width;
+	if (arg->precision_set && arg->precision == 0 && nbr == 0)
+		len = 0;
+	if (arg->precision < len )
+		arg->precision = len;
 	(arg->flags & ZERO) ? pad_zeros(arg->width, arg->precision,
 		!(arg->flags & MINUS), arg) : pad_spaces(arg->width, arg->precision,
 		!(arg->flags & MINUS), arg);

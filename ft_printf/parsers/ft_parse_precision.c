@@ -48,6 +48,7 @@ int			ft_parse_precision(const char *format, va_list argp,
 			arg->precision_set = 0;
 		count += count_digits(format + count);
 	}
-	arg->precision_set && (arg->flags &= ~ZERO);
+	if (arg->precision_set)
+		(arg->flags &= ~ZERO);
 	return (count);
 }

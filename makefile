@@ -1,8 +1,7 @@
-
-
 NAME = push_swap
 PUSH_SWAP_HEADER = push_swap.h
-OBJS = push_swap.o checker.o src/check_args.o src/error.o
+OBJS = push_swap.o checker.o src/check_args.o src/error.o \
+		src/checker/reader.o
 PRINTF = ft_printf
 PRINTF_LIB =  ft_printf/libftprintf.a
 
@@ -16,10 +15,10 @@ sub-make:
 	@$(MAKE) -C $(PRINTF)
 
 $(NAME): $(OBJS) $(PUSH_SWAP_HEADER)
-	@$(CC) $(CFLAGS) $(OBJS) $(PRINTF_LIB) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJS) $(PRINTF_LIB) -o $(NAME) -I.
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c -o $@  $<
+	$(CC) $(CFLAGS) -c -o $@  $< -I.
 
 clean:
 	@rm -rf $(OBJS)
