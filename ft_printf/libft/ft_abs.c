@@ -1,33 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   reader.c                                           :+:      :+:    :+:   */
+/*   ft_abs.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbareich <tbareich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/02 00:58:48 by tbareich          #+#    #+#             */
-/*   Updated: 2022/01/02 01:57:41 by tbareich         ###   ########.fr       */
+/*   Created: 2022/01/01 21:23:19 by tbareich          #+#    #+#             */
+/*   Updated: 2022/01/01 21:28:13 by tbareich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <push_swap.h>
-
-void	reader(int ac, char **av)
+unsigned			ft_abs(int num)
 {
-	char 	*line;
-	int		gnl_sign;
+	return num < 0 ? -num : num;
+}
 
-	check_args(ac, av);
-	line = NULL;
-	while ((gnl_sign = get_next_line(0, &line)) > 0)
-	{
-		if (check_opt(line) == unkonwn)
-			error("ERROR");
-		ft_strdel(&line);
-		line = NULL;
-	}
-	ft_printf("%d\n", gnl_sign);
+unsigned long		ft_labs(long num)
+{
+	return num < 0 ? -num : num;
+}
 
-	if (gnl_sign < 0)
-		error("ERROR");
+unsigned long long	ft_llabs(long long num)
+{
+	return num < 0 ? -num : num;
 }

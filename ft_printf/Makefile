@@ -40,7 +40,7 @@ LIBFT = libft/bst_delete.o libft/bst_deletenode.o libft/bst_find.o \
 		libft/ft_strsplit.o libft/ft_strstr.o libft/ft_strsub.o \
 		libft/ft_strtrim.o libft/ft_tolower.o libft/ft_toupper.o \
 		libft/get_int_len.o libft/get_next_line.o libft/ft_swap.o\
-		libft/is_numeric.o
+		libft/is_numeric.o libft/ft_abs.o
 
 SPECIFIERS = specifiers/ft_specifier_char.o specifiers/ft_specifier_double.o \
 		specifiers/ft_specifier_hex.o specifiers/ft_specifier_int.o \
@@ -65,9 +65,13 @@ CFLAGS = -Wall -Werror -Wextra
 
 all: $(NAME)
 
+
 $(NAME): $(OBJS) $(SPECIFIERS) $(LIBFT) $(PARSERS) $(HELPERS) $(FT_PRINTF_HEADER)
 	@ar rc $(NAME) $(OBJS) $(SPECIFIERS) $(LIBFT) $(PARSERS) $(HELPERS)
 	@ranlib $(NAME)
+
+%.o: %.c
+	$(CC) $(CFLAGS) -c -o $@ $< -I. -Ilibft
 
 clean:
 	@rm -rf $(OBJS)

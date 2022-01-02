@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include <ft_printf.h>
 
 static int		add_color_to_output(char *tmp, t_printf_arg *arg)
 {

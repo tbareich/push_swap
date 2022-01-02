@@ -50,7 +50,7 @@ void				ft_specifier_int(va_list argp, t_printf_arg *arg)
 	unsigned int	len;
 
 	nbr = switcher(argp, arg);
-	error_handler(0, str = ft_snumtoa(ABS(nbr)));
+	error_handler(0, str = ft_snumtoa(ft_llabs(nbr)));
 	specifier_int_helper(arg, &str, &len, nbr);
 	if (!(arg->flags & MINUS) && (!(arg->flags & ZERO)))
 		pad_spaces(arg->width, arg->precision, 1, arg);

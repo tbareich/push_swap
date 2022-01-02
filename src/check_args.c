@@ -11,5 +11,4 @@ void	check_args(int ac, char **av)
 			error("ERROR");
 		++i;
 	}
-	
 }
