@@ -177,6 +177,7 @@ int					arrlst_size(t_arrlst arrlst);
 unsigned 			ft_abs(int num);
 unsigned long		ft_labs(long num);
 unsigned long long	ft_llabs(long long num);
+char				is_int(char *number);
 
 /*
  ** extra Functions

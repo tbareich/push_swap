@@ -38,11 +38,14 @@ $(NAME): $(OBJS) $(PUSH_SWAP_OBJS) $(CHECKER_OBJS) $(PUSH_SWAP_HEADER)
 
 clean:
 	@rm -rf $(OBJS)
+	@rm -rf $(PUSH_SWAP_OBJS)
+	@rm -rf $(CHECKER_OBJS)
 	@rm -rf $(LIBFT)
 	@$(MAKE) -C $(PRINTF) clean
 
 fclean: clean
 	@rm -f $(NAME)
+	@rm -f $(CHECKER_NAME)
 	@rm -f $(PRINTF_LIB)
 
 re: fclean  all

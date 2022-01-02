@@ -6,37 +6,40 @@
 /*   By: tbareich <tbareich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/02 01:59:12 by tbareich          #+#    #+#             */
-/*   Updated: 2022/01/02 02:17:56 by tbareich         ###   ########.fr       */
+/*   Updated: 2022/01/02 18:40:28 by tbareich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
 
-static char	compare_string_numbers(char *num1, char *num2)
+static char	is_in_int_range(char *number, char *min, char *max)
 {
-	int i;
+	int		i;
+	int		len;
+	char	*cmp;
 
 	i = 0;
-	while (num1[i])
+	len = ft_strlen(number);
+	if (number[i] == '-')
+		++i;
+	if (i == 1)
+		cmp = min;
+	else
+		cmp = max;
+	if ((len - i) != 10)
+		return ((len - i) < 10);
+	while (number[i])
 	{
-		if (num1[i] > num2[i])
-			return (1);
-		else if (num1[i] < num2[i])
-			return (-1);
-		
+		if (number[i] > cmp[i] || number[i] > '9' || number[i] < '0')
+			return (0);
 		++i;
 	}
-	return (0);
+	return (1);
 }
 
-char	is_int(char *number, char *min, char* max)
+char		is_int(char *number)
 {
-	char	cmp;
 	if (number == 0)
 		return 0;
-	if (number[0] == '-')
-		cmp = compare_string_numbers(number + 1, min + 1);
-	else
-		cmp = compare_string_numbers(number, max);
-	return (cmp <= 0);
+ 	return is_in_int_range(number, "-2147483648", "2147483647");
 }
