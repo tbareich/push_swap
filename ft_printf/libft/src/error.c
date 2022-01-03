@@ -1,28 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbareich <tbareich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/02 00:58:31 by tbareich          #+#    #+#             */
-/*   Updated: 2022/01/02 00:58:31 by tbareich         ###   ########.fr       */
+/*   Created: 2022/01/03 19:03:03 by tbareich          #+#    #+#             */
+/*   Updated: 2022/01/03 19:03:03 by tbareich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <push_swap.h>
+#include <libft.h>
 
-
-int	main(int ac, char **av)
+void	error(char *msg)
 {
-	t_turn	turn;
-	t_stack	stack_a;
-	t_stack	stack_b;
-
-	if (new_from_stack(&stack_a, ac - 1, sizeof(int)))
-		error("Insufficient memory A");
-	if (new_from_stack(&stack_b, ac - 1, sizeof(int)))
-		error("Insufficient memory B");
-	check_args(&turn ,ac, av);
-	return (0);
+	ft_putstr_fd(msg, 2);
+	exit(1);
 }

@@ -58,6 +58,14 @@ typedef struct		s_arrlst
 	void			**array;
 }					t_arrlst;
 
+typedef struct		s_stack
+{
+	unsigned		top;
+	unsigned		length;
+	size_t			size;
+	void			*array;
+}					t_stack;
+
 /*
  ** libc Functions
  ** --------------
@@ -170,7 +178,18 @@ void				arrlst_del(t_arrlst **arrlst);
 int					arrlst_size(t_arrlst arrlst);
 
 /*
- ** math Functions
+ ** Stack Functions
+ ** -----------------------
+*/
+
+t_stack				*new_stack(unsigned len, size_t size);
+char				new_from_stack(t_stack *stack, unsigned len, size_t size);
+char				push_stack(t_stack *stack, void* elem);
+void				*pop_stack(t_stack *stack);
+void				print_stack(t_stack *stack, void print(void *elem));
+
+/*
+ ** Math Functions
  ** -----------------------
 */
 
@@ -180,10 +199,11 @@ unsigned long long	ft_llabs(long long num);
 char				is_int(char *number);
 
 /*
- ** extra Functions
+ ** Extra Functions
  ** -----------------------
 */
 
+void				error(char *msg);
 char				*ft_strjoin_free(char const *s1, char const *s2, int option);
 char				*ft_strdup_free(char **s1);
 void				*ft_realloc(void *ptr, size_t pre_size, size_t size);

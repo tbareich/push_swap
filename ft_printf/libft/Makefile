@@ -6,7 +6,7 @@
 #    By: tbareich <tbareich@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/24 14:13:12 by tbareich          #+#    #+#              #
-#    Updated: 2022/01/03 00:09:17 by tbareich         ###   ########.fr        #
+#    Updated: 2022/01/03 19:07:39 by tbareich         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,8 @@ SRCS_NO_PATH= bst_delete.c bst_deletenode.c bst_find.c \
 		ft_strsplit.c ft_strstr.c ft_strsub.c \
 		ft_strtrim.c ft_tolower.c ft_toupper.c \
 		get_int_len.c get_next_line.c ft_swap.c\
-		is_numeric.c ft_abs.c is_int.c
+		is_numeric.c ft_abs.c is_int.c\
+		stack.c error.c
 SRCS = $(addprefix $(SRCS_DIR), $(SRCS_NO_PATH))
 OBJS = $(patsubst $(SRCS_DIR)%.c, $(OBJS_DIR)%.o, $(SRCS))
 CC = gcc
@@ -56,7 +57,7 @@ $(NAME): $(OBJS) $(LIBFT_HEADER)
 
 $(OBJS_DIR)%.o: $(SRCS_DIR)%.c
 	@mkdir -p $(OBJS_DIR)
-	$(CC) $(CFLAGS) -c -o $@ $< -I.
+	$(CC) $(CFLAGS) -c -o $@ $< -I. -Ilibft
 
 clean:
 	@rm -rf $(OBJS_DIR)

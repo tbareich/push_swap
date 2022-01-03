@@ -31,10 +31,14 @@ enum				e_operation
 	pb
 };
 
-void				check_args(int ac, char **av);
-void				error(char *msg);
-void				reader(int ac, char **av);
-enum e_operation	check_opt(char *opt);
+typedef struct		s_turn
+{
+	t_stack stack_a;
+	t_stack stack_b;
+}					t_turn;
 
+void				reader(t_turn *turn, int ac, char **av);
+void				check_args(t_turn *turn, int ac, char **av);
+enum e_operation	check_opt(char *opt);
 
 #endif

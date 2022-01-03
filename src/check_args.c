@@ -1,8 +1,9 @@
 #include <push_swap.h>
 
-void	check_args(int ac, char **av)
+void	check_args(t_turn *turn, int ac, char **av)
 {
 	int i;
+	int num;
 
 	if (ac < 2)
 		error("ERROR");
@@ -11,6 +12,8 @@ void	check_args(int ac, char **av)
 	{
 		if (is_int(av[i]) == 0)
 			error("ERROR");
+		num = atoi(av[i]);
+		push_stack(&(turn->stack_a), &num);
 		++i;
 	}
 }

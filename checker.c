@@ -6,13 +6,31 @@
 /*   By: tbareich <tbareich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/02 00:58:27 by tbareich          #+#    #+#             */
-/*   Updated: 2022/01/02 01:22:25 by tbareich         ###   ########.fr       */
+/*   Updated: 2022/01/03 19:25:51 by tbareich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
 
-int		main(int ac, char **av)
+static void	print(void *elem)
 {
-	reader(ac, av);
+	int		*num;
+
+	num = (int *)elem;
+	ft_putnbr(*num);
+}
+
+int			main(int ac, char **av)
+{
+	t_turn	turn;
+	t_stack	stack_a;
+	t_stack	stack_b;
+
+	if (new_from_stack(&stack_a, ac - 1, sizeof(int)))
+		error("Insufficient memory");
+	if (new_from_stack(&stack_b, ac - 1, sizeof(int)))
+		error("Insufficient memory");
+	reader(&turn, ac, av);
+	print_stack(&stack_a, print);
+	print_stack(&stack_b, print);
 }

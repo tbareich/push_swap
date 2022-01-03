@@ -41,7 +41,7 @@ all: sub-make $(NAME)
 sub-make:
 	@$(MAKE) -C libft
 
-$(NAME): $(OBJS) $(SPECIFIERS) $(PARSERS) $(HELPERS) $(FT_PRINTF_HEADER) $(LIBFT) 
+$(NAME): $(OBJS) $(SPECIFIERS) $(PARSERS) $(HELPERS) $(FT_PRINTF_HEADER)
 	@ar rc $(NAME) $(OBJS) $(SPECIFIERS) $(LIBFT) $(PARSERS) $(HELPERS)
 	@ranlib $(NAME)
 

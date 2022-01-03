@@ -13,7 +13,7 @@
 NAME = push_swap
 CHECKER_NAME = checker
 PUSH_SWAP_HEADER = push_swap.h
-OBJS = src/check_args.o src/error.o
+OBJS = src/check_args.o
 		
 PUSH_SWAP_OBJS = push_swap.o 
 CHECKER_OBJS =  checker.o  src/checker/reader.o src/checker/check_opt.o
