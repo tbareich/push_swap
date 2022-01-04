@@ -62,8 +62,7 @@ typedef struct		s_stack
 {
 	unsigned		top;
 	unsigned		length;
-	size_t			size;
-	void			*array;
+	int				*array;
 }					t_stack;
 
 /*
@@ -182,11 +181,11 @@ int					arrlst_size(t_arrlst arrlst);
  ** -----------------------
 */
 
-t_stack				*new_stack(unsigned len, size_t size);
-char				new_from_stack(t_stack *stack, unsigned len, size_t size);
-char				push_stack(t_stack *stack, void* elem);
-void				*pop_stack(t_stack *stack);
-void				print_stack(t_stack *stack, void print(void *elem));
+t_stack				*new_stack(unsigned length);
+char				new_from_stack(t_stack *stack, unsigned length);
+char				push_stack(t_stack *stack, int number);
+int					*pop_stack(t_stack *stack);
+void				print_stack(t_stack *stack, void print(int number));
 
 /*
  ** Math Functions

@@ -6,18 +6,18 @@
 /*   By: tbareich <tbareich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/02 00:58:27 by tbareich          #+#    #+#             */
-/*   Updated: 2022/01/04 02:27:35 by tbareich         ###   ########.fr       */
+/*   Updated: 2022/01/04 10:16:46 by tbareich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
 
-static void	print(void *elem)
+static void	print(int number)
 {
-	int		*num;
+	int		num;
 
-	num = (int *)elem;
-	ft_putnbr(*num);
+	num = number;
+	ft_putnbr(num);
 }
 
 int			main(int ac, char **av)
@@ -26,9 +26,9 @@ int			main(int ac, char **av)
 	t_stack	stack_a;
 	t_stack	stack_b;
 
-	if (new_from_stack(&stack_a, ac - 1, sizeof(int)))
+	if (new_from_stack(&stack_a, ac - 1))
 		error("Insufficient memory");
-	if (new_from_stack(&stack_b, ac - 1, sizeof(int)))
+	if (new_from_stack(&stack_b, ac - 1))
 		error("Insufficient memory");
 	turn.stack_a = stack_a;
 	turn.stack_b = stack_b;

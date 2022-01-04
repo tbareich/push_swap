@@ -19,9 +19,9 @@ int	main(int ac, char **av)
 	t_stack	stack_a;
 	t_stack	stack_b;
 
-	if (new_from_stack(&stack_a, ac - 1, sizeof(int)))
+	if (new_from_stack(&stack_a, ac - 1))
 		error("Insufficient memory A");
-	if (new_from_stack(&stack_b, ac - 1, sizeof(int)))
+	if (new_from_stack(&stack_b, ac - 1))
 		error("Insufficient memory B");
 	check_args(&turn ,ac, av);
 	return (0);
