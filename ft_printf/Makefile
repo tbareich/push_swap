@@ -14,6 +14,7 @@ NAME = libftprintf.a
 FT_PRINTF_HEADER = ft_printf.h
 OBJS = ft_printf.o
 LIBFT = libft/obj/*.o
+LIBFT_LIB = libft/libft.a
 
 SPECIFIERS = specifiers/ft_specifier_char.o specifiers/ft_specifier_double.o \
 		specifiers/ft_specifier_hex.o specifiers/ft_specifier_int.o \
@@ -41,9 +42,9 @@ all: sub-make $(NAME)
 sub-make:
 	@$(MAKE) -C libft
 
-$(NAME): $(OBJS) $(SPECIFIERS) $(PARSERS) $(HELPERS) $(FT_PRINTF_HEADER)
+$(NAME): $(OBJS) $(SPECIFIERS) $(PARSERS) $(HELPERS) $(FT_PRINTF_HEADER) $(LIBFT_LIB)
 	@ar rc $(NAME) $(OBJS) $(SPECIFIERS) $(LIBFT) $(PARSERS) $(HELPERS)
-	@ranlib $(NAME)
+	ranlib $(NAME)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c -o $@ $< -I. -Ilibft

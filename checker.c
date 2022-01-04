@@ -6,7 +6,7 @@
 /*   By: tbareich <tbareich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/02 00:58:27 by tbareich          #+#    #+#             */
-/*   Updated: 2022/01/03 19:25:51 by tbareich         ###   ########.fr       */
+/*   Updated: 2022/01/04 02:27:35 by tbareich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ int			main(int ac, char **av)
 		error("Insufficient memory");
 	if (new_from_stack(&stack_b, ac - 1, sizeof(int)))
 		error("Insufficient memory");
+	turn.stack_a = stack_a;
+	turn.stack_b = stack_b;
 	reader(&turn, ac, av);
 	print_stack(&stack_a, print);
 	print_stack(&stack_b, print);

@@ -16,7 +16,7 @@ PUSH_SWAP_HEADER = push_swap.h
 OBJS = src/check_args.o
 		
 PUSH_SWAP_OBJS = push_swap.o 
-CHECKER_OBJS =  checker.o  src/checker/reader.o src/checker/check_opt.o
+CHECKER_OBJS = checker.o src/checker/reader.o src/checker/check_opt.o
 PRINTF = ft_printf
 PRINTF_LIB =  ft_printf/libftprintf.a
 
@@ -29,8 +29,8 @@ all: sub-make $(NAME)
 sub-make:
 	@$(MAKE) -C $(PRINTF)
 
-$(NAME): $(OBJS) $(PUSH_SWAP_OBJS) $(CHECKER_OBJS) $(PUSH_SWAP_HEADER)
-	@$(CC) $(CFLAGS) $(OBJS) $(PUSH_SWAP_OBJS)$(PRINTF_LIB) -o $(NAME) -I. -Ift_printf
+$(NAME): $(OBJS) $(PUSH_SWAP_OBJS) $(CHECKER_OBJS) $(PUSH_SWAP_HEADER) $(PRINTF_LIB)
+	$(CC) $(CFLAGS) $(OBJS) $(PUSH_SWAP_OBJS)$(PRINTF_LIB) -o $(NAME) -I. -Ift_printf
 	@$(CC) $(CFLAGS) $(OBJS) $(CHECKER_OBJS) $(PRINTF_LIB)  -o $(CHECKER_NAME) -I. -Ift_printf
 
 %.o: %.c
