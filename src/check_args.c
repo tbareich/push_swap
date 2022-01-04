@@ -13,7 +13,8 @@ void	check_args(t_turn *turn, int ac, char **av)
 		if (is_int(av[i]) == 0)
 			error("ERROR");
 		num = atoi(av[i]);
-		push_stack(&(turn->stack_a), &num);
+		if (push_stack(&(turn->stack_a), &num))
+			error("ERROR");
 		++i;
 	}
 }

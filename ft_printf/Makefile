@@ -44,7 +44,7 @@ sub-make:
 
 $(NAME): $(OBJS) $(SPECIFIERS) $(PARSERS) $(HELPERS) $(FT_PRINTF_HEADER) $(LIBFT_LIB)
 	@ar rc $(NAME) $(OBJS) $(SPECIFIERS) $(LIBFT) $(PARSERS) $(HELPERS)
-	ranlib $(NAME)
+	@ranlib $(NAME)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c -o $@ $< -I. -Ilibft
