@@ -181,11 +181,10 @@ int					arrlst_size(t_arrlst arrlst);
  ** -----------------------
 */
 
-t_stack				*new_stack(unsigned length);
-char				new_from_stack(t_stack *stack, unsigned length);
+char				init_stack(t_stack *stack, unsigned length);
 char				push_stack(t_stack *stack, int number);
 int					*pop_stack(t_stack *stack);
-void				print_stack(t_stack *stack, void print(int number));
+void				print_stack(t_stack *stack);
 
 /*
  ** Math Functions

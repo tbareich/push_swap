@@ -6,7 +6,7 @@
 /*   By: tbareich <tbareich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/02 00:58:48 by tbareich          #+#    #+#             */
-/*   Updated: 2022/01/03 19:12:11 by tbareich         ###   ########.fr       */
+/*   Updated: 2022/01/06 04:18:55 by tbareich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ void	reader(t_turn *turn, int ac, char **av)
 	while ((gnl_sign = get_next_line(0, &line)) > 0)
 	{
 		if (check_opt(line) == unkonwn)
-			error("ERROR");
+			error(DEFAULTERROR);
 		ft_strdel(&line);
 		line = NULL;
 	}
 	if (gnl_sign < 0)
-		error("ERROR");
+		error(DEFAULTERROR);
 }

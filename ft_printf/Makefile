@@ -50,13 +50,19 @@ $(NAME): $(OBJS) $(SPECIFIERS) $(PARSERS) $(HELPERS) $(FT_PRINTF_HEADER) $(LIBFT
 	$(CC) $(CFLAGS) -c -o $@ $< -I. -Ilibft
 
 clean:
+	@rm -rf $(OBJS)
+	@rm -rf $(SPECIFIERS)
+	@rm -rf $(PARSERS)
+	@rm -rf $(HELPERS)
 	@$(MAKE) clean -C libft
+
+printf_clean: 
 	@rm -rf $(OBJS)
 	@rm -rf $(SPECIFIERS)
 	@rm -rf $(PARSERS)
 	@rm -rf $(HELPERS)
 
-fclean: clean
+fclean: printf_clean 
 	@rm -f $(NAME)
 	@$(MAKE) fclean -C libft
 

@@ -6,31 +6,13 @@
 /*   By: tbareich <tbareich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 17:57:00 by tbareich          #+#    #+#             */
-/*   Updated: 2022/01/04 10:17:06 by tbareich         ###   ########.fr       */
+/*   Updated: 2022/01/04 10:53:52 by tbareich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
 
-t_stack		*new_stack(unsigned length)
-{
-	t_stack		*stack;
-
-	stack = (t_stack*)malloc(sizeof(t_stack));
-	if (stack == NULL)
-		return (NULL);
-	stack->array = malloc(length * sizeof(int));
-	if (stack->array == NULL)
-	{
-		ft_memdel((void **) &stack);
-		return (NULL);
-	}
-	stack->top = 0;
-	stack->length = length;
-	return stack;
-}
-
-char		new_from_stack(t_stack *stack, unsigned length)
+char		init_stack(t_stack *stack, unsigned length)
 {
 	if (stack == NULL)
 		return (1);
@@ -59,7 +41,7 @@ int			*pop_stack(t_stack *stack)
 	return (stack->array + stack->top);
 }
 
-void		print_stack(t_stack *stack, void print(int number))
+void		print_stack(t_stack *stack)
 {
 	unsigned	i;
 
@@ -69,13 +51,16 @@ void		print_stack(t_stack *stack, void print(int number))
 		return ;
 	}
 	i = 0;
-	ft_putstr("[ ");
+	ft_putstr("{\n\ttop: ");
+	ft_putnbr(stack->top);
+	ft_putstr(",\n\tarray: [ ");
 	while (i < stack->length)
 	{
-		print(stack->array[i]);
+		ft_putnbr(stack->array[i]);
 		if (i < stack->length - 1)
 			ft_putstr(" ,");
 		++i;
 	}
 	ft_putendl(" ]");
+	ft_putendl("}");
 }

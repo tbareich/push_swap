@@ -15,6 +15,14 @@
 
 # include <ft_printf.h>
 
+# ifndef MEMOERROR
+# define MEMOERROR "INSUFFICIENT MEMORY"
+# endif
+
+# ifndef DEFAULTERROR
+# define DEFAULTERROR "ERROR"
+# endif
+
 enum				e_operation
 {
 	unkonwn,
@@ -33,12 +41,21 @@ enum				e_operation
 
 typedef struct		s_turn
 {
-	t_stack stack_a;
-	t_stack stack_b;
+	t_stack *stack_a;
+	t_stack *stack_b;
 }					t_turn;
+
+typedef struct		s_indexing
+{
+	unsigned	index;
+	int			value;
+}					t_indexing;
 
 void				reader(t_turn *turn, int ac, char **av);
 void				check_args(t_turn *turn, int ac, char **av);
 enum e_operation	check_opt(char *opt);
+void 				merge_sort(t_list **headRef);
+void				print_sorted_list(t_list *head);
+
 
 #endif

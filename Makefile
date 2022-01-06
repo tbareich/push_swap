@@ -13,7 +13,7 @@
 NAME = push_swap
 CHECKER_NAME = checker
 PUSH_SWAP_HEADER = push_swap.h
-OBJS = src/check_args.o
+OBJS = src/check_args.o src/merge_sort.o
 		
 PUSH_SWAP_OBJS = push_swap.o 
 CHECKER_OBJS = checker.o src/checker/reader.o src/checker/check_opt.o
@@ -43,10 +43,16 @@ clean:
 	@rm -rf $(LIBFT)
 	@$(MAKE) -C $(PRINTF) clean
 
-fclean: clean
+push_swap_clean:
+	@rm -rf $(OBJS)
+	@rm -rf $(PUSH_SWAP_OBJS)
+	@rm -rf $(CHECKER_OBJS)
+	@rm -rf $(LIBFT)
+
+fclean: push_swap_clean
 	@rm -f $(NAME)
 	@rm -f $(CHECKER_NAME)
-	@rm -f $(PRINTF_LIB)
+	@$(MAKE) -C $(PRINTF) fclean
 
 re: fclean  all
 
