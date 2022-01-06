@@ -7,7 +7,7 @@ static void	indexing(t_stack *stack, t_list *head)
 	t_indexing *elem_cmp;
 
 	merge_sort(&head);
-	print_sorted_list(head);
+	// print_sorted_list(head);
 	i = 0;
 	while (head != NULL)
 	{
