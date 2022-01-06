@@ -6,7 +6,7 @@
 /*   By: tbareich <tbareich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/02 00:58:27 by tbareich          #+#    #+#             */
-/*   Updated: 2022/01/06 11:59:46 by tbareich         ###   ########.fr       */
+/*   Updated: 2022/01/06 12:01:37 by tbareich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	is_sorted(t_turn turn)
 	i = turn.stack_a->top - 1;
 	while (i > 0)
 	{
-		if (turn.stack_a->array[i] >= turn.stack_a->array[i - 1])
+		if (turn.stack_a->array[i] > turn.stack_a->array[i - 1])
 		{
 			ft_putstr("KO\n");
 			return ;
@@ -47,7 +47,5 @@ int			main(int ac, char **av)
 	turn.stack_a = &stack_a;
 	turn.stack_b = &stack_b;
 	reader(&turn, ac, av);
-	// print_stack(&stack_a);
-	// print_stack(&stack_b);
 	is_sorted(turn);
 }
