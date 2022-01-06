@@ -1,31 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker.c                                          :+:      :+:    :+:   */
+/*   px.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbareich <tbareich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/02 00:58:27 by tbareich          #+#    #+#             */
-/*   Updated: 2022/01/06 11:28:44 by tbareich         ###   ########.fr       */
+/*   Created: 2022/01/06 09:42:27 by tbareich          #+#    #+#             */
+/*   Updated: 2022/01/06 11:27:16 by tbareich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
 
-
-int			main(int ac, char **av)
+void	px(t_stack *destination_stack, t_stack *source_stack)
 {
-	t_turn	turn;
-	t_stack	stack_a;
-	t_stack	stack_b;
+	int		*value;
 
-	if (init_stack(&stack_a, ac - 1))
-		error(MEMOERROR);
-	if (init_stack(&stack_b, ac - 1))
-		error(MEMOERROR);
-	turn.stack_a = &stack_a;
-	turn.stack_b = &stack_b;
-	reader(&turn, ac, av);
-	print_stack(&stack_a);
-	print_stack(&stack_b);
+	value = pop_stack(source_stack);
+	if (value != NULL)
+		push_stack(destination_stack, *value);
 }

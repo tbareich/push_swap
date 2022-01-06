@@ -1,31 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker.c                                          :+:      :+:    :+:   */
+/*   sx.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbareich <tbareich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/02 00:58:27 by tbareich          #+#    #+#             */
-/*   Updated: 2022/01/06 11:28:44 by tbareich         ###   ########.fr       */
+/*   Created: 2022/01/06 09:34:56 by tbareich          #+#    #+#             */
+/*   Updated: 2022/01/06 09:38:44 by tbareich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
 
-
-int			main(int ac, char **av)
+void	sx(t_stack *stack)
 {
-	t_turn	turn;
-	t_stack	stack_a;
-	t_stack	stack_b;
-
-	if (init_stack(&stack_a, ac - 1))
-		error(MEMOERROR);
-	if (init_stack(&stack_b, ac - 1))
-		error(MEMOERROR);
-	turn.stack_a = &stack_a;
-	turn.stack_b = &stack_b;
-	reader(&turn, ac, av);
-	print_stack(&stack_a);
-	print_stack(&stack_b);
+	if (stack->top > 1)
+		ft_swap(stack->array + stack->top - 1, stack->array + stack->top - 2);
 }

@@ -16,11 +16,11 @@
 # include <ft_printf.h>
 
 # ifndef MEMOERROR
-# define MEMOERROR "INSUFFICIENT MEMORY"
+# define MEMOERROR "INSUFFICIENT MEMORY\n"
 # endif
 
 # ifndef DEFAULTERROR
-# define DEFAULTERROR "ERROR"
+# define DEFAULTERROR "ERROR\n"
 # endif
 
 enum				e_operation
@@ -57,5 +57,12 @@ enum e_operation	check_opt(char *opt);
 void 				merge_sort(t_list **headRef);
 void				print_sorted_list(t_list *head);
 
+void				sx(t_stack *stack);
+void				s_a_b(t_stack *stack1, t_stack *stack2);
+void				px(t_stack *destination_stack, t_stack *source_stack);
+void				rx(t_stack *stack);
+void				r_a_b(t_stack *stack1, t_stack *stack2);
+void				rrx(t_stack *stack);
+void				rr_a_b(t_stack *stack1, t_stack *stack2);
 
 #endif

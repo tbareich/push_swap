@@ -1,5 +1,29 @@
 #include <push_swap.h>
 
+static void	indexing(t_stack *stack, t_list *head)
+{
+	int	i;
+	t_indexing *elem;
+	t_indexing *elem_cmp;
+
+	merge_sort(&head);
+	print_sorted_list(head);
+	i = 0;
+	while (head != NULL)
+	{
+		elem = (t_indexing *)(head->content);
+		stack->array[elem->index] = i;
+		if (head->next != NULL)
+		{
+			elem_cmp = (t_indexing *)(head->next->content);
+			if (elem->value == elem_cmp->value)
+				error(DEFAULTERROR);
+		}
+		head = head->next;
+		++i;
+	}
+}
+
 void	check_args(t_turn *turn, int ac, char **av)
 {
 	int 	i;
@@ -26,6 +50,5 @@ void	check_args(t_turn *turn, int ac, char **av)
 		ft_lstadd(&head, node);
 		--i;
 	}
-	merge_sort(&head);
-	print_sorted_list(head);
+	indexing(turn->stack_a, head);
 }

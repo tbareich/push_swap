@@ -17,6 +17,9 @@ OBJS = src/check_args.o src/merge_sort.o
 		
 PUSH_SWAP_OBJS = push_swap.o 
 CHECKER_OBJS = checker.o src/checker/reader.o src/checker/check_opt.o
+OPERATIONS_OBJS = src/operations/sx.o src/operations/px.o\
+				src/operations/rx.o src/operations/r_a_b.o src/operations/rrx.o\
+				src/operations/rr_a_b.o src/operations/s_a_b.o
 PRINTF = ft_printf
 PRINTF_LIB =  ft_printf/libftprintf.a
 
@@ -29,9 +32,12 @@ all: sub-make $(NAME)
 sub-make:
 	@$(MAKE) -C $(PRINTF)
 
-$(NAME): $(OBJS) $(PUSH_SWAP_OBJS) $(CHECKER_OBJS) $(PUSH_SWAP_HEADER) $(PRINTF_LIB)
-	$(CC) $(CFLAGS) $(OBJS) $(PUSH_SWAP_OBJS)$(PRINTF_LIB) -o $(NAME) -I. -Ift_printf
-	@$(CC) $(CFLAGS) $(OBJS) $(CHECKER_OBJS) $(PRINTF_LIB)  -o $(CHECKER_NAME) -I. -Ift_printf
+$(NAME): $(OBJS) $(PUSH_SWAP_OBJS) $(CHECKER_OBJS) $(PUSH_SWAP_HEADER)\
+			$(PRINTF_LIB) $(OPERATIONS_OBJS)
+	@$(CC) $(CFLAGS) $(OBJS) $(PUSH_SWAP_OBJS) $(OPERATIONS_OBJS) $(PRINTF_LIB) \
+	-o $(NAME) -I. -Ift_printf
+	@$(CC) $(CFLAGS) $(OBJS) $(CHECKER_OBJS) $(OPERATIONS_OBJS) $(PRINTF_LIB) \
+	-o $(CHECKER_NAME) -I. -Ift_printf
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c -o $@  $< -I. -Ift_printf
@@ -54,6 +60,6 @@ fclean: push_swap_clean
 	@rm -f $(CHECKER_NAME)
 	@$(MAKE) -C $(PRINTF) fclean
 
-re: fclean  all
+re: fclean all
 
 .PHONY: all clean fclean re
