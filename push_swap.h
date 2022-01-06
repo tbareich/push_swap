@@ -56,6 +56,7 @@ void				check_args(t_turn *turn, int ac, char **av);
 enum e_operation	check_opt(char *opt);
 void 				merge_sort(t_list **headRef);
 void				print_sorted_list(t_list *head);
+char				is_sorted(t_turn turn);
 
 void				sx(t_stack *stack);
 void				s_a_b(t_stack *stack1, t_stack *stack2);
