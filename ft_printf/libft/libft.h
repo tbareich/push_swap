@@ -208,6 +208,5 @@ void				*ft_realloc(void *ptr, size_t pre_size, size_t size);
 void				ft_swap(int *elem1, int *elem2);
 int					get_int_len(int nbr);
 int					get_next_line(const int fd, char **line);
-char				is_numeric(char *str);
 
 #endif

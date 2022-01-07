@@ -22,6 +22,13 @@ int	main(int ac, char **av)
 		error(MEMOERROR);
 	if (init_stack(&stack_b, ac - 1))
 		error(MEMOERROR);
+	if (ac < 2)
+		return (0);
+	turn.stack_a = &stack_a;
+	turn.stack_b = &stack_b;
 	check_args(&turn ,ac, av);
+	print_stack(turn.stack_a);
+	chanks_dividing_method(&turn, ac - 1);
+	print_stack(turn.stack_b);
 	return (0);
 }

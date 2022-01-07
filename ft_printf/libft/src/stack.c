@@ -6,7 +6,7 @@
 /*   By: tbareich <tbareich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 17:57:00 by tbareich          #+#    #+#             */
-/*   Updated: 2022/01/06 11:28:18 by tbareich         ###   ########.fr       */
+/*   Updated: 2022/01/07 04:05:40 by tbareich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void		print_stack(t_stack *stack)
 	{
 		ft_putnbr(stack->array[i]);
 		if (i < stack->top - 1)
-			ft_putstr(" ,");
+			ft_putstr(", ");
 		++i;
 	}
 	ft_putendl(" ]");

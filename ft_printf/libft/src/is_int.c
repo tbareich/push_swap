@@ -6,11 +6,23 @@
 /*   By: tbareich <tbareich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/02 01:59:12 by tbareich          #+#    #+#             */
-/*   Updated: 2022/01/02 18:40:28 by tbareich         ###   ########.fr       */
+/*   Updated: 2022/01/07 08:25:06 by tbareich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
+
+
+static char	is_number(char *number, int index)
+{
+	while (number[index])
+	{
+		if (number[index] > '9' || number[index] < '0')
+			return (0);
+		++index;
+	}
+	return (1);
+}
 
 static char	is_in_int_range(char *number, char *min, char *max)
 {
@@ -19,18 +31,29 @@ static char	is_in_int_range(char *number, char *min, char *max)
 	char	*cmp;
 
 	i = 0;
-	len = ft_strlen(number);
 	if (number[i] == '-')
 		++i;
 	if (i == 1)
 		cmp = min;
 	else
 		cmp = max;
+	len = ft_strlen(number);
 	if ((len - i) != 10)
-		return ((len - i) < 10);
+	{
+		if ((len - i) < 10)
+			return (is_number(number, i));
+		return (0);
+	}
 	while (number[i])
 	{
-		if (number[i] > cmp[i] || number[i] > '9' || number[i] < '0')
+		if (number[i] <= '9' && number[i] >= '0')
+		{
+			if (number[i] > cmp[i])
+				return (0);
+			if (number[i] < cmp[i])
+				return (1);
+		}
+		else
 			return (0);
 		++i;
 	}
