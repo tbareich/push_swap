@@ -27,8 +27,14 @@ int	main(int ac, char **av)
 	turn.stack_a = &stack_a;
 	turn.stack_b = &stack_b;
 	check_args(&turn ,ac, av);
+	// print_stack(turn.stack_a);
+	chanks_divide(&turn, ac - 1);
+	// print_stack(turn.stack_b);
+	while (stack_b.top)
+	{
+		px(&stack_a, &stack_b);
+	}
 	print_stack(turn.stack_a);
-	chanks_dividing_method(&turn, ac - 1);
-	print_stack(turn.stack_b);
+	
 	return (0);
 }

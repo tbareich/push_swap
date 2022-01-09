@@ -6,7 +6,7 @@
 /*   By: tbareich <tbareich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 17:57:00 by tbareich          #+#    #+#             */
-/*   Updated: 2022/01/07 04:05:40 by tbareich         ###   ########.fr       */
+/*   Updated: 2022/01/09 19:55:16 by tbareich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,25 @@ void		print_stack(t_stack *stack)
 	}
 	ft_putendl(" ]");
 	ft_putendl("}");
+}
+
+void		print_stack_array(t_stack *stack)
+{
+	unsigned	i;
+
+	if (stack == NULL)
+	{
+		ft_putendl("empty");
+		return ;
+	}
+	i = 0;
+	ft_putstr("array: [ ");
+	while (i < stack->top)
+	{
+		ft_putnbr(stack->array[i]);
+		if (i < stack->top - 1)
+			ft_putstr(", ");
+		++i;
+	}
+	ft_putendl(" ]");
 }

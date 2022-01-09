@@ -15,9 +15,9 @@ CHECKER_NAME = checker
 PUSH_SWAP_HEADER = push_swap.h
 OBJS = src/check_args.o src/merge_sort.o src/is_sorted.o
 		
-PUSH_SWAP_OBJS = push_swap.o src/push_swap/chanks_dividing_method.o\
+PUSH_SWAP_OBJS = push_swap.o src/push_swap/chanks_divide.o\
 	 			 src/push_swap/search_in_range.o  src/push_swap/move_to_top.o\
-				  src/push_swap/find_best_spot.o
+				  src/push_swap/find_best_spot.o  src/push_swap/min_max.o 
 CHECKER_OBJS = checker.o src/checker/reader.o src/checker/check_opt.o
 OPERATIONS_OBJS = src/operations/sx.o src/operations/px.o\
 				src/operations/rx.o src/operations/r_a_b.o src/operations/rrx.o\

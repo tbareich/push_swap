@@ -21,6 +21,8 @@
 
 # define ARRLST_SIZE 4
 # define BUFF_SIZE 5
+# define MAX_INT 2147483647
+# define MIN_INT -2147483648
 
 /*
  ** includes
@@ -185,6 +187,7 @@ char				init_stack(t_stack *stack, unsigned length);
 char				push_stack(t_stack *stack, int number);
 int					*pop_stack(t_stack *stack);
 void				print_stack(t_stack *stack);
+void				print_stack_array(t_stack *stack);
 
 /*
  ** Math Functions

@@ -6,7 +6,7 @@
 /*   By: tbareich <tbareich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 09:48:17 by tbareich          #+#    #+#             */
-/*   Updated: 2022/01/06 11:33:55 by tbareich         ###   ########.fr       */
+/*   Updated: 2022/01/09 22:24:16 by tbareich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void		rx(t_stack *stack)
 	int	i;
 	int	tmp;
 
-	if (stack->top - 1 < 2)
+	if (stack->top - 1 < 1)
 		return ;
 	i = stack->top - 1;
 	tmp = stack->array[i];
