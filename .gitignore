@@ -1,5 +1,3 @@
 **/*.o
 *.o
-checker
-push_swap
 **/*.a
