@@ -15,7 +15,6 @@
 void		find_best_spot(t_turn *turn, int number)
 {
 	int		i;
-	int		first_index;
 	int		index;
 	t_stack	*stack_b;
 
@@ -23,12 +22,11 @@ void		find_best_spot(t_turn *turn, int number)
 	stack_b = turn->stack_b;
 	if (stack_b->top < 2)
 		return ;
-	first_index = 0;
 	i = 0;
 	index = -1;
 	while (i < (int)(stack_b->top - 1))
 	{
-		if (number > stack_b->array[i] && number < stack_b->array[i + 1])
+		if (number < stack_b->array[i] && number > stack_b->array[i + 1])
 		{
 			index = i;
 			break ;

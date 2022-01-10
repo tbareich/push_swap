@@ -63,7 +63,7 @@ void				move_to_top(t_stack *stack_a, char stack_name, int index);
 void				find_best_spot(t_turn *turn, int number);
 char				is_min_max(t_stack *stack_b, int value);
 int					find_min(t_stack *stack_b);
-
+int					find_max(t_stack *stack_b);
 
 void				sx(t_stack *stack);
 void				s_a_b(t_stack *stack1, t_stack *stack2);

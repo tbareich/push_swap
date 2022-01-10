@@ -35,6 +35,5 @@ int	main(int ac, char **av)
 		px(&stack_a, &stack_b);
 	}
 	print_stack(turn.stack_a);
-	
 	return (0);
 }

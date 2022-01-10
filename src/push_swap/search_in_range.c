@@ -6,7 +6,7 @@
 /*   By: tbareich <tbareich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 02:25:54 by tbareich          #+#    #+#             */
-/*   Updated: 2022/01/09 17:39:27 by tbareich         ###   ########.fr       */
+/*   Updated: 2022/01/10 02:05:22 by tbareich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ int		search_in_range(t_turn *turn, int chank)
 	max_index = turn->stack_a->top - 1;
 	while (max_index >= min_index)
 	{
-		if (turn->stack_a->array[max_index] <= chank)
+		if (turn->stack_a->array[max_index] < chank)
 			return max_index;
-		if (turn->stack_a->array[min_index] <= chank)
+		if (turn->stack_a->array[min_index] < chank)
 			return min_index;
 		--max_index;
 		++min_index;
