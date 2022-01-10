@@ -17,6 +17,7 @@ int	main(int ac, char **av)
 	t_turn	turn;
 	t_stack	stack_a;
 	t_stack	stack_b;
+	int		number_index;
 
 	if (init_stack(&stack_a, ac - 1))
 		error(MEMOERROR);
@@ -27,13 +28,14 @@ int	main(int ac, char **av)
 	turn.stack_a = &stack_a;
 	turn.stack_b = &stack_b;
 	check_args(&turn ,ac, av);
-	// print_stack(turn.stack_a);
 	chanks_divide(&turn, ac - 1);
-	// print_stack(turn.stack_b);
 	while (stack_b.top)
 	{
+		number_index = find_max(&stack_b);
+		if (number_index != -1)
+			move_to_top(&stack_b, 'b', number_index);	
 		px(&stack_a, &stack_b);
+		ft_putendl("pa");
 	}
-	print_stack(turn.stack_a);
 	return (0);
 }

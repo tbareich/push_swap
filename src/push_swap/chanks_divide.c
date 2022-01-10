@@ -50,9 +50,5 @@ void	chanks_divide(t_turn *turn, int length)
 		px(turn->stack_b, turn->stack_a);
 		ft_putendl("pb");
 	}
-	number_index = find_min(turn->stack_b);
-	// print_stack(turn->stack_b);
-	if (number_index != -1)
-		move_to_top(turn->stack_b, 'b', number_index);	
 	// print_stack(turn->stack_b);
 }
