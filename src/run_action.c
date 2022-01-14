@@ -6,7 +6,7 @@
 /*   By: tbareich <tbareich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 04:39:59 by tbareich          #+#    #+#             */
-/*   Updated: 2022/01/11 12:38:27 by tbareich         ###   ########.fr       */
+/*   Updated: 2022/01/14 12:44:38 by tbareich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,33 +17,34 @@ const char	*g_actions[12] =
 		NULL, "sa", "sb", "ss", "ra", "rb", "rr","rra", "rrb", "rrr", "pa", "pb"
 	};
 
-void		run_action(t_stack *stack_a, t_stack *stack_b, 
-							e_operation operation, char print_action)
+void		run_action(t_turn *turn, e_operation operation, char print_action)
 {
 	if (operation == sa)
-		sx(stack_a);
+		sx(turn->stack_a);
 	else if (operation == sb)
-		sx(stack_b);
+		sx(turn->stack_b);
 	else if (operation == ss)
-		s_a_b(stack_a, stack_b);
+		s_a_b(turn->stack_a, turn->stack_b);
 	else if (operation == pa)
-		px(stack_a, stack_b);
+		px(turn->stack_a, turn->stack_b);
 	else if (operation == pb)
-		px(stack_b, stack_a);
+		px(turn->stack_b, turn->stack_a);
 	else if (operation == ra)
-		rx(stack_a);
+		rx(turn->stack_a);
 	else if (operation == rb)
-		rx(stack_b);
+		rx(turn->stack_b);
 	else if (operation == rr)
-		r_a_b(stack_a, stack_b);
+		r_a_b(turn->stack_a, turn->stack_b);
 	else if (operation == rra)
-		rrx(stack_a);
+		rrx(turn->stack_a);
 	else if (operation == rrb)
-		rrx(stack_b);
+		rrx(turn->stack_b);
 	else if (operation == rrr)
-		rr_a_b(stack_a, stack_b);
+		rr_a_b(turn->stack_a, turn->stack_b);
 	if (g_actions[operation] != NULL && print_action == 1)
 		ft_putendl(g_actions[operation]);
+	if (turn->visualizator)
+		draw(turn->visualizator, *(turn->stack_a), *(turn->stack_b));
 }
 
 void	print_lst_actions(t_turn *turn)

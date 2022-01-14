@@ -96,7 +96,7 @@ void		sort_by_chanks(t_turn *turn, int length)
 		else
 			find_middle_spot(turn, turn->stack_a->array[turn->stack_a->top - 1]);
 		add_action(&(turn->a_actions), pb);
-		run_action(turn->stack_a, turn->stack_b, pb, 0);
+		run_action(turn, pb, 0);
 		print_lst_actions(turn);
 	}
 	number_index = find_max(turn->stack_b);

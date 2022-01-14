@@ -6,7 +6,7 @@
 /*   By: tbareich <tbareich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 03:36:53 by tbareich          #+#    #+#             */
-/*   Updated: 2022/01/11 13:50:14 by tbareich         ###   ########.fr       */
+/*   Updated: 2022/01/14 12:39:58 by tbareich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	move_to_top_a_optimized(t_turn *turn, int index)
 		turn->a_rotate_length = i;
 		while (i)
 		{
-			run_action(turn->stack_a, turn->stack_b, ra, 0);
+			run_action(turn, ra, 0);
 			add_action(&(turn->a_actions), ra);
 			--i;
 		}
@@ -36,7 +36,7 @@ void	move_to_top_a_optimized(t_turn *turn, int index)
 		turn->a_rotate_length = i;
 		while (i)
 		{
-			run_action(turn->stack_a, turn->stack_b, rra, 0);
+			run_action(turn, rra, 0);
 			add_action(&(turn->a_actions), rra);
 			--i;
 		}
@@ -64,7 +64,7 @@ void	move_to_top_b_optimized(t_turn *turn, int index)
 		i = stack->top - 1 - index;
 		while (i)
 		{
-			run_action(turn->stack_a, turn->stack_b, rb, 0);
+			run_action(turn, rb, 0);
 			add_action(&(turn->b_actions), rb);
 			--i;
 		}
@@ -73,7 +73,7 @@ void	move_to_top_b_optimized(t_turn *turn, int index)
 		i = index + 1;
 		while (i)
 		{
-			run_action(turn->stack_a, turn->stack_b, rrb, 0);
+			run_action(turn, rrb, 0);
 			add_action(&(turn->b_actions), rrb);
 			--i;
 		}
@@ -97,12 +97,12 @@ void	move_to_top(t_turn *turn, char stack_name, int index)
 		{
 			if (stack_name == 'a')
 			{
-				run_action(turn->stack_a, turn->stack_b, ra, 0);
+				run_action(turn, ra, 0);
 				add_action(&(turn->a_actions), ra);
 			}
 			else
 			{
-				run_action(turn->stack_a, turn->stack_b, rb, 0);
+				run_action(turn, rb, 0);
 				add_action(&(turn->b_actions), rb);
 			}
 			--i;
@@ -114,12 +114,12 @@ void	move_to_top(t_turn *turn, char stack_name, int index)
 		{
 			if (stack_name == 'a')
 			{
-				run_action(turn->stack_a, turn->stack_b, rra, 0);
+				run_action(turn, rra, 0);
 				add_action(&(turn->a_actions), rra);
 			}
 			else
 			{
-				run_action(turn->stack_a, turn->stack_b, rrb, 0);
+				run_action(turn, rrb, 0);
 				add_action(&(turn->b_actions), rrb);
 			}
 			--i;
