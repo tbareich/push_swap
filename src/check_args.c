@@ -23,11 +23,6 @@ static void	indexing(t_stack *stack, t_list *head)
 		++i;
 	}
 }
-static void	lst_del_content(void *content, size_t content_size)
-{
-	ft_memdel(&content);
-	(void)content_size;
-}
 
 void	check_args(t_turn *turn, int ac, char **av)
 {
@@ -54,5 +49,5 @@ void	check_args(t_turn *turn, int ac, char **av)
 		--i;
 	}
 	indexing(turn->stack_a, head);
-	ft_lstdel(&head, lst_del_content);
+	ft_lstdel(&head, ft_delcontent);
 }

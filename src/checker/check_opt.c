@@ -6,13 +6,13 @@
 /*   By: tbareich <tbareich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/01 21:40:46 by tbareich          #+#    #+#             */
-/*   Updated: 2022/01/02 01:57:34 by tbareich         ###   ########.fr       */
+/*   Updated: 2022/01/10 04:21:29 by tbareich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
 
-enum e_operation	check_opt(char *opt)
+e_operation		check_opt(char *opt)
 {
 	if (ft_strcmp(opt, "sa") == 0)
 		return sa;

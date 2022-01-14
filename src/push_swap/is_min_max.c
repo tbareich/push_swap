@@ -1,39 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   find_best_spot.c                                      :+:      :+:    :+:   */
+/*   is_min_max.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbareich <tbareich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/07 08:34:36 by tbareich          #+#    #+#             */
-/*   Updated: 2022/01/07 10:29:49 by tbareich         ###   ########.fr       */
+/*   Created: 2022/01/09 17:29:10 by tbareich          #+#    #+#             */
+/*   Updated: 2022/01/11 02:39:13 by tbareich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
 
-void		find_best_spot(t_turn *turn, int number)
+char	is_min_max(t_stack *stack_b, int value)
 {
-	int		i;
-	int		index;
-	t_stack	*stack_b;
+	unsigned	i;
+	char		is_max;
+	char		is_min;
 
-
-	stack_b = turn->stack_b;
-	if (stack_b->top < 2)
-		return ;
+	is_max = 1;
+	is_min = 1;
 	i = 0;
-	index = -1;
-	while (i < (int)(stack_b->top - 1))
+	while (i < stack_b->top)
 	{
-		if (number < stack_b->array[i] && number > stack_b->array[i + 1])
-		{
-			index = i;
-			break ;
-		}
+		if (stack_b->array[i] > value)
+			is_max = 0;
+		if (stack_b->array[i] < value)
+			is_min = 0;
 		++i;
 	}
-	if (index != -1)
-		move_to_top(stack_b, 'b', index);
-	// print_stack_array(stack_b);
+	return (is_max || is_min);
 }

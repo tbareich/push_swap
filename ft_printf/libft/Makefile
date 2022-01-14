@@ -6,7 +6,7 @@
 #    By: tbareich <tbareich@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/24 14:13:12 by tbareich          #+#    #+#              #
-#    Updated: 2022/01/07 04:20:35 by tbareich         ###   ########.fr        #
+#    Updated: 2022/01/11 14:18:11 by tbareich         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,6 +48,11 @@ OBJS = $(patsubst $(SRCS_DIR)%.c, $(OBJS_DIR)%.o, $(SRCS))
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra
 
+# COLORS
+GREEN = \033[0;32m
+RED = \033[0;31m
+RESET = \033[0m
+
 all: $(NAME)
 
 
@@ -57,7 +62,8 @@ $(NAME): $(OBJS) $(LIBFT_HEADER)
 
 $(OBJS_DIR)%.o: $(SRCS_DIR)%.c
 	@mkdir -p $(OBJS_DIR)
-	$(CC) $(CFLAGS) -c -o $@ $< -I. -Ilibft
+	@$(CC) $(CFLAGS) -c -o $@ $< -I. -Ilibft
+	@echo "$(GREEN).$(RESET)\c"
 
 clean:
 	@rm -rf $(OBJS_DIR)

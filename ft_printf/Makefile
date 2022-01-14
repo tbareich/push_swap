@@ -37,6 +37,11 @@ HELPERS = helpers/ft_snumtoa.o helpers/ft_unumtoa.o helpers/pad_spaces.o \
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra
 
+# COLORS
+GREEN = \033[0;32m
+RED = \033[0;31m
+RESET = \033[0m
+
 all: sub-make $(NAME)
 
 sub-make:
@@ -47,7 +52,9 @@ $(NAME): $(OBJS) $(SPECIFIERS) $(PARSERS) $(HELPERS) $(FT_PRINTF_HEADER) $(LIBFT
 	@ranlib $(NAME)
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c -o $@ $< -I. -Ilibft
+	@$(CC) $(CFLAGS) -c -o $@ $< -I. -Ilibft
+	@echo "$(GREEN).$(RESET)\c"
+
 
 clean:
 	@rm -rf $(OBJS)
