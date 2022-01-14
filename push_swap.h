@@ -63,7 +63,7 @@ e_operation			check_opt(char *opt);
 void 				merge_sort(t_list **headRef);
 void				print_sorted_list(t_list *head);
 char				is_sorted(t_turn turn);
-void				sort_by_chanks(t_turn *turn, int length);
+void				sort_by_chanks(t_turn *turn , int divider, int length);
 int					search_in_range(t_turn *turn, int chank);
 void				move_to_top_a_optimized(t_turn *turn, int index);
 void				move_to_top_b_optimized(t_turn *turn, int index);

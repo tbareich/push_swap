@@ -6,13 +6,13 @@
 /*   By: tbareich <tbareich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 02:25:54 by tbareich          #+#    #+#             */
-/*   Updated: 2022/01/11 12:54:08 by tbareich         ###   ########.fr       */
+/*   Updated: 2022/01/14 18:21:47 by tbareich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
 
-int		can_pushed_to_stack_b(t_stack *stack_b, int number)
+int	can_pushed_to_stack_b(t_stack *stack_b, int number)
 {
 	int		i;
 	int		first_sign;
@@ -25,15 +25,15 @@ int		can_pushed_to_stack_b(t_stack *stack_b, int number)
 	while (i >= 0)
 	{
 		tmp_sign = number - stack_b->array[i];
-		if ((tmp_sign < 0 && first_sign >= 0) ||
-				(tmp_sign >= 0 && first_sign < 0))
+		if ((tmp_sign < 0 && first_sign >= 0)
+			|| (tmp_sign >= 0 && first_sign < 0))
 			return (0);
 		--i;
 	}
 	return (1);
 }
 
-int		search_in_range(t_turn *turn, int chank)
+int	search_in_range(t_turn *turn, int chank)
 {
 	int		min_index;
 	int		max_index;
@@ -43,9 +43,9 @@ int		search_in_range(t_turn *turn, int chank)
 	while (max_index >= min_index)
 	{
 		if (turn->stack_a->array[max_index] <= chank)
-			return max_index;
+			return (max_index);
 		if (turn->stack_a->array[min_index] <= chank)
-			return min_index;
+			return (min_index);
 		--max_index;
 		++min_index;
 	}

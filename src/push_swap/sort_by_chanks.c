@@ -18,7 +18,6 @@ static void	find_middle_spot(t_turn *turn, int number)
 	int		index;
 	t_stack	*stack_b;
 
-
 	stack_b = turn->stack_b;
 	if (stack_b->top < 2)
 		return ;
@@ -39,12 +38,12 @@ static void	find_middle_spot(t_turn *turn, int number)
 
 static int	find_max(t_stack *stack_b)
 {
-	int			max;
-	int			max_index;
-	unsigned	i;
+	int				max;
+	int				max_index;
+	unsigned int	i;
 
 	if (stack_b->top < 2)
-		return -1;
+		return (-1);
 	max = MIN_INT;
 	max_index = -1;
 	i = 0;
@@ -60,21 +59,12 @@ static int	find_max(t_stack *stack_b)
 	return (max_index);
 }
 
-void		sort_by_chanks(t_turn *turn, int length)
+void	sort_by_chanks(t_turn *turn, int divider, int length)
 {
 	int		chank;
-	int		divider;
 	int		number_index;
-	int 	step;
+	int		step;
 
-	if (length <= 1)
-		return ;
-	else if (length <= 5)
-		divider = 1;
-	else if (length <= 100)
-		divider = 5;
-	else
-		divider = 11;
 	chank = length / divider;
 	step = chank;
 	while (turn->stack_a->top)
@@ -86,21 +76,22 @@ void		sort_by_chanks(t_turn *turn, int length)
 			continue ;
 		}
 		move_to_top_a_optimized(turn, number_index);
-		if (is_min_max(turn->stack_b, 
-			turn->stack_a->array[turn->stack_a->top - 1]))
+		if (is_min_max(turn->stack_b,
+				turn->stack_a->array[turn->stack_a->top - 1]))
 		{
 			number_index = find_max(turn->stack_b);
-			if (number_index != - 1)
-				move_to_top_b_optimized(turn, number_index);		
+			if (number_index != -1)
+				move_to_top_b_optimized(turn, number_index);
 		}
 		else
-			find_middle_spot(turn, turn->stack_a->array[turn->stack_a->top - 1]);
+			find_middle_spot(turn,
+				turn->stack_a->array[turn->stack_a->top - 1]);
 		add_action(&(turn->a_actions), pb);
 		run_action(turn, pb, 0);
 		print_lst_actions(turn);
 	}
 	number_index = find_max(turn->stack_b);
 	if (number_index != -1)
-		move_to_top(turn, 'b', number_index);	
+		move_to_top(turn, 'b', number_index);
 	print_lst_actions(turn);
 }

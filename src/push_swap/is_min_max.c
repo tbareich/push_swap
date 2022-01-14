@@ -6,7 +6,7 @@
 /*   By: tbareich <tbareich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/09 17:29:10 by tbareich          #+#    #+#             */
-/*   Updated: 2022/01/11 02:39:13 by tbareich         ###   ########.fr       */
+/*   Updated: 2022/01/14 17:51:42 by tbareich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 char	is_min_max(t_stack *stack_b, int value)
 {
-	unsigned	i;
-	char		is_max;
-	char		is_min;
+	unsigned int	i;
+	char			is_max;
+	char			is_min;
 
 	is_max = 1;
 	is_min = 1;

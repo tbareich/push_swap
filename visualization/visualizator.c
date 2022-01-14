@@ -6,7 +6,7 @@
 /*   By: tbareich <tbareich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:03:07 by tbareich          #+#    #+#             */
-/*   Updated: 2022/01/14 13:29:20 by tbareich         ###   ########.fr       */
+/*   Updated: 2022/01/14 18:42:00 by tbareich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,7 @@ void    event_listner()
     {
         if ((event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE)
                     || event.type == SDL_QUIT)
-        {
-            // ft_free_obj(data);
-            // prog_launched = SDL_FALSE;
-            exit(1);
-        }
+            exit(0);
     }
 }
 
@@ -99,48 +95,23 @@ void			init_visualizator(t_visualization *data)
     {
         sdl_error("Font error");
     }
-    // if (SDL_RenderDrawPoint(data->rend, 0,0) != 0)
-    //     sdl_error("Get draw failed");
     SDL_PumpEvents();
 }
 
 void            write_text(t_visualization *data,char *str, int x)
 {
-
-// this is the color in rgb format,
-// maxing out all would give you the color white,
-// and it will be your text's color
-SDL_Color white = {236, 240, 241, 255};
-// as TTF_RenderText_Solid could only be used on
-// SDL_Surface then you have to create the surface first
-SDL_Surface* surfaceMessage =
-    TTF_RenderText_Solid(data->font, str, white); 
-
-// now you can convert it into a texture
-SDL_Texture* Message = SDL_CreateTextureFromSurface(data->rend, surfaceMessage);
-
-SDL_Rect Message_rect; //create a rect
-Message_rect.w = 100; // controls the width of the rect
-Message_rect.h = 30 ; // controls the height of the rect
-Message_rect.x = x + (STACK_W / 2) - (Message_rect.w / 2);  //controls the rect's x coordinate 
-Message_rect.y = (WIN_H - STACK_H) / 2 - (Message_rect.h / 2); // controls the rect's y coordinte
-
-// (0,0) is on the top left of the window/screen,
-// think a rect as the text's box,
-// that way it would be very simple to understand
-
-// Now since it's a texture, you have to put RenderCopy
-// in your game loop area, the area where the whole code executes
-
-// you put the renderer's name first, the Message,
-// the crop size (you can ignore this if you don't want
-// to dabble with cropping), and the rect which is the size
-// and coordinate of your texture
-SDL_RenderCopy(data->rend, Message, NULL, &Message_rect);
-
-// Don't forget to free your surface and texture
-SDL_FreeSurface(surfaceMessage);
-SDL_DestroyTexture(Message);
+	SDL_Color color = {236, 240, 241, 255};
+	SDL_Surface* surfaceMessage =
+		TTF_RenderText_Solid(data->font, str, color); 
+	SDL_Texture* Message = SDL_CreateTextureFromSurface(data->rend, surfaceMessage);
+	SDL_Rect Message_rect;
+	Message_rect.w = 100;
+	Message_rect.h = 30 ;
+	Message_rect.x = x + (STACK_W / 2) - (Message_rect.w / 2);
+	Message_rect.y = (WIN_H - STACK_H) / 2 - (Message_rect.h / 2);
+	SDL_RenderCopy(data->rend, Message, NULL, &Message_rect);
+	SDL_FreeSurface(surfaceMessage);
+	SDL_DestroyTexture(Message);
 }
 void            draw(t_visualization *data, t_stack a, t_stack b)
 {
@@ -148,7 +119,7 @@ void            draw(t_visualization *data, t_stack a, t_stack b)
 	    sdl_error("Get color failed");
 	SDL_RenderClear(data->rend);
     visualizator(data, a, 0, a.top + b.top);
-    visualizator(data, b, STACK_W + 40, a.top + b.top);
+    visualizator(data, b, STACK_W, a.top + b.top);
     write_text(data, "Stack A", -40);
     write_text(data, "Stack B", STACK_W);
 
@@ -162,7 +133,6 @@ void            draw(t_visualization *data, t_stack a, t_stack b)
     event_listner();
     SDL_Delay(convert_range(a.top + b.top + 2, 0, 500, 100, 0));
     event_listner();
-    // printf("draaw\n");
 }
 
 void			visualizator(t_visualization *data, t_stack s, int x, int height)
@@ -193,27 +163,17 @@ void			visualizator(t_visualization *data, t_stack s, int x, int height)
             rec.y = ((s.top - 1 - j) * h) + (WIN_H - STACK_H);
             rec.w = (s.array[j] + 1) * (STACK_W - 40)/(height + 1);
             rec.h = h;
-
             if (SDL_RenderFillRect(data->rend, &rec) != 0)
                 sdl_error("draw rectangle failed");
             j++;
         }
     }
-	
-	// return (NULL);
 }
 
 void			loop_program(t_visualization *data)
 {
-	SDL_bool	prog_launched;
-
-	
-	prog_launched = SDL_TRUE;
-	while (prog_launched)
-	{
+	while (1)
 		event_listner();
-	}
-
     TTF_CloseFont(data->font);
     TTF_Quit();
 	SDL_DestroyRenderer(data->rend);

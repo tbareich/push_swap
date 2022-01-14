@@ -6,7 +6,7 @@
 /*   By: tbareich <tbareich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 04:39:59 by tbareich          #+#    #+#             */
-/*   Updated: 2022/01/14 12:44:38 by tbareich         ###   ########.fr       */
+/*   Updated: 2022/01/14 17:32:52 by tbareich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ void		run_action(t_turn *turn, e_operation operation, char print_action)
 		rr_a_b(turn->stack_a, turn->stack_b);
 	if (g_actions[operation] != NULL && print_action == 1)
 		ft_putendl(g_actions[operation]);
-	if (turn->visualizator)
+	if (turn->visualizator && 
+			is_option_activated(turn->visualizator->options, V_OPTION))
 		draw(turn->visualizator, *(turn->stack_a), *(turn->stack_b));
 }
 
