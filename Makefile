@@ -13,15 +13,15 @@
 PS_NAME = push_swap
 C_NAME = checker
 PUSH_SWAP_HEADER = push_swap.h
-VISUALIZATOR_HEADER = visualization/visualizator.h
+VISUALIZATOR_HEADER = visualization/visualisator.h
 
-VISUALIZATOR_OBJS = visualization/visualizator.o
+VISUALIZATOR_OBJS = visualization/visualisator.o
 OBJS = src/check_args.o src/merge_sort.o src/is_sorted.o src/run_action.o
 
 PUSH_SWAP_OBJS = push_swap.o src/push_swap/sort_by_chanks.o\
 				src/push_swap/search_in_range.o src/push_swap/move_to_top.o\
 				src/push_swap/is_min_max.o src/push_swap/simple_sort.o\
-				src/push_swap/add_action.o
+				src/push_swap/add_action.o src/push_swap/find_element_position.o
 
 CHECKER_OBJS = checker.o src/checker/reader.o src/checker/check_opt.o
 OPERATIONS_OBJS = src/operations/sx.o src/operations/px.o\

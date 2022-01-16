@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   visualizator.c                                     :+:      :+:    :+:   */
+/*   visualisator.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbareich <tbareich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:03:07 by tbareich          #+#    #+#             */
-/*   Updated: 2022/01/14 18:42:00 by tbareich         ###   ########.fr       */
+/*   Updated: 2022/01/16 06:21:04 by tbareich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <visualizator.h>
+#include <visualisator.h>
 
 
 char        is_option_activated(char option, int option_index)
@@ -73,11 +73,9 @@ uint32_t rgb(double ratio)
     return r | (g << 8) | (b << 16);
 }
 
-void			init_visualizator(t_visualization *data)
+void			init_visualisator(t_visualization *data)
 {
 	data->win = NULL;
-	    //this opens a font style and sets a size
-    
 	if (SDL_Init(SDL_INIT_VIDEO) != 0)
 		sdl_error("initialisation SDL");
 	if (!(data->win = SDL_CreateWindow("PUSH SWAP :)", SDL_WINDOWPOS_CENTERED,
@@ -90,7 +88,7 @@ void			init_visualizator(t_visualization *data)
 		sdl_error("Get color failed");
      if( TTF_Init() != 0)
          sdl_error("Font init error");
-    data->font = TTF_OpenFont("/Library/Fonts/Arial.ttf", 55);
+    data->font = TTF_OpenFont("/Library/Fonts/Arial.ttf", 32);
     if (data->font == NULL)
     {
         sdl_error("Font error");
@@ -100,14 +98,15 @@ void			init_visualizator(t_visualization *data)
 
 void            write_text(t_visualization *data,char *str, int x)
 {
-	SDL_Color color = {236, 240, 241, 255};
+	SDL_Color fcolor = {236, 240, 241, 255};
+	SDL_Color bcolor = { 0, 0, 0, 255};
 	SDL_Surface* surfaceMessage =
-		TTF_RenderText_Solid(data->font, str, color); 
+		TTF_RenderText_Shaded(data->font, str, fcolor, bcolor); 
 	SDL_Texture* Message = SDL_CreateTextureFromSurface(data->rend, surfaceMessage);
 	SDL_Rect Message_rect;
-	Message_rect.w = 100;
-	Message_rect.h = 30 ;
-	Message_rect.x = x + (STACK_W / 2) - (Message_rect.w / 2);
+	Message_rect.w = surfaceMessage->w;
+	Message_rect.h = surfaceMessage->h ;
+	Message_rect.x = x + (WIN_W / 4) - (Message_rect.w / 2);
 	Message_rect.y = (WIN_H - STACK_H) / 2 - (Message_rect.h / 2);
 	SDL_RenderCopy(data->rend, Message, NULL, &Message_rect);
 	SDL_FreeSurface(surfaceMessage);
@@ -115,13 +114,13 @@ void            write_text(t_visualization *data,char *str, int x)
 }
 void            draw(t_visualization *data, t_stack a, t_stack b)
 {
-    if (SDL_SetRenderDrawColor(data->rend, 30, 30, 30, 255) != 0)
+    if (SDL_SetRenderDrawColor(data->rend, 0, 0, 0, 255) != 0)
 	    sdl_error("Get color failed");
 	SDL_RenderClear(data->rend);
     visualizator(data, a, 0, a.top + b.top);
-    visualizator(data, b, STACK_W, a.top + b.top);
+    visualizator(data, b, WIN_W / 2, a.top + b.top);
     write_text(data, "Stack A", -40);
-    write_text(data, "Stack B", STACK_W);
+    write_text(data, "Stack B", WIN_W / 2);
 
 	if (SDL_SetRenderDrawColor(data->rend, 100, 100, 100, 255) != 0)
 		sdl_error("Get color failed");
@@ -131,7 +130,7 @@ void            draw(t_visualization *data, t_stack a, t_stack b)
         sdl_error("Get line failed");
     SDL_RenderPresent(data->rend);
     event_listner();
-    SDL_Delay(convert_range(a.top + b.top + 2, 0, 500, 100, 0));
+    SDL_Delay(convert_range(a.top + b.top, 0, 500, 100, 0));
     event_listner();
 }
 
@@ -143,9 +142,18 @@ void			visualizator(t_visualization *data, t_stack s, int x, int height)
     SDL_Rect rec;
 
 	j = 0;
+	h = STACK_H / height;
+	if (SDL_SetRenderDrawColor(data->rend,
+				10, 10, 10, 255) != 0)
+		sdl_error("Get color failed");
+	rec.w = STACK_W;
+	rec.x = x + WIN_W / 4 - rec.w / 2;
+	rec.y = WIN_H - STACK_H;
+	rec.h = STACK_H;
+		if (SDL_RenderFillRect(data->rend, &rec) != 0)
+			sdl_error("draw rectangle failed");
     if (s.top > 0)
     {
-        h = STACK_H / height;
         while (j < (int)s.top)
         {
             if (is_option_activated(data->options, C_OPTION))
@@ -159,13 +167,13 @@ void			visualizator(t_visualization *data, t_stack s, int x, int height)
                 if (SDL_SetRenderDrawColor(data->rend,
                             255, 255, 255, 255) != 0)
                   sdl_error("Get color failed");
-            rec.x = x;
-            rec.y = ((s.top - 1 - j) * h) + (WIN_H - STACK_H);
-            rec.w = (s.array[j] + 1) * (STACK_W - 40)/(height + 1);
+            rec.w = convert_range(s.array[j], 0, height,  (STACK_W / height) * (height / 3), STACK_W);
             rec.h = h;
+            rec.x = x + WIN_W / 4 - rec.w / 2;
+            rec.y = (s.top - j - 1) * h + (WIN_H - STACK_H);
             if (SDL_RenderFillRect(data->rend, &rec) != 0)
                 sdl_error("draw rectangle failed");
-            j++;
+			++j;
         }
     }
 }

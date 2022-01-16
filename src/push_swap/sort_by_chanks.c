@@ -12,86 +12,43 @@
 
 #include <push_swap.h>
 
-static void	find_middle_spot(t_turn *turn, int number)
+static void	place_in_best_position(t_turn *turn, int index)
 {
-	int		i;
-	int		index;
-	t_stack	*stack_b;
-
-	stack_b = turn->stack_b;
-	if (stack_b->top < 2)
-		return ;
-	i = 0;
-	index = -1;
-	while (i < (int)(stack_b->top - 1))
+	move_to_top_a_optimized(turn, index);
+	if (is_min_max(turn->stack_b,
+			turn->stack_a->array[turn->stack_a->top - 1]))
 	{
-		if (number > stack_b->array[i] && number < stack_b->array[i + 1])
-		{
-			index = i;
-			break ;
-		}
-		++i;
+		index = find_max(turn->stack_b);
+		if (index != -1)
+			move_to_top_b_optimized(turn, index);
 	}
-	if (index != -1)
-		move_to_top_b_optimized(turn, index);
-}
-
-static int	find_max(t_stack *stack_b)
-{
-	int				max;
-	int				max_index;
-	unsigned int	i;
-
-	if (stack_b->top < 2)
-		return (-1);
-	max = MIN_INT;
-	max_index = -1;
-	i = 0;
-	while (i < stack_b->top)
-	{
-		if (stack_b->array[i] >= max)
-		{
-			max = stack_b->array[i];
-			max_index = i;
-		}
-		++i;
-	}
-	return (max_index);
+	else
+		find_middle_spot_b(turn, turn->stack_b,
+			turn->stack_a->array[turn->stack_a->top - 1]);
+	add_action(&(turn->a_actions), pb);
+	run_action(turn, pb, 0);
+	print_lst_actions(turn);
 }
 
 void	sort_by_chanks(t_turn *turn, int divider, int length)
 {
 	int		chank;
-	int		number_index;
+	int		index;
 	int		step;
 
 	chank = length / divider;
 	step = chank;
 	while (turn->stack_a->top)
 	{
-		number_index = search_in_range(turn, chank);
-		if (number_index == -1)
+		index = search_in_range(turn, chank);
+		if (index == -1)
 		{
 			chank += step;
 			continue ;
 		}
-		move_to_top_a_optimized(turn, number_index);
-		if (is_min_max(turn->stack_b,
-				turn->stack_a->array[turn->stack_a->top - 1]))
-		{
-			number_index = find_max(turn->stack_b);
-			if (number_index != -1)
-				move_to_top_b_optimized(turn, number_index);
-		}
-		else
-			find_middle_spot(turn,
-				turn->stack_a->array[turn->stack_a->top - 1]);
-		add_action(&(turn->a_actions), pb);
-		run_action(turn, pb, 0);
-		print_lst_actions(turn);
+		place_in_best_position(turn, index);
 	}
-	number_index = find_max(turn->stack_b);
-	if (number_index != -1)
-		move_to_top(turn, 'b', number_index);
-	print_lst_actions(turn);
+	index = find_max(turn->stack_b);
+	if (index != -1)
+		move_to_top(turn, 'b', index);
 }

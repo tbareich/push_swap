@@ -19,7 +19,7 @@ static int	set_options(t_visualization *visualizator, int ac, char **av)
 
 	i = 1;
 	options_length = 0;
-	while (i < ac && i < 3)
+	while (i < ac)
 	{
 		if (ft_strequ(av[i], "-v"))
 		{
@@ -60,17 +60,17 @@ int			main(int ac, char **av)
 		return (0);
 	check_args(&turn ,ac, av);
 	if (is_option_activated(visualizator.options, V_OPTION))
-		init_visualizator(&visualizator);
+		init_visualisator(&visualizator);
 	if (is_sorted(turn))
 		return (0);
-	if (ac == 3)
-		run_action(&turn, sa, 1);
 	else
 	{
-		if (ac <= 100)
-			sort_by_chanks(&turn, 5, stack_a.top);
+		if (ac == 4 || ac == 6 || ac == 3)
+			simple_sort(&turn);
+		else if (ac <= 100)
+			sort_by_chanks(&turn, 6, stack_a.top);
 		else
-			sort_by_chanks(&turn, 11, stack_a.top);
+			sort_by_chanks(&turn, 12, stack_a.top);
 		while (stack_b.top)
 			run_action(&turn, pa, 1);
 	}

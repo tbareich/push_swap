@@ -6,7 +6,7 @@
 /*   By: tbareich <tbareich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 03:36:53 by tbareich          #+#    #+#             */
-/*   Updated: 2022/01/14 18:20:04 by tbareich         ###   ########.fr       */
+/*   Updated: 2022/01/16 06:23:13 by tbareich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,16 @@ static void	run_and_add_action(t_turn *turn, t_list **action,
 	{
 		run_action(turn, operation, 0);
 		add_action(action, operation);
+		--index;
+	}
+}
+
+static void	run_and_print(t_turn *turn,
+			e_operation operation, int index)
+{
+	while (index)
+	{
+		run_action(turn, operation, 1);
 		--index;
 	}
 }
@@ -86,16 +96,17 @@ void	move_to_top(t_turn *turn, char stack_name, int index)
 	{
 		i = stack->top - 1 - index;
 		if (stack_name == 'a')
-			run_and_add_action(turn, &(turn->a_actions), ra, i);
+			run_and_print(turn, ra, i);
 		else
-			run_and_add_action(turn, &(turn->b_actions), rb, i);
+			run_and_print(turn, rb, i);
+		
 	}
 	else
 	{
 		i = index + 1;
 		if (stack_name == 'a')
-			run_and_add_action(turn, &(turn->a_actions), rra, i);
+			run_and_print(turn, rra, i);
 		else
-			run_and_add_action(turn, &(turn->b_actions), rrb, i);
+			run_and_print(turn, rrb, i);
 	}
 }

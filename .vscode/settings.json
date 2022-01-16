@@ -3,6 +3,7 @@
 		"push_swap.h": "c",
 		"libft.h": "c",
 		"visualizator.h": "c",
-		"ft_printf.h": "c"
+		"ft_printf.h": "c",
+		"visualisator.h": "c"
 	}
 }
