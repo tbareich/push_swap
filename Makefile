@@ -33,10 +33,10 @@ PRINTF_LIB =  ft_printf/libftprintf.a
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra
 SDL_INCLUDE    = -I/Users/$$USER/brew/Cellar/sdl2/2.0.20/include \
-        -I/Users/$$USER/brew/Cellar/sdl2_ttf/2.0.15/include
+        -I/Users/$$USER/brew/Cellar/sdl2_ttf/2.0.18/include
 
 SDL_LIBS = -L /Users/$$USER/brew/Cellar/sdl2/2.0.20/lib \
-        -L /Users/$$USER/brew/Cellar/sdl2_ttf/2.0.15/lib
+        -L /Users/$$USER/brew/Cellar/sdl2_ttf/2.0.18/lib
 
 SDL_FLAGGS= `sdl2-config --cflags --libs` -lSDL2 -lSDL2_ttf
 # COLORS
@@ -54,17 +54,14 @@ $(PS_NAME): $(OBJS) $(PUSH_SWAP_OBJS) $(VISUALIZATOR_OBJS) $(PRINTF_LIB) \
 	@$(CC) $(CFLAGS) $(SDL_FLAGGS) $(SDL_INCLUDE) $(SDL_LIBS) $(OBJS) \
 	$(PUSH_SWAP_OBJS) $(OPERATIONS_OBJS) $(VISUALIZATOR_OBJS) $(PRINTF_LIB) \
 	-o $(PS_NAME) -I. -Ift_printf 
-	@echo "\n"
 
 $(C_NAME): $(OBJS) $(CHECKER_OBJS) $(PUSH_SWAP_HEADER) $(VISUALIZATOR_OBJS) \
 	$(PRINTF_LIB) $(VISUALIZATOR_HEADER) $(OPERATIONS_OBJS) 
 	@$(CC) $(CFLAGS) $(SDL_FLAGGS) $(SDL_INCLUDE) $(SDL_LIBS) $(OBJS) $(VISUALIZATOR_OBJS) $(CHECKER_OBJS) $(OPERATIONS_OBJS) $(PRINTF_LIB) \
 	-o $(C_NAME) -I. -Ift_printf 
-	@echo "\n"
 
 %.o: %.c $(VISUALIZATOR_HEADER) $(PUSH_SWAP_HEADER) 
 	@$(CC) $(CFLAGS) $(SDL_INCLUDE) -c -o $@  $< -I. -Ift_printf  -Ivisualization -Ift_printf/libft
-	@echo "$(GREEN).$(RESET)\c"
 
 clean:
 	@rm -rf $(OBJS)

@@ -62,9 +62,9 @@ typedef struct		s_arrlst
 
 typedef struct		s_stack
 {
-	unsigned		top;
-	unsigned		length;
-	int				*array;
+	unsigned				top;
+	unsigned				length;
+	int						*array;
 }					t_stack;
 
 /*
@@ -184,7 +184,7 @@ int					arrlst_size(t_arrlst arrlst);
 */
 
 char				init_stack(t_stack *stack, unsigned length);
-char				push_stack(t_stack *stack, int number);
+char				push_stack(t_stack *stack, int element);
 int					*pop_stack(t_stack *stack);
 void				print_stack(t_stack *stack);
 void				print_stack_array(t_stack *stack);
@@ -198,6 +198,8 @@ unsigned 			ft_abs(int num);
 unsigned long		ft_labs(long num);
 unsigned long long	ft_llabs(long long num);
 char				is_int(char *number);
+int					max(int a, int b);
+int					min(int a, int b);
 
 /*
  ** Extra Functions

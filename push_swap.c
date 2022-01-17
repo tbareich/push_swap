@@ -68,9 +68,9 @@ int			main(int ac, char **av)
 		if (ac == 4 || ac == 6 || ac == 3)
 			simple_sort(&turn);
 		else if (ac <= 100)
-			sort_by_chanks(&turn, 6, stack_a.top);
+			sort_by_chanks(&turn, 1, stack_a.top);
 		else
-			sort_by_chanks(&turn, 12, stack_a.top);
+			sort_by_chanks(&turn, 1, stack_a.top);
 		while (stack_b.top)
 			run_action(&turn, pa, 1);
 	}
