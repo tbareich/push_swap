@@ -14,7 +14,6 @@
 #define PUSH_SWAP_H
 
 # include <ft_printf.h>
-# include <visualisator.h>
 
 # ifndef MEMOERROR
 # define MEMOERROR "INSUFFICIENT MEMORY\n"
@@ -40,15 +39,25 @@ typedef enum
 	pb
 }					e_operation;
 
+typedef struct		s_action_list
+{
+	t_list	*head;
+	int		length;	
+}					t_action_list;
+
 typedef struct		s_turn
 {
-	t_stack *stack_a;
-	t_stack *stack_b;
-	int			a_rotate_length;
-	e_operation a_rotate_type;
-	t_list	*a_actions;
-	t_list	*b_actions;
-	t_visualization	*visualizator;
+	t_stack 		*stack_a;
+	t_stack 		*stack_b;
+	int				a_rotate_length;
+	int				low_min;
+	int				low_max;
+	int				up_min;
+	int				up_max;
+	e_operation 	a_rotate_type;
+	t_action_list	*a_actions;
+	t_action_list	*b_actions;
+	t_action_list	*actions;
 }					t_turn;
 
 typedef struct		s_indexing
@@ -64,7 +73,7 @@ void 				merge_sort(t_list **headRef);
 void				print_sorted_list(t_list *head);
 char				is_sorted(t_turn turn);
 void				sort_by_chanks(t_turn *turn , int divider, int length);
-int					search_in_range(t_turn *turn, int chank);
+int					search_in_range(t_turn *turn, int min, int max);
 void				move_to_top_a_optimized(t_turn *turn, int index);
 void				move_to_top_b_optimized(t_turn *turn, int index);
 void				move_to_top(t_turn *turn, char stack_name,

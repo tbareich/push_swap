@@ -25,7 +25,7 @@ static void	place_in_best_position(t_turn *turn, int index)
 	else
 		find_middle_spot_b(turn, turn->stack_b,
 			turn->stack_a->array[turn->stack_a->top - 1]);
-	add_action(&(turn->a_actions), pb);
+	add_action(&(turn->a_actions->head), pb);
 	run_action(turn, pb, 0);
 	print_lst_actions(turn);
 }
@@ -35,18 +35,26 @@ void	sort_by_chanks(t_turn *turn, int divider, int length)
 	int		chank;
 	int		index;
 	int		step;
+	int		i;
 
 	chank = length / divider;
 	step = chank;
+	i = 0;
 	while (turn->stack_a->top)
 	{
-		index = search_in_range(turn, chank);
+		if (i >= turn->low_min && i <= turn->low_max)
+			index = search_in_range(turn, 0, length / 2);
+		if (i >= turn->up_min && i <= turn->up_max)
+			index = search_in_range(turn, length / 2, length);
+		else
+			index = search_in_range(turn, 0, length);
 		if (index == -1)
 		{
 			chank += step;
 			continue ;
 		}
 		place_in_best_position(turn, index);
+		++i;
 	}
 	index = find_max(turn->stack_b);
 	if (index != -1)

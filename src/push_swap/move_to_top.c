@@ -6,7 +6,7 @@
 /*   By: tbareich <tbareich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 03:36:53 by tbareich          #+#    #+#             */
-/*   Updated: 2022/01/16 06:23:13 by tbareich         ###   ########.fr       */
+/*   Updated: 2022/01/28 15:49:47 by tbareich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,14 @@ void	move_to_top_a_optimized(t_turn *turn, int index)
 		i = stack->top - 1 - index;
 		turn->a_rotate_type = ra;
 		turn->a_rotate_length = i;
-		run_and_add_action(turn, &(turn->a_actions), ra, i);
+		run_and_add_action(turn, &(turn->a_actions->head), ra, i);
 	}
 	else
 	{
 		i = index + 1;
 		turn->a_rotate_type = rra;
 		turn->a_rotate_length = i;
-		run_and_add_action(turn, &(turn->a_actions), rra, i);
+		run_and_add_action(turn, &(turn->a_actions->head), rra, i);
 	}
 }
 
@@ -74,12 +74,12 @@ void	move_to_top_b_optimized(t_turn *turn, int index)
 	if (rb_length <= rrb_length)
 	{
 		i = stack->top - 1 - index;
-		run_and_add_action(turn, &(turn->b_actions), rb, i);
+		run_and_add_action(turn, &(turn->b_actions->head), rb, i);
 	}
 	else
 	{
 		i = index + 1;
-		run_and_add_action(turn, &(turn->b_actions), rrb, i);
+		run_and_add_action(turn, &(turn->b_actions->head), rrb, i);
 	}
 }
 

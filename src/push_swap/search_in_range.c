@@ -6,7 +6,7 @@
 /*   By: tbareich <tbareich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 02:25:54 by tbareich          #+#    #+#             */
-/*   Updated: 2022/01/17 17:32:19 by tbareich         ###   ########.fr       */
+/*   Updated: 2022/01/25 19:49:59 by tbareich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int	turns_length(t_turn *turn, int index)
 
 
 
-int	search_in_range(t_turn *turn, int chank)
+int	search_in_range(t_turn *turn, int min, int max)
 {
 	int		index;
 	int		best;
@@ -102,7 +102,8 @@ int	search_in_range(t_turn *turn, int chank)
 	best = MAX_INT;
 	while (index < (int)turn->stack_a->top)
 	{
-		if (turn->stack_a->array[index] <= chank)
+		if (turn->stack_a->array[index] <= max
+				&& turn->stack_a->array[index] >= min)
 		{
 			turns = turns_length(turn, index);
 			if (turns < best)
@@ -113,5 +114,6 @@ int	search_in_range(t_turn *turn, int chank)
 		}
 		++index;
 	}
+	// ft_printf("%d\n", best);
 	return (best_index);
 }

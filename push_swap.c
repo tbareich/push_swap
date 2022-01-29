@@ -12,37 +12,40 @@
 
 #include <push_swap.h>
 
-static int	set_options(t_visualization *visualizator, int ac, char **av)
+t_stack		*copy_stack(t_stack stack)
 {
-	int		i;
-	int		options_length;
+	t_stack		*copy;
+	unsigned	i;
 
-	i = 1;
-	options_length = 0;
-	while (i < ac)
+	copy = malloc(sizeof(t_stack));
+	init_stack(copy, stack.length);
+	i = 0;
+	while (i < stack.top)
 	{
-		if (ft_strequ(av[i], "-v"))
-		{
-			visualizator->options |= 1;
-			++options_length;
-		}
-		else if (ft_strequ(av[i], "-c"))
-		{
-			visualizator->options |= 2;
-			++options_length;
-		}	
+		push_stack(copy, stack.array[i]);
 		++i;
 	}
-	return (options_length);
+	return copy;
+}
+
+void		print_rev(t_list list)
+{
+	if (list.next != NULL)
+		print_rev(*(list.next));
+	ft_putendl(list.content);
 }
 
 int			main(int ac, char **av)
 {
 	t_turn	turn;
-	t_stack	stack_a;
-	t_stack	stack_b;
-	t_visualization visualizator;
-	int				options_length;
+	t_stack			stack_a;
+	t_stack			stack_b;
+	t_action_list	a_actions;
+	t_action_list	b_actions;
+	t_action_list	actions;
+	int				i;
+	int				best_turns;
+	t_action_list	best_actions;
 
 	if (init_stack(&stack_a, ac - 1))
 		error(MEMOERROR);
@@ -50,31 +53,55 @@ int			main(int ac, char **av)
 		error(MEMOERROR);
 	turn.stack_b = &stack_b;
 	turn.stack_a = &stack_a;
-	turn.b_actions = NULL;
-	turn.a_actions = NULL;
-	turn.visualizator = &visualizator;
-	options_length = set_options(&visualizator, ac, av);
-	ac = ac - options_length;
-	av =  av + options_length;
+	turn.b_actions = &a_actions;
+	turn.a_actions = &b_actions;
+	turn.actions = &actions;
+	turn.b_actions->head = NULL;
+	turn.a_actions->head = NULL;
+	turn.actions->head = NULL;
+	turn.actions->length = 0;
 	if (ac < 2)
 		return (0);
 	check_args(&turn ,ac, av);
-	if (is_option_activated(visualizator.options, V_OPTION))
-		init_visualisator(&visualizator);
 	if (is_sorted(turn))
 		return (0);
 	else
 	{
 		if (ac == 4 || ac == 6 || ac == 3)
 			simple_sort(&turn);
-		else if (ac <= 100)
-			sort_by_chanks(&turn, 1, stack_a.top);
 		else
-			sort_by_chanks(&turn, 1, stack_a.top);
-		while (stack_b.top)
-			run_action(&turn, pa, 1);
+		{
+			i = 10;
+			turn.low_min = 0;
+			turn.low_max = 1;
+			turn.up_min = 5;
+			turn.up_max = 10;
+			best_turns = MAX_INT;
+			while (i)
+			{
+				turn.actions->head = NULL;
+				turn.b_actions->head = NULL;
+				turn.a_actions->head = NULL;
+				turn.actions->length = 0;
+				turn.stack_a = copy_stack(stack_a);
+				sort_by_chanks(&turn, 1, stack_a.top);
+				while (stack_b.top)
+					run_action(&turn, pa, 1);
+				if (actions.length < best_turns)
+				{
+					best_actions.head = actions.head;
+					best_actions.length = actions.length;
+					best_turns = actions.length;
+					// ft_printf("%d\n", actions.length);
+				}
+				++turn.low_max;
+				++turn.up_min;
+				++turn.up_max;
+				--i;
+			}
+
+		}
+		print_rev(*(best_actions.head));
 	}
-	if (is_option_activated(visualizator.options, V_OPTION))
-		loop_program(&visualizator);
 	return (0);
 }

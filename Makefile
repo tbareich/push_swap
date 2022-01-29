@@ -13,9 +13,7 @@
 PS_NAME = push_swap
 C_NAME = checker
 PUSH_SWAP_HEADER = push_swap.h
-VISUALIZATOR_HEADER = visualization/visualisator.h
 
-VISUALIZATOR_OBJS = visualization/visualisator.o
 OBJS = src/check_args.o src/merge_sort.o src/is_sorted.o src/run_action.o
 
 PUSH_SWAP_OBJS = push_swap.o src/push_swap/sort_by_chanks.o\
@@ -32,13 +30,7 @@ PRINTF_LIB =  ft_printf/libftprintf.a
 
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra
-SDL_INCLUDE    = -I/Users/$$USER/brew/Cellar/sdl2/2.0.20/include \
-        -I/Users/$$USER/brew/Cellar/sdl2_ttf/2.0.18/include
 
-SDL_LIBS = -L /Users/$$USER/brew/Cellar/sdl2/2.0.20/lib \
-        -L /Users/$$USER/brew/Cellar/sdl2_ttf/2.0.18/lib
-
-SDL_FLAGGS= `sdl2-config --cflags --libs` -lSDL2 -lSDL2_ttf
 # COLORS
 GREEN = \033[0;32m
 RED = \033[0;31m
@@ -49,26 +41,26 @@ all: sub-make $(PS_NAME) $(C_NAME)
 sub-make:
 	@$(MAKE) -C $(PRINTF)
 
-$(PS_NAME): $(OBJS) $(PUSH_SWAP_OBJS) $(VISUALIZATOR_OBJS) $(PRINTF_LIB) \
-			$(OPERATIONS_OBJS) $(VISUALIZATOR_HEADER) $(PUSH_SWAP_HEADER) 
-	@$(CC) $(CFLAGS) $(SDL_FLAGGS) $(SDL_INCLUDE) $(SDL_LIBS) $(OBJS) \
-	$(PUSH_SWAP_OBJS) $(OPERATIONS_OBJS) $(VISUALIZATOR_OBJS) $(PRINTF_LIB) \
+$(PS_NAME): $(OBJS) $(PUSH_SWAP_OBJS) $(PRINTF_LIB) \
+			$(OPERATIONS_OBJS) $(PUSH_SWAP_HEADER) 
+	$(CC) $(CFLAGS)  $(OBJS) \
+	$(PUSH_SWAP_OBJS) $(OPERATIONS_OBJS) $(PRINTF_LIB) \
 	-o $(PS_NAME) -I. -Ift_printf 
 
-$(C_NAME): $(OBJS) $(CHECKER_OBJS) $(PUSH_SWAP_HEADER) $(VISUALIZATOR_OBJS) \
-	$(PRINTF_LIB) $(VISUALIZATOR_HEADER) $(OPERATIONS_OBJS) 
-	@$(CC) $(CFLAGS) $(SDL_FLAGGS) $(SDL_INCLUDE) $(SDL_LIBS) $(OBJS) $(VISUALIZATOR_OBJS) $(CHECKER_OBJS) $(OPERATIONS_OBJS) $(PRINTF_LIB) \
+$(C_NAME): $(OBJS) $(CHECKER_OBJS) $(PUSH_SWAP_HEADER) \
+	$(PRINTF_LIB) $(OPERATIONS_OBJS) 
+	$(CC) $(CFLAGS) $(OBJS) $(CHECKER_OBJS) $(OPERATIONS_OBJS) $(PRINTF_LIB) \
 	-o $(C_NAME) -I. -Ift_printf 
 
-%.o: %.c $(VISUALIZATOR_HEADER) $(PUSH_SWAP_HEADER) 
-	@$(CC) $(CFLAGS) $(SDL_INCLUDE) -c -o $@  $< -I. -Ift_printf  -Ivisualization -Ift_printf/libft
+%.o: %.c $(PUSH_SWAP_HEADER) 
+	$(CC) $(CFLAGS) -c -o $@ $< -I. -Ift_printf  -Ivisualization -Ift_printf/libft
 
 clean:
 	@rm -rf $(OBJS)
 	@rm -rf $(PUSH_SWAP_OBJS)
 	@rm -rf $(CHECKER_OBJS)
 	@rm -rf $(OPERATIONS_OBJS)
-	@rm -rf $(VISUALIZATOR_OBJS)
+	@rm -rf
 	@rm -rf $(LIBFT)
 	@$(MAKE) -C $(PRINTF) clean
 
@@ -77,7 +69,7 @@ push_swap_clean:
 	@rm -rf $(PUSH_SWAP_OBJS)
 	@rm -rf $(CHECKER_OBJS)
 	@rm -rf $(OPERATIONS_OBJS)
-	@rm -rf $(VISUALIZATOR_OBJS)
+	@rm -rf
 	@rm -rf $(LIBFT)
 
 fclean: push_swap_clean
