@@ -43,6 +43,10 @@ typedef struct		s_action_list
 {
 	t_list	*head;
 	int		length;	
+	int		low_min;
+	int		low_max;
+	int		up_min;
+	int		up_max;
 }					t_action_list;
 
 typedef struct		s_turn

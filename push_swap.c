@@ -60,6 +60,8 @@ int			main(int ac, char **av)
 	turn.a_actions->head = NULL;
 	turn.actions->head = NULL;
 	turn.actions->length = 0;
+	best_actions.head = NULL;
+	best_actions.length = 0;
 	if (ac < 2)
 		return (0);
 	check_args(&turn ,ac, av);
@@ -71,37 +73,45 @@ int			main(int ac, char **av)
 			simple_sort(&turn);
 		else
 		{
-			i = 10;
+			i = 20;
 			turn.low_min = 0;
-			turn.low_max = 1;
-			turn.up_min = 5;
-			turn.up_max = 10;
+			turn.low_max = i;
+			turn.up_min = 0;
+			turn.up_max = i;
 			best_turns = MAX_INT;
 			while (i)
 			{
-				turn.actions->head = NULL;
-				turn.b_actions->head = NULL;
-				turn.a_actions->head = NULL;
-				turn.actions->length = 0;
 				turn.stack_a = copy_stack(stack_a);
 				sort_by_chanks(&turn, 1, stack_a.top);
 				while (stack_b.top)
 					run_action(&turn, pa, 1);
 				if (actions.length < best_turns)
 				{
+					ft_lstdel(&(best_actions.head), ft_delcontent);
 					best_actions.head = actions.head;
 					best_actions.length = actions.length;
 					best_turns = actions.length;
-					// ft_printf("%d\n", actions.length);
+					actions.head = NULL;
+					actions.length = 0;
 				}
-				++turn.low_max;
+				else
+				{
+					ft_lstdel(&(actions.head), ft_delcontent);
+					actions.length = 0;
+				}
+
+				// if (best_turns < 5500)
+				// 	break ;
+				--turn.low_max;
 				++turn.up_min;
-				++turn.up_max;
+				// turn.up_max+=2;
 				--i;
 			}
 
 		}
 		print_rev(*(best_actions.head));
+		ft_lstdel(&(best_actions.head), ft_delcontent);
+		ft_lstdel(&(actions.head), ft_delcontent);
 	}
 	return (0);
 }
