@@ -6,7 +6,7 @@
 /*   By: tbareich <tbareich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 10:06:17 by tbareich          #+#    #+#             */
-/*   Updated: 2022/01/09 22:24:45 by tbareich         ###   ########.fr       */
+/*   Updated: 2022/02/05 21:49:58 by tbareich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,7 @@
 
 void		rrx(t_stack *stack)
 {
-	unsigned	i;
-	int			tmp;
-
-	if (stack->top - 1 < 1)
+	if (stack->length - 1 < 1)
 		return ;
-	i = 0;
-	tmp = stack->array[i];
-	while (i < stack->top)
-	{
-		if (i == stack->top - 1)
-		{
-			stack->array[i] = tmp;
-			break ;
-		}
-		stack->array[i] = stack->array[i + 1];
-		++i;
-	}
+	stack_left_rotate(stack);
 }

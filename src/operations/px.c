@@ -6,7 +6,7 @@
 /*   By: tbareich <tbareich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 09:42:27 by tbareich          #+#    #+#             */
-/*   Updated: 2022/01/06 11:27:16 by tbareich         ###   ########.fr       */
+/*   Updated: 2022/02/05 21:48:09 by tbareich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,12 @@
 
 void	px(t_stack *destination_stack, t_stack *source_stack)
 {
-	int		*value;
+	t_stack_element	*stacl_element;
 
-	value = pop_stack(source_stack);
-	if (value != NULL)
-		push_stack(destination_stack, *value);
+	stacl_element = pop_stack(source_stack);
+	if (stacl_element != NULL)
+	{
+		push_stack(destination_stack, stacl_element->value);
+		ft_memdel((void **)&stacl_element);
+	}
 }

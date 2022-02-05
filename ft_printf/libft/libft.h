@@ -60,12 +60,22 @@ typedef struct		s_arrlst
 	void			**array;
 }					t_arrlst;
 
+typedef struct		s_stack_element
+{
+	int						index;
+	int						value;
+	struct s_stack_element	*prev;
+	struct s_stack_element	*next;
+}					t_stack_element;
+
 typedef struct		s_stack
 {
-	unsigned				top;
-	unsigned				length;
-	int						*array;
+	int				length;
+	int				init_index;
+	t_stack_element	*top;
+	t_stack_element	*tail;
 }					t_stack;
+
 
 /*
  ** libc Functions
@@ -183,11 +193,14 @@ int					arrlst_size(t_arrlst arrlst);
  ** -----------------------
 */
 
-char				init_stack(t_stack *stack, unsigned length);
+char				init_stack(t_stack *stack);
 char				push_stack(t_stack *stack, int element);
-int					*pop_stack(t_stack *stack);
+t_stack_element		*pop_stack(t_stack *stack);
 void				print_stack(t_stack *stack);
 void				print_stack_array(t_stack *stack);
+int					get_index(t_stack stack, t_stack_element element);
+void				stack_left_rotate(t_stack *stack);
+void				stack_right_rotate(t_stack *stack);
 
 /*
  ** Math Functions

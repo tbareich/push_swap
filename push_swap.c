@@ -15,15 +15,13 @@
 t_stack		*copy_stack(t_stack stack)
 {
 	t_stack		*copy;
-	unsigned	i;
 
-	copy = malloc(sizeof(t_stack));
-	init_stack(copy, stack.length);
-	i = 0;
-	while (i < stack.top)
+	copy = (t_stack *)malloc(sizeof(t_stack));
+	init_stack(copy);
+	while (stack.tail)
 	{
-		push_stack(copy, stack.array[i]);
-		++i;
+		push_stack(copy, stack.tail->value);
+		stack.tail = stack.tail->next;
 	}
 	return copy;
 }
@@ -47,9 +45,9 @@ int			main(int ac, char **av)
 	int				best_turns;
 	t_action_list	best_actions;
 
-	if (init_stack(&stack_a, ac - 1))
+	if (init_stack(&stack_a))
 		error(MEMOERROR);
-	if (init_stack(&stack_b, ac - 1))
+	if (init_stack(&stack_b))
 		error(MEMOERROR);
 	turn.stack_b = &stack_b;
 	turn.stack_a = &stack_a;
@@ -82,8 +80,8 @@ int			main(int ac, char **av)
 			while (i)
 			{
 				turn.stack_a = copy_stack(stack_a);
-				sort_by_chanks(&turn, 1, stack_a.top);
-				while (stack_b.top)
+				sort_by_chanks(&turn, stack_a.length);
+				while (stack_b.length)
 					run_action(&turn, pa, 1);
 				if (actions.length < best_turns)
 				{
@@ -99,18 +97,20 @@ int			main(int ac, char **av)
 					ft_lstdel(&(actions.head), ft_delcontent);
 					actions.length = 0;
 				}
-
-				// if (best_turns < 5500)
-				// 	break ;
 				--turn.low_max;
 				++turn.up_min;
-				// turn.up_max+=2;
 				--i;
 			}
 
 		}
-		print_rev(*(best_actions.head));
-		ft_lstdel(&(best_actions.head), ft_delcontent);
+		// print_stack_array(&stack_a);
+		if (best_actions.head != NULL)
+		{
+			print_rev(*(best_actions.head));
+			ft_lstdel(&(best_actions.head), ft_delcontent);	
+		}
+		else
+			print_rev(*(actions.head));
 		ft_lstdel(&(actions.head), ft_delcontent);
 	}
 	return (0);

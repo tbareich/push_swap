@@ -66,8 +66,9 @@ typedef struct		s_turn
 
 typedef struct		s_indexing
 {
-	unsigned	index;
-	int			value;
+	int				index;
+	int				value;
+	t_stack_element *stack_element;
 }					t_indexing;
 
 void				reader(t_turn *turn, int ac, char **av);
@@ -76,21 +77,21 @@ e_operation			check_opt(char *opt);
 void 				merge_sort(t_list **headRef);
 void				print_sorted_list(t_list *head);
 char				is_sorted(t_turn turn);
-void				sort_by_chanks(t_turn *turn , int divider, int length);
-int					search_in_range(t_turn *turn, int min, int max);
+void				sort_by_chanks(t_turn *turn , int length);
+t_stack_element		*search_in_range(t_turn *turn, int min, int max);
 void				move_to_top_a_optimized(t_turn *turn, int index);
 void				move_to_top_b_optimized(t_turn *turn, int index);
 void				move_to_top(t_turn *turn, char stack_name,
 									int index);
-char				is_min_max(t_stack *stack, int value);
+char				is_min_max(t_stack *stack, t_stack_element element);
 void				run_action(t_turn *turn, e_operation operation,
 									char print_action);
 void				add_action(t_list **actions_list, e_operation operation);
 void				print_lst_actions(t_turn *turn);
 void				find_middle_spot_a(t_turn *turn, t_stack *stack, int number);
 void				find_middle_spot_b(t_turn *turn, t_stack *stack, int number);
-int					find_max(t_stack *stack);
-int					find_min(t_stack *stack);
+t_stack_element		*find_max(t_stack *stack);
+t_stack_element		*find_min(t_stack *stack);
 void				simple_sort(t_turn *turn);
 
 void				sx(t_stack *stack);

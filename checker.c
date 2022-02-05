@@ -6,7 +6,7 @@
 /*   By: tbareich <tbareich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/02 00:58:27 by tbareich          #+#    #+#             */
-/*   Updated: 2022/01/10 03:03:39 by tbareich         ###   ########.fr       */
+/*   Updated: 2022/02/05 21:52:07 by tbareich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ int			main(int ac, char **av)
 	t_stack	stack_a;
 	t_stack	stack_b;
 
-	if (init_stack(&stack_a, ac - 1))
+	if (init_stack(&stack_a))
 		error(MEMOERROR);
-	if (init_stack(&stack_b, ac - 1))
+	if (init_stack(&stack_b))
 		error(MEMOERROR);
 	turn.stack_a = &stack_a;
 	turn.stack_b = &stack_b;

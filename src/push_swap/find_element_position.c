@@ -6,7 +6,7 @@
 /*   By: tbareich <tbareich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 22:04:40 by tbareich          #+#    #+#             */
-/*   Updated: 2022/01/16 06:25:40 by tbareich         ###   ########.fr       */
+/*   Updated: 2022/02/05 21:39:56 by tbareich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,21 @@
 
 void	find_middle_spot_a(t_turn *turn, t_stack *stack, int number)
 {
-	int		i;
 	int		index;
+	t_stack_element	*current;
 
-	if (stack->top < 2)
+	if (stack->length < 2)
 		return ;
-	i = 0;
 	index = -1;
-	while (i < (int)(stack->top - 1))
+	current = stack->tail;
+	while (current->next)
 	{
-		if (number < stack->array[i] && number > stack->array[i + 1])
+		if (number < current->value && number > current->next->value)
 		{
-			index = i;
+			index = get_index(*stack, *current);
 			break ;
 		}
-		++i;
+		current = current->next;
 	}
 	if (index != -1)
 		move_to_top(turn, 'a', index);
@@ -36,68 +36,58 @@ void	find_middle_spot_a(t_turn *turn, t_stack *stack, int number)
 
 void	find_middle_spot_b(t_turn *turn, t_stack *stack, int number)
 {
-	int		i;
 	int		index;
+	t_stack_element	*current;
 
-	if (stack->top < 2)
+	if (stack->length < 2)
 		return ;
-	i = 0;
 	index = -1;
-	while (i < (int)(stack->top - 1))
+	current = stack->tail;
+	while (current->next)
 	{
-		if (number > stack->array[i] && number < stack->array[i + 1])
+		if (number > current->value && number < current->next->value)
 		{
-			index = i;
+			index = get_index(*stack, *current);
 			break ;
 		}
-		++i;
+		current = current->next;
 	}
 	if (index != -1)
 		move_to_top_b_optimized(turn, index);
 }
 
-int	find_max(t_stack *stack)
+t_stack_element	*find_max(t_stack *stack)
 {
-	int				max;
-	int				max_index;
-	unsigned int	i;
+	t_stack_element	*max;
+	t_stack_element	*current;
 
-	if (stack->top < 1)
-		return (-1);
-	max = stack->array[0];
-	max_index = 0;
-	i = 0;
-	while (i < stack->top)
+	if (stack->length < 1)
+		return (NULL);
+	current = stack->tail;
+	max = current;
+	while (current)
 	{
-		if (stack->array[i] > max)
-		{
-			max = stack->array[i];
-			max_index = i;
-		}
-		++i;
+		if (current->value > max->value)
+			max = current;
+		current = current->next;
 	}
-	return (max_index);
+	return (max);
 }
 
-int	find_min(t_stack *stack)
+t_stack_element	*find_min(t_stack *stack)
 {
-	int				min;
-	int				min_index;
-	unsigned int	i;
+	t_stack_element	*min;
+	t_stack_element	*current;
 
-	if (stack->top < 1)
-		return (-1);
-	min = stack->array[0];
-	min_index = 0;
-	i = 0;
-	while (i < stack->top)
+	if (stack->length < 1)
+		return (NULL);
+	current = stack->tail;
+	min = current;
+	while (current)
 	{
-		if (stack->array[i] < min)
-		{
-			min = stack->array[i];
-			min_index = i;
-		}
-		++i;
+		if (current->value < min->value)
+			min = current;
+		current = current->next;
 	}
-	return (min_index);
+	return (min);
 }

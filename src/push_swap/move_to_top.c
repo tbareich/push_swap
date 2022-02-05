@@ -6,7 +6,7 @@
 /*   By: tbareich <tbareich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 03:36:53 by tbareich          #+#    #+#             */
-/*   Updated: 2022/01/28 15:49:47 by tbareich         ###   ########.fr       */
+/*   Updated: 2022/02/06 00:26:56 by tbareich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ void	move_to_top_a_optimized(t_turn *turn, int index)
 	t_stack	*stack;
 
 	stack = turn->stack_a;
-	if (index >= (int)((stack->top / 2) - 1))
+	if (index >= (int)((stack->length / 2) - 1))
 	{
-		i = stack->top - 1 - index;
+		i = stack->length - 1 - index;
 		turn->a_rotate_type = ra;
 		turn->a_rotate_length = i;
 		run_and_add_action(turn, &(turn->a_actions->head), ra, i);
@@ -63,7 +63,7 @@ void	move_to_top_b_optimized(t_turn *turn, int index)
 	int			rrb_length;
 
 	stack = turn->stack_b;
-	rb_length = stack->top - 1 - index;
+	rb_length = stack->length - 1 - index;
 	rrb_length = index + 1;
 	if (turn->a_rotate_type == ra)
 		if (rb_length < turn->a_rotate_length)
@@ -73,7 +73,7 @@ void	move_to_top_b_optimized(t_turn *turn, int index)
 			rrb_length = turn->a_rotate_length - rrb_length;
 	if (rb_length <= rrb_length)
 	{
-		i = stack->top - 1 - index;
+		i = stack->length - 1 - index;
 		run_and_add_action(turn, &(turn->b_actions->head), rb, i);
 	}
 	else
@@ -92,9 +92,9 @@ void	move_to_top(t_turn *turn, char stack_name, int index)
 		stack = turn->stack_a;
 	else
 		stack = turn->stack_b;
-	if (index >= (int)((stack->top / 2) - 1))
+	if (index >= (int)((stack->length / 2) - 1))
 	{
-		i = stack->top - 1 - index;
+		i = stack->length - 1 - index;
 		if (stack_name == 'a')
 			run_and_print(turn, ra, i);
 		else

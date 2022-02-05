@@ -6,7 +6,7 @@
 /*   By: tbareich <tbareich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 21:18:55 by tbareich          #+#    #+#             */
-/*   Updated: 2022/01/11 04:37:32 by tbareich         ###   ########.fr       */
+/*   Updated: 2022/02/05 21:26:16 by tbareich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 
 char	is_sorted(t_turn turn)
 {
-	int		i;
+	t_stack_element *current;
 
-	if (turn.stack_b->top != 0)
+	if (turn.stack_b->top != NULL)
 		return (0);
-	i = turn.stack_a->top - 1;
-	while (i > 0)
+	current = turn.stack_a->top;
+	while (current->prev)
 	{
-		if (turn.stack_a->array[i] > turn.stack_a->array[i - 1])
+		if (current->value > current->prev->value)
 			return (0);
-		--i;
+		current = current->prev;
 	}
 	return (1);
 }

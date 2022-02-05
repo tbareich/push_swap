@@ -6,114 +6,94 @@
 /*   By: tbareich <tbareich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 02:25:54 by tbareich          #+#    #+#             */
-/*   Updated: 2022/01/25 19:49:59 by tbareich         ###   ########.fr       */
+/*   Updated: 2022/02/05 23:06:06 by tbareich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
 
-int	find_middle_spot_index(t_turn *turn, int number)
+t_stack_element	*find_middle_spot(t_turn *turn, t_stack_element element)
 {
-	int		i;
-	int		index;
-	t_stack	*stack_b;
-
+	t_stack			*stack_b;
+	t_stack_element	*node;
+	t_stack_element	*current;
 
 	stack_b = turn->stack_b;
-	if (stack_b->top < 2)
-		return (-1);
-	i = 0;
-	index = -1;
-	while (i < (int)(stack_b->top - 1))
+	if (stack_b->length < 2)
+		return (NULL);
+	current = stack_b->tail;
+	while (current->next)
 	{
-		if (number > stack_b->array[i] && number < stack_b->array[i + 1])
+		if (element.value > current->value
+				&& element.value < current->next->value)
 		{
-			index = i;
+			node = current;
 			break ;
 		}
-		++i;
+		current = current->next;
 	}
-	return (index);
+	return (node);
 }
 
-
-int	find_max_index(t_stack *stack_b)
+int	turns_length(t_turn *turn, t_stack_element element)
 {
-	int			max;
-	int			max_index;
-	unsigned	i;
-
-	if (stack_b->top < 2)
-		return -1;
-	max = MIN_INT;
-	max_index = -1;
-	i = 0;
-	while (i < stack_b->top)
-	{
-		if (stack_b->array[i] >= max)
-		{
-			max = stack_b->array[i];
-			max_index = i;
-		}
-		++i;
-	}
-	return (max_index);
-}
-
-
-int	turns_length(t_turn *turn, int index)
-{
-	int		elem_index;
-	t_stack	*stack_b;
-	t_stack	*stack_a;
-	int		a_i_length;
-	int		b_i_length;
-
+	t_stack_element	*founded_elem;
+	t_stack			*stack_b;
+	t_stack			*stack_a;
+	int				a_i_length;
+	int				b_i_length;
 
 	stack_b = turn->stack_b;
 	stack_a = turn->stack_a;
-	a_i_length = min(index + 1, stack_a->top - index - 1);
+	a_i_length = min(get_index(*stack_a, element) + 1, stack_a->length
+					- get_index(*stack_a, element) - 1);
 	b_i_length = 0;
-	if (is_min_max(stack_b, stack_a->array[index]))
+	if (is_min_max(stack_b, element))
 	{
-		elem_index = find_max_index(turn->stack_b);
-		b_i_length = min(elem_index + 1, stack_b->top - elem_index - 1);
+		founded_elem = find_max(turn->stack_b);
+		if (founded_elem)
+			b_i_length = min(get_index(*stack_b, *founded_elem) + 1, 
+					stack_b->length - get_index(*stack_b, *founded_elem) - 1);
+	// ft_printf("hello\n");
 	}
 	else
 	{
-		elem_index = find_middle_spot_index(turn, stack_a->array[index]);
-		if (elem_index != -1)
-			b_i_length = min(elem_index + 1, stack_b->top - elem_index - 1);
+		founded_elem = find_middle_spot(turn, element);
+		if (founded_elem && get_index(*stack_b, *founded_elem) != -1)
+			b_i_length = min(get_index(*stack_b, *founded_elem) 
+				+ 1, stack_b->length - get_index(*stack_b, *founded_elem) - 1);
 	}
 	return (max(a_i_length, b_i_length));
 }
 
 
 
-int	search_in_range(t_turn *turn, int min, int max)
+t_stack_element	*search_in_range(t_turn *turn, int min, int max)
 {
-	int		index;
-	int		best;
-	int		best_index;
-	int		turns;
+	int				index;
+	int				best;
+	int				turns;
+	t_stack_element *current;
+	t_stack_element *element;
 
-	index = 0;
-	best_index = -1;
 	best = MAX_INT;
-	while (index < (int)turn->stack_a->top)
+	element = NULL;
+	current = turn->stack_a->tail;
+
+	while (current)
 	{
-		if (turn->stack_a->array[index] <= max
-				&& turn->stack_a->array[index] >= min)
+		if (current->value <= max
+				&& current->value >= min)
 		{
-			turns = turns_length(turn, index);
+			turns = turns_length(turn, *current);
 			if (turns < best)
 			{
 				best = turns;
-				best_index = index;
+				element = current;
 			}
 		}
 		++index;
+		current = current->next;
 	}
-	// ft_printf("%d\n", best);
-	return (best_index);
+	return (element);
 }
