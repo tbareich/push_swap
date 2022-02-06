@@ -6,7 +6,7 @@
 /*   By: tbareich <tbareich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 17:57:00 by tbareich          #+#    #+#             */
-/*   Updated: 2022/02/06 00:26:01 by tbareich         ###   ########.fr       */
+/*   Updated: 2022/02/06 03:01:39 by tbareich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,45 +123,28 @@ int		get_index(t_stack stack, t_stack_element element)
 
 void	stack_left_rotate(t_stack *stack)
 {
-	t_stack_element *new_tail;
-	t_stack_element *new_top;
-
-	if (stack == NULL || stack->top == NULL || stack->length < 2)
+	if (stack == NULL || stack->top == NULL || stack->tail->next == NULL)
 		return ;
-	if (stack->tail->next != NULL)
-	{
-		new_tail = stack->tail->next;
-		new_top = stack->tail;
-		new_top->prev = stack->top;
-		new_top->index = stack->top->index + 1;
-		stack->top->next = new_top;
-		stack->top = new_top;
-		stack->tail = new_tail;
-		new_top->next = NULL;
-		new_tail->prev = NULL;
-		stack->init_index -= 1;
-	}
+	stack->top->next = stack->tail;
+	stack->tail->prev = stack->top;
+	stack->tail->index = stack->top->index + 1;
+	stack->top = stack->top->next;
+	stack->tail = stack->tail->next;
+	stack->top->next = NULL;
+	stack->tail->prev = NULL;
+	stack->init_index -= 1;
 }
 
 void	stack_right_rotate(t_stack *stack)
 {
-	t_stack_element *new_tail;
-	t_stack_element *new_top;
-
 	if (stack == NULL || stack->top == NULL || stack->length < 2)
 		return ;
-	if (stack->tail->next != NULL)
-	{
-		new_tail = stack->top;
-		new_tail->next = stack->tail;
-		new_tail->index = stack->tail->index - 1;
-		stack->tail->prev = new_tail;
-		stack->tail = new_tail;
-		new_top = stack->top->prev;
-		stack->top = new_top;
-		stack->tail = new_tail;
-		new_top->next = NULL;
-		new_tail->prev = NULL;
-		stack->init_index += 1;
-	}
+	stack->top->next = stack->tail;
+	stack->tail->prev = stack->top;
+	stack->top->index = stack->tail->index - 1;
+	stack->top = stack->top->prev;
+	stack->tail = stack->tail->prev;
+	stack->top->next = NULL;
+	stack->tail->prev = NULL;
+	stack->init_index += 1;
 }

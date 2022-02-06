@@ -80,9 +80,12 @@ int			main(int ac, char **av)
 			while (i)
 			{
 				turn.stack_a = copy_stack(stack_a);
+				// print_stack_array(turn.stack_a);
 				sort_by_chanks(&turn, stack_a.length);
 				while (stack_b.length)
 					run_action(&turn, pa, 1);
+				// print_stack_array(turn.stack_a);
+				// error("");
 				if (actions.length < best_turns)
 				{
 					ft_lstdel(&(best_actions.head), ft_delcontent);
