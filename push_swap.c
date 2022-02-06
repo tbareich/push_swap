@@ -14,8 +14,8 @@
 
 t_stack		*copy_stack(t_stack stack)
 {
-	t_stack		*copy;
-	unsigned	i;
+	t_stack	*copy;
+	int		i;
 
 	copy = malloc(sizeof(t_stack));
 	init_stack(copy, stack.length);

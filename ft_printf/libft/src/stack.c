@@ -6,13 +6,13 @@
 /*   By: tbareich <tbareich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 17:57:00 by tbareich          #+#    #+#             */
-/*   Updated: 2022/01/09 19:55:16 by tbareich         ###   ########.fr       */
+/*   Updated: 2022/02/06 09:50:22 by tbareich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <libft.h>
 
-char		init_stack(t_stack *stack, unsigned length)
+char		init_stack(t_stack *stack, int length)
 {
 	if (stack == NULL)
 		return (1);
@@ -43,7 +43,7 @@ int			*pop_stack(t_stack *stack)
 
 void		print_stack(t_stack *stack)
 {
-	unsigned	i;
+	int	i;
 
 	if (stack == NULL)
 	{
@@ -67,7 +67,7 @@ void		print_stack(t_stack *stack)
 
 void		print_stack_array(t_stack *stack)
 {
-	unsigned	i;
+	int	i;
 
 	if (stack == NULL)
 	{

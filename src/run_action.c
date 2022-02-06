@@ -6,7 +6,7 @@
 /*   By: tbareich <tbareich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 04:39:59 by tbareich          #+#    #+#             */
-/*   Updated: 2022/01/29 05:03:59 by tbareich         ###   ########.fr       */
+/*   Updated: 2022/02/06 09:49:05 by tbareich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,6 @@ void		run_action(t_turn *turn, e_operation operation, char print_action)
 			ft_lstnew(g_actions[operation], ft_strlen(g_actions[operation]) + 1));
 		turn->actions->length++;
 	}
-		// ft_putendl(g_actions[operation]);
-	// if (turn->visualizator && 
-	// 		is_option_activated(turn->visualizator->options, V_OPTION))
-		// draw(turn->visualizator, *(turn->stack_a), *(turn->stack_b));
 }
 
 void		print_action(t_turn *turn, e_operation operation)
@@ -61,10 +57,6 @@ void		print_action(t_turn *turn, e_operation operation)
 			ft_lstnew(g_actions[operation], ft_strlen(g_actions[operation]) + 1));
 		turn->actions->length++;
 	}
-		// ft_putendl(g_actions[operation]);
-	// if (turn->visualizator && 
-	// 		is_option_activated(turn->visualizator->options, V_OPTION))
-		// draw(turn->visualizator, *(turn->stack_a), *(turn->stack_b));
 }
 
 void	print_lst_actions(t_turn *turn)

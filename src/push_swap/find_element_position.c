@@ -6,7 +6,7 @@
 /*   By: tbareich <tbareich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 22:04:40 by tbareich          #+#    #+#             */
-/*   Updated: 2022/01/16 06:25:40 by tbareich         ###   ########.fr       */
+/*   Updated: 2022/02/06 09:52:00 by tbareich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,9 @@ void	find_middle_spot_b(t_turn *turn, t_stack *stack, int number)
 
 int	find_max(t_stack *stack)
 {
-	int				max;
-	int				max_index;
-	unsigned int	i;
+	int	max;
+	int	max_index;
+	int	i;
 
 	if (stack->top < 1)
 		return (-1);
@@ -81,9 +81,9 @@ int	find_max(t_stack *stack)
 
 int	find_min(t_stack *stack)
 {
-	int				min;
-	int				min_index;
-	unsigned int	i;
+	int	min;
+	int	min_index;
+	int	i;
 
 	if (stack->top < 1)
 		return (-1);

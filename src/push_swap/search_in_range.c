@@ -6,7 +6,7 @@
 /*   By: tbareich <tbareich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 02:25:54 by tbareich          #+#    #+#             */
-/*   Updated: 2022/01/25 19:49:59 by tbareich         ###   ########.fr       */
+/*   Updated: 2022/02/06 09:51:11 by tbareich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	find_max_index(t_stack *stack_b)
 {
 	int			max;
 	int			max_index;
-	unsigned	i;
+	int			i;
 
 	if (stack_b->top < 2)
 		return -1;
