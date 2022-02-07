@@ -112,7 +112,10 @@ int			main(int ac, char **av)
 			}
 
 		}
-		print_rev(*(best_actions.head));
+		if (best_actions.head == NULL)
+			print_rev(*(actions.head));
+		else
+			print_rev(*(best_actions.head));
 		ft_lstdel(&(best_actions.head), ft_delcontent);
 		ft_lstdel(&(actions.head), ft_delcontent);
 	}
