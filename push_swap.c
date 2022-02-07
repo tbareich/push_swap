@@ -73,16 +73,19 @@ int			main(int ac, char **av)
 			simple_sort(&turn);
 		else
 		{
-			i = 20;
+			if (ac <= 101)
+				i = ac / 4;
+			else
+				i = 20;
 			turn.low_min = 0;
 			turn.low_max = i;
 			turn.up_min = 0;
 			turn.up_max = i;
 			best_turns = MAX_INT;
-			while (i)
+			while (i >= 0)
 			{
 				turn.stack_a = copy_stack(stack_a);
-				sort_by_chanks(&turn, 1, stack_a.top);
+				sort_by_chanks(&turn, stack_a.top);
 				while (stack_b.top)
 					run_action(&turn, pa, 1);
 				if (actions.length < best_turns)

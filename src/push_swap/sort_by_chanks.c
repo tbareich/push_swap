@@ -30,7 +30,7 @@ static void	place_in_best_position(t_turn *turn, int index)
 	print_lst_actions(turn);
 }
 
-void	sort_by_chanks(t_turn *turn, int divider, int length)
+void	sort_by_chanks(t_turn *turn, int length)
 {
 	int		index;
 	int		i;
@@ -42,8 +42,6 @@ void	sort_by_chanks(t_turn *turn, int divider, int length)
 			index = search_in_range(turn, 0, length / 2);
 		else if (i >= turn->up_min && i < turn->up_max)
 			index = search_in_range(turn, length / 2, length);
-		else if (divider == 0)
-			return ;
 		else
 			index = search_in_range(turn, 0, length);
 		place_in_best_position(turn, index);
