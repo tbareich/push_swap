@@ -6,7 +6,7 @@
 /*   By: tbareich <tbareich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 02:25:54 by tbareich          #+#    #+#             */
-/*   Updated: 2022/02/05 23:06:06 by tbareich         ###   ########.fr       */
+/*   Updated: 2022/02/09 09:55:02 by tbareich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ t_stack_element	*find_middle_spot(t_turn *turn, t_stack_element element)
 	if (stack_b->length < 2)
 		return (NULL);
 	current = stack_b->tail;
+	node = NULL;
 	while (current->next)
 	{
 		if (element.value > current->value
@@ -79,7 +80,7 @@ t_stack_element	*search_in_range(t_turn *turn, int min, int max)
 	best = MAX_INT;
 	element = NULL;
 	current = turn->stack_a->tail;
-
+	index = 0;
 	while (current)
 	{
 		if (current->value <= max
