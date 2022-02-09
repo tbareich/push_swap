@@ -103,6 +103,7 @@ int			main(int ac, char **av)
 		{
 			turn.stack_a = copy_stack(stack_a);
 			simple_sort(&turn);
+			stack_del(&(turn.stack_a));
 		}
 		else
 		{
@@ -138,11 +139,10 @@ int			main(int ac, char **av)
 				--turn.low_max;
 				++turn.up_min;
 				--i;
+				stack_del(&(turn.stack_a));
 			}
 
 		}
-		ft_memdel((void **)&(turn.stack_a->array));
-		ft_memdel((void **)&(turn.stack_a));
 		turn.stack_a = &stack_a;
 		turn.stack_b = &stack_b;
 		if (is_option_activated(visualizator.options, V_OPTION))

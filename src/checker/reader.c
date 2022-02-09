@@ -6,7 +6,7 @@
 /*   By: tbareich <tbareich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/02 00:58:48 by tbareich          #+#    #+#             */
-/*   Updated: 2022/02/09 12:35:13 by tbareich         ###   ########.fr       */
+/*   Updated: 2022/02/09 17:45:21 by tbareich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	reader(t_turn *turn, int ac, char **av)
 		operation = check_opt(line);
 		if (operation == unkonwn)
 			error(DEFAULTERROR);
-		ft_printf("%s\n",line);
 		run_action(turn, operation, 0);
 		ft_strdel(&line);
 		line = NULL;

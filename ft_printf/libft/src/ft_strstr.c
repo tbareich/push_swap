@@ -18,11 +18,13 @@ char	*ft_strstr(const char *haystack, const char *needle)
 
 	if (*needle == 0)
 		return ((char *)haystack);
-	while ((p = ft_memchr(haystack, *needle, ft_strlen(haystack))))
+	p = ft_memchr(haystack, *needle, ft_strlen(haystack));
+	while (p)
 	{
 		if (!ft_memcmp(p, needle, ft_strlen(needle)))
 			return (p);
 		haystack = p + 1;
+		p = ft_memchr(haystack, *needle, ft_strlen(haystack));
 	}
 	return (NULL);
 }

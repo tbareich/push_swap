@@ -6,7 +6,7 @@
 /*   By: tbareich <tbareich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/02 00:58:27 by tbareich          #+#    #+#             */
-/*   Updated: 2022/02/09 12:32:39 by tbareich         ###   ########.fr       */
+/*   Updated: 2022/02/09 15:45:46 by tbareich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int			main(int ac, char **av)
 	if (ac < 2)
 		return (0);
 	reader(&turn, ac, av);
-	print_stack(&stack_a);
 	if (is_sorted(turn))
 		ft_putendl("OK");
 	else

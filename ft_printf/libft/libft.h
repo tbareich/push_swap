@@ -38,34 +38,34 @@
  ** ----------
 */
 
-typedef struct		s_list
+typedef struct s_list
 {
 	void			*content;
 	size_t			content_size;
 	struct s_list	*next;
-}					t_list;
+}	t_list;
 
-typedef struct		s_bst
+typedef struct s_bst
 {
 	int				key;
 	void			*content;
 	size_t			content_size;
 	struct s_bst	*left;
 	struct s_bst	*right;
-}					t_bst;
+}	t_bst;
 
-typedef struct		s_arrlst
+typedef struct s_arrlst
 {
 	unsigned int	length;
 	void			**array;
-}					t_arrlst;
+}	t_arrlst;
 
-typedef struct		s_stack
+typedef struct s_stack
 {
 	int	top;
 	int	length;
 	int	*array;
-}					t_stack;
+}	t_stack;
 
 /*
  ** libc Functions
@@ -165,7 +165,7 @@ t_bst				*bst_max(t_bst *root);
 void				bst_delete(t_bst *root);
 void				bst_inorder(t_bst *root);
 int					bst_modify_addr(t_bst *node, void *content,
-		size_t content_size);
+						size_t content_size);
 
 /*
  ** Binary Search Functions
@@ -186,15 +186,14 @@ int					arrlst_size(t_arrlst arrlst);
 char				init_stack(t_stack *stack, int length);
 char				push_stack(t_stack *stack, int element);
 int					*pop_stack(t_stack *stack);
-void				print_stack(t_stack *stack);
-void				print_stack_array(t_stack *stack);
+void				stack_del(t_stack **stack);
 
 /*
  ** Math Functions
  ** -----------------------
 */
 
-unsigned 			ft_abs(int num);
+unsigned int		ft_abs(int num);
 unsigned long		ft_labs(long num);
 unsigned long long	ft_llabs(long long num);
 char				is_int(char *number);
@@ -207,7 +206,8 @@ int					min(int a, int b);
 */
 
 void				error(char *msg);
-char				*ft_strjoin_free(char const *s1, char const *s2, int option);
+char				*ft_strjoin_free(char const *s1, char const *s2,
+						int option);
 char				*ft_strdup_free(char **s1);
 void				*ft_realloc(void *ptr, size_t pre_size, size_t size);
 void				ft_swap(int *elem1, int *elem2);

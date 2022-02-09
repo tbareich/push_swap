@@ -6,7 +6,7 @@
 /*   By: tbareich <tbareich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:03:07 by tbareich          #+#    #+#             */
-/*   Updated: 2022/01/16 06:21:04 by tbareich         ###   ########.fr       */
+/*   Updated: 2022/02/09 15:07:35 by tbareich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void			init_visualisator(t_visualization *data)
 		sdl_error("Get color failed");
      if( TTF_Init() != 0)
          sdl_error("Font init error");
-    data->font = TTF_OpenFont("/Library/Fonts/Arial.ttf", 32);
+    data->font = TTF_OpenFont("/Library/Fonts/Arial.ttf", 24);
     if (data->font == NULL)
     {
         sdl_error("Font error");

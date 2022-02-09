@@ -29,7 +29,14 @@ static int	w_nb(char *s, char c)
 	return (i);
 }
 
-char		**ft_strsplit(char const *s, char c)
+static int	spliter(char const *s, char c, int i)
+{
+	while (s[i] == c && s[i])
+		i++;
+	return (i);
+}
+
+char	**ft_strsplit(char const *s, char c)
 {
 	char	**tab;
 	int		i;
@@ -38,21 +45,21 @@ char		**ft_strsplit(char const *s, char c)
 
 	if (s == NULL)
 		return (NULL);
-	i = 0;
-	j = 0;
-	k = 0;
 	tab = (char **)malloc((w_nb((char *)s, c) + 1) * sizeof(char *));
 	if (tab == NULL)
 		return (NULL);
-	while (s[i = j])
+	i = 0;
+	j = 0;
+	k = 0;
+	while (s[i])
 	{
-		while (s[i] == c && s[i])
-			i++;
+		i = spliter(s, c, i);
 		j = i;
 		while (s[j] != c && s[j])
 			j++;
 		if (j != i)
 			tab[k++] = ft_strsub(s + i, 0, j - i);
+		i = j;
 	}
 	tab[k] = 0;
 	return (tab);

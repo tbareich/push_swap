@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-static void		bst_deletenodehelper(t_bst *root)
+static void	bst_deletenodehelper(t_bst *root)
 {
 	t_bst	*tmp;
 
@@ -34,7 +34,7 @@ static t_bst	*bst_freenode(t_bst *root, t_bst *direction)
 	return (direction);
 }
 
-t_bst			*bst_deletenode(t_bst *root, int key)
+t_bst	*bst_deletenode(t_bst *root, int key)
 {
 	if (root == NULL)
 		return (root);
