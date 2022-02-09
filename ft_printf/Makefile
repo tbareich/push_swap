@@ -52,9 +52,7 @@ $(NAME): $(OBJS) $(SPECIFIERS) $(PARSERS) $(HELPERS) $(FT_PRINTF_HEADER) $(LIBFT
 	@ranlib $(NAME)
 
 %.o: %.c
-	@$(CC) $(CFLAGS) -c -o $@ $< -I. -Ilibft
-	@echo "$(GREEN).$(RESET)\c"
-
+	$(CC) $(CFLAGS) -c -o $@ $< -I. -Ilibft
 
 clean:
 	@rm -rf $(OBJS)

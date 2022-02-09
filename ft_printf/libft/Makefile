@@ -6,7 +6,7 @@
 #    By: tbareich <tbareich@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/24 14:13:12 by tbareich          #+#    #+#              #
-#    Updated: 2022/01/17 16:19:28 by tbareich         ###   ########.fr        #
+#    Updated: 2022/02/09 09:51:59 by tbareich         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,8 +62,7 @@ $(NAME): $(OBJS) $(LIBFT_HEADER)
 
 $(OBJS_DIR)%.o: $(SRCS_DIR)%.c
 	@mkdir -p $(OBJS_DIR)
-	@$(CC) $(CFLAGS) -c -o $@ $< -I. -Ilibft
-	@echo "$(GREEN).$(RESET)\c"
+	$(CC) $(CFLAGS) -c -o $@ $< -I. -Ilibft
 
 clean:
 	@rm -rf $(OBJS_DIR)
