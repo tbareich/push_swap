@@ -25,7 +25,7 @@ static void	place_in_best_position(t_turn *turn, int index)
 	else
 		find_middle_spot_b(turn, turn->stack_b,
 			turn->stack_a->array[turn->stack_a->top - 1]);
-	add_action(&(turn->a_actions->head), pb);
+	add_action_list(&(turn->a_actions->head), pb);
 	run_action(turn, pb, 0);
 	print_lst_actions(turn);
 }

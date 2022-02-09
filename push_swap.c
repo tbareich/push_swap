@@ -12,12 +12,36 @@
 
 #include <push_swap.h>
 
+static int	set_options(t_visualization *visualizator, int ac, char **av)
+{
+	int		i;
+	int		options_length;
+
+	i = 1;
+	options_length = 0;
+	while (i < ac)
+	{
+		if (ft_strequ(av[i], "-v"))
+		{
+			visualizator->options |= 1;
+			++options_length;
+		}
+		else if (ft_strequ(av[i], "-c"))
+		{
+			visualizator->options |= 2;
+			++options_length;
+		}	
+		++i;
+	}
+	return (options_length);
+}
+
 t_stack		*copy_stack(t_stack stack)
 {
 	t_stack	*copy;
 	int		i;
 
-	copy = malloc(sizeof(t_stack));
+	copy = (t_stack *)malloc(sizeof(t_stack));
 	init_stack(copy, stack.length);
 	i = 0;
 	while (i < stack.top)
@@ -28,11 +52,11 @@ t_stack		*copy_stack(t_stack stack)
 	return copy;
 }
 
-void		print_rev(t_list list)
+void		print_rev(t_turn *turn, t_list list)
 {
 	if (list.next != NULL)
-		print_rev(*(list.next));
-	ft_putendl(list.content);
+		print_rev(turn, *(list.next));
+	print_action(turn, *((e_operation *)list.content));
 }
 
 int			main(int ac, char **av)
@@ -46,6 +70,8 @@ int			main(int ac, char **av)
 	int				i;
 	int				best_turns;
 	t_action_list	best_actions;
+	t_visualization visualizator;
+	int				options_length;
 
 	if (init_stack(&stack_a, ac - 1))
 		error(MEMOERROR);
@@ -60,6 +86,10 @@ int			main(int ac, char **av)
 	turn.a_actions->head = NULL;
 	turn.actions->head = NULL;
 	turn.actions->length = 0;
+	turn.visualizator = &visualizator;
+	options_length = set_options(&visualizator, ac, av);
+	ac = ac - options_length;
+	av =  av + options_length;
 	best_actions.head = NULL;
 	best_actions.length = 0;
 	if (ac < 2)
@@ -70,7 +100,10 @@ int			main(int ac, char **av)
 	else
 	{
 		if (ac == 4 || ac == 6 || ac == 3)
+		{
+			turn.stack_a = copy_stack(stack_a);
 			simple_sort(&turn);
+		}
 		else
 		{
 			if (ac <= 101)
@@ -85,7 +118,7 @@ int			main(int ac, char **av)
 			while (i >= 0)
 			{
 				turn.stack_a = copy_stack(stack_a);
-				sort_by_chanks(&turn, stack_a.top);
+				sort_by_chanks(&turn, turn.stack_a->top);
 				while (stack_b.top)
 					run_action(&turn, pa, 1);
 				if (actions.length < best_turns)
@@ -102,22 +135,26 @@ int			main(int ac, char **av)
 					ft_lstdel(&(actions.head), ft_delcontent);
 					actions.length = 0;
 				}
-
-				// if (best_turns < 5500)
-				// 	break ;
 				--turn.low_max;
 				++turn.up_min;
-				// turn.up_max+=2;
 				--i;
 			}
 
 		}
-		if (best_actions.head == NULL)
-			print_rev(*(actions.head));
+		ft_memdel((void **)&(turn.stack_a->array));
+		ft_memdel((void **)&(turn.stack_a));
+		turn.stack_a = &stack_a;
+		turn.stack_b = &stack_b;
+		if (is_option_activated(visualizator.options, V_OPTION))
+			init_visualisator(&visualizator);
+		if (best_actions.length == 0)
+			print_rev(&turn, *(actions.head));
 		else
-			print_rev(*(best_actions.head));
+			print_rev(&turn, *(best_actions.head));
 		ft_lstdel(&(best_actions.head), ft_delcontent);
 		ft_lstdel(&(actions.head), ft_delcontent);
 	}
+	if (is_option_activated(visualizator.options, V_OPTION))
+		loop_program(&visualizator);
 	return (0);
 }

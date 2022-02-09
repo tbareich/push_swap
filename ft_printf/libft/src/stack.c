@@ -6,7 +6,7 @@
 /*   By: tbareich <tbareich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 17:57:00 by tbareich          #+#    #+#             */
-/*   Updated: 2022/02/06 09:50:22 by tbareich         ###   ########.fr       */
+/*   Updated: 2022/02/09 14:07:27 by tbareich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ char		init_stack(t_stack *stack, int length)
 {
 	if (stack == NULL)
 		return (1);
-	stack->array = malloc(length * sizeof(int));
+	stack->array = (int *)malloc(length * sizeof(int));
 	if (stack->array == NULL)
 		return (1);
 	stack->top = 0;
@@ -39,6 +39,12 @@ int			*pop_stack(t_stack *stack)
 		return (NULL);
 	stack->top -= 1;
 	return (stack->array + stack->top);
+}
+
+void		stack_del (t_stack **stack)
+{
+	ft_memdel((void **)&(turn.stack_a->array));
+	ft_memdel((void **)stack_a);
 }
 
 void		print_stack(t_stack *stack)

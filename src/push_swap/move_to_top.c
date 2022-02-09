@@ -6,7 +6,7 @@
 /*   By: tbareich <tbareich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 03:36:53 by tbareich          #+#    #+#             */
-/*   Updated: 2022/01/28 15:49:47 by tbareich         ###   ########.fr       */
+/*   Updated: 2022/02/09 10:51:23 by tbareich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	run_and_add_action(t_turn *turn, t_list **action,
 	while (index)
 	{
 		run_action(turn, operation, 0);
-		add_action(action, operation);
+		add_action_list(action, operation);
 		--index;
 	}
 }

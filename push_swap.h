@@ -14,6 +14,7 @@
 #define PUSH_SWAP_H
 
 # include <ft_printf.h>
+# include <visualisator.h>
 
 # ifndef MEMOERROR
 # define MEMOERROR "INSUFFICIENT MEMORY\n"
@@ -62,6 +63,7 @@ typedef struct		s_turn
 	t_action_list	*a_actions;
 	t_action_list	*b_actions;
 	t_action_list	*actions;
+	t_visualization	*visualizator;
 }					t_turn;
 
 typedef struct		s_indexing
@@ -84,14 +86,15 @@ void				move_to_top(t_turn *turn, char stack_name,
 									int index);
 char				is_min_max(t_stack *stack, int value);
 void				run_action(t_turn *turn, e_operation operation,
-									char print_action);
-void				add_action(t_list **actions_list, e_operation operation);
+									char add_action);
+void				add_action_list(t_list **actions_list, e_operation operation);
 void				print_lst_actions(t_turn *turn);
 void				find_middle_spot_a(t_turn *turn, t_stack *stack, int number);
 void				find_middle_spot_b(t_turn *turn, t_stack *stack, int number);
 int					find_max(t_stack *stack);
 int					find_min(t_stack *stack);
 void				simple_sort(t_turn *turn);
+void				print_action(t_turn *turn, e_operation operation);
 
 void				sx(t_stack *stack);
 void				s_a_b(t_stack *stack1, t_stack *stack2);
