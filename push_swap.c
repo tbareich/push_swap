@@ -57,6 +57,7 @@ void		print_rev(t_turn *turn, t_list list)
 	if (list.next != NULL)
 		print_rev(turn, *(list.next));
 	print_action(turn, *((e_operation *)list.content));
+	++turn->visualizator->turn;
 }
 
 int			main(int ac, char **av)
@@ -86,6 +87,7 @@ int			main(int ac, char **av)
 	turn.a_actions->head = NULL;
 	turn.actions->head = NULL;
 	turn.actions->length = 0;
+	visualizator.turn = 0;
 	turn.visualizator = &visualizator;
 	options_length = set_options(&visualizator, ac, av);
 	ac = ac - options_length;

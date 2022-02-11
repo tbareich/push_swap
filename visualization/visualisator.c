@@ -6,7 +6,7 @@
 /*   By: tbareich <tbareich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:03:07 by tbareich          #+#    #+#             */
-/*   Updated: 2022/02/09 15:07:35 by tbareich         ###   ########.fr       */
+/*   Updated: 2022/02/11 20:11:43 by tbareich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,18 +96,18 @@ void			init_visualisator(t_visualization *data)
     SDL_PumpEvents();
 }
 
-void            write_text(t_visualization *data,char *str, int x)
+static void		write_text(t_visualization *data, char *str, int x, int y)
 {
 	SDL_Color fcolor = {236, 240, 241, 255};
-	SDL_Color bcolor = { 0, 0, 0, 255};
+	SDL_Color bcolor = { 0, 0, 0, 0};
 	SDL_Surface* surfaceMessage =
 		TTF_RenderText_Shaded(data->font, str, fcolor, bcolor); 
 	SDL_Texture* Message = SDL_CreateTextureFromSurface(data->rend, surfaceMessage);
 	SDL_Rect Message_rect;
 	Message_rect.w = surfaceMessage->w;
 	Message_rect.h = surfaceMessage->h ;
-	Message_rect.x = x + (WIN_W / 4) - (Message_rect.w / 2);
-	Message_rect.y = (WIN_H - STACK_H) / 2 - (Message_rect.h / 2);
+	Message_rect.x = x - (Message_rect.w / 2);
+	Message_rect.y = y - (Message_rect.h / 2);
 	SDL_RenderCopy(data->rend, Message, NULL, &Message_rect);
 	SDL_FreeSurface(surfaceMessage);
 	SDL_DestroyTexture(Message);
@@ -119,9 +119,11 @@ void            draw(t_visualization *data, t_stack a, t_stack b)
 	SDL_RenderClear(data->rend);
     visualizator(data, a, 0, a.top + b.top);
     visualizator(data, b, WIN_W / 2, a.top + b.top);
-    write_text(data, "Stack A", -40);
-    write_text(data, "Stack B", WIN_W / 2);
-
+	data->font = TTF_OpenFont("/Library/Fonts/Arial.ttf", 24);
+    write_text(data, "Stack A", -40 + (WIN_W / 4), (WIN_H - STACK_H) / 2);
+    write_text(data, "Stack B", WIN_W / 2 + (WIN_W / 4), (WIN_H - STACK_H) / 2);
+	// data->font = TTF_OpenFont("/Library/Fonts/Arial.ttf", 50);
+    write_text(data, ft_itoa(data->turn),  WIN_W - 50 , WIN_H - 50);
 	if (SDL_SetRenderDrawColor(data->rend, 100, 100, 100, 255) != 0)
 		sdl_error("Get color failed");
     if (SDL_RenderDrawLine(data->rend, WIN_W / 2, 0, WIN_W / 2, WIN_H) != 0)
@@ -165,7 +167,7 @@ void			visualizator(t_visualization *data, t_stack s, int x, int height)
             }
             else
                 if (SDL_SetRenderDrawColor(data->rend,
-                            255, 255, 255, 255) != 0)
+                           255, 215, 0, 255) != 0)
                   sdl_error("Get color failed");
             rec.w = convert_range(s.array[j], 0, height,  (STACK_W / height) * (height / 3), STACK_W);
             rec.h = h;

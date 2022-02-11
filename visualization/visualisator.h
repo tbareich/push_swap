@@ -6,7 +6,7 @@
 /*   By: tbareich <tbareich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:02:18 by tbareich          #+#    #+#             */
-/*   Updated: 2022/01/16 04:05:18 by tbareich         ###   ########.fr       */
+/*   Updated: 2022/02/11 20:01:12 by tbareich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,12 @@ typedef struct		s_visualization
 	SDL_Renderer		*rend;
     char              options:2;
     TTF_Font            *font;
+	int					turn;
 }					t_visualization;
 
 void		event_listner();
 uint32_t	rgb(double ratio);
 void		init_visualisator(t_visualization *data);
-void		write_text(t_visualization *data,char *str, int x);
 void		draw(t_visualization *data, t_stack a, t_stack b);
 void		visualizator(t_visualization *data, t_stack s,
 						int x, int height);

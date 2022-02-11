@@ -59,6 +59,7 @@ typedef struct		s_turn
 	int				low_max;
 	int				up_min;
 	int				up_max;
+	int				current_turn;
 	e_operation 	a_rotate_type;
 	t_action_list	*a_actions;
 	t_action_list	*b_actions;
