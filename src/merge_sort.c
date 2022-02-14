@@ -6,7 +6,7 @@
 /*   By: tbareich <tbareich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 04:29:50 by tbareich          #+#    #+#             */
-/*   Updated: 2022/01/06 04:52:21 by tbareich         ###   ########.fr       */
+/*   Updated: 2022/02/14 20:50:51 by tbareich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,17 +71,4 @@ void 			merge_sort(t_list **headRef)
     merge_sort(&a);
     merge_sort(&b);
     *headRef = sorted_merge(a, b);
-}
-
-void			print_sorted_list(t_list *head)
-{
-    while (head != NULL) {
-        ft_printf("{%d, %d}",((t_indexing *)head->content)->index,
-				((t_indexing *)head->content)->value);
-        head = head->next;
-		if (head != NULL)
-			ft_putstr(" -> ");
-		else
-			ft_putstr("\n");
-    }
 }

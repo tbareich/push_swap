@@ -6,7 +6,7 @@
 /*   By: tbareich <tbareich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/07 02:25:54 by tbareich          #+#    #+#             */
-/*   Updated: 2022/02/06 09:51:11 by tbareich         ###   ########.fr       */
+/*   Updated: 2022/02/14 20:50:54 by tbareich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,5 @@ int	search_in_range(t_turn *turn, int min, int max)
 		}
 		++index;
 	}
-	// ft_printf("%d\n", best);
 	return (best_index);
 }
