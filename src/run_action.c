@@ -6,18 +6,27 @@
 /*   By: tbareich <tbareich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 04:39:59 by tbareich          #+#    #+#             */
-/*   Updated: 2022/02/09 12:08:36 by tbareich         ###   ########.fr       */
+/*   Updated: 2022/02/14 22:49:36 by tbareich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
-	
-const char	*g_actions[12] = 
-	{
-		NULL, "sa", "sb", "ss", "ra", "rb", "rr","rra", "rrb", "rrr", "pa", "pb"
-	};
 
-void		run_action(t_turn *turn, e_operation operation, char append)
+const char	*g_actions[12]
+	= {NULL, "sa", "sb", "ss", "ra", "rb", "rr",
+	"rra", "rrb", "rrr", "pa", "pb"};
+
+static void	add_action(t_turn *turn, e_operation operation)
+{
+	if (operation != unkonwn)
+	{
+		ft_lstadd(&(turn->actions->head),
+			ft_lstnew(&operation, sizeof(e_operation)));
+		turn->actions->length++;
+	}
+}
+
+void	run_action(t_turn *turn, e_operation operation, char append)
 {
 	if (operation == sa)
 		sx(turn->stack_a);
@@ -41,41 +50,27 @@ void		run_action(t_turn *turn, e_operation operation, char append)
 		rrx(turn->stack_b);
 	else if (operation == rrr)
 		rr_a_b(turn->stack_a, turn->stack_b);
-	if (g_actions[operation] != NULL && append == 1)
-	{
-		ft_lstadd(&(turn->actions->head), 
-			ft_lstnew(&operation, sizeof(e_operation)));
-		turn->actions->length++;
-	}
+	if (operation != unkonwn && append == 1)
+		add_action(turn, operation);
 }
 
-void		add_action(t_turn *turn, e_operation operation)
-{
-	if (g_actions[operation] != NULL)
-	{
-		ft_lstadd(&(turn->actions->head), 
-			ft_lstnew(&operation, sizeof(e_operation)));
-		turn->actions->length++;
-	}
-}
-
-void		print_action(t_turn *turn, e_operation operation)
+void	print_action(t_turn *turn, e_operation operation)
 {
 	run_action(turn, operation, 0);
 	if (g_actions[operation] != NULL)
 	{
-		if ( is_option_activated(turn->visualizator->options, V_OPTION) == 1)
+		if (is_option_activated(turn->visualizator->options, V_OPTION) == 1)
 			draw(turn->visualizator, *(turn->stack_a), *(turn->stack_b));
 		ft_putendl(g_actions[operation]);
 	}
 }
 
-void	print_lst_actions(t_turn *turn)
+void	add_lst_actions(t_turn *turn)
 {
 	t_list		*a_lst;
 	t_list		*b_lst;
-	e_operation a_operation;
-	e_operation b_operation;
+	e_operation	a_operation;
+	e_operation	b_operation;
 
 	a_lst = turn->a_actions->head;
 	b_lst = turn->b_actions->head;

@@ -69,18 +69,16 @@ clean:
 	@rm -rf $(CHECKER_OBJS)
 	@rm -rf $(OPERATIONS_OBJS)
 	@rm -rf $(VISUALIZATOR_OBJS)
-	@rm -rf $(LIBFT)
 	@$(MAKE) -C $(LIBFT) clean
 
-push_swap_clean:
-	@rm -rf $(OBJS)
-	@rm -rf $(PUSH_SWAP_OBJS)
-	@rm -rf $(CHECKER_OBJS)
-	@rm -rf $(OPERATIONS_OBJS)
-	@rm -rf $(VISUALIZATOR_OBJS)
-	@rm -rf $(LIBFT)
+# push_swap_clean:
+# 	@rm -rf $(OBJS)
+# 	@rm -rf $(PUSH_SWAP_OBJS)
+# 	@rm -rf $(CHECKER_OBJS)
+# 	@rm -rf $(OPERATIONS_OBJS)
+# 	@rm -rf $(VISUALIZATOR_OBJS)
 
-fclean: push_swap_clean
+fclean: clean
 	@rm -f $(PS_NAME)
 	@rm -f $(C_NAME)
 	@$(MAKE) -C $(LIBFT) fclean

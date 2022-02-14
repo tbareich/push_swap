@@ -1,13 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_args.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tbareich <tbareich@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/14 22:22:56 by tbareich          #+#    #+#             */
+/*   Updated: 2022/02/14 22:22:56 by tbareich         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <push_swap.h>
 
 static void	indexing(t_stack *stack, t_list *head)
 {
-	int	i;
-	t_indexing *elem;
-	t_indexing *elem_cmp;
+	int			i;
+	t_indexing	*elem;
+	t_indexing	*elem_cmp;
 
 	merge_sort(&head);
-	// print_sorted_list(head);
 	i = 0;
 	while (head != NULL)
 	{
@@ -26,10 +37,10 @@ static void	indexing(t_stack *stack, t_list *head)
 
 void	check_args(t_turn *turn, int ac, char **av)
 {
-	int 	i;
-	int 	number;
-	t_list	*head;
-	t_list	*node;
+	int			i;
+	int			number;
+	t_list		*head;
+	t_list		*node;
 	t_indexing	indexing_element;
 
 	i = ac - 1;
@@ -43,7 +54,8 @@ void	check_args(t_turn *turn, int ac, char **av)
 			error(DEFAULTERROR);
 		indexing_element.value = number;
 		indexing_element.index = turn->stack_a->top - 1;
-		if ((node = ft_lstnew(&indexing_element, sizeof(t_indexing))) == NULL)
+		node = ft_lstnew(&indexing_element, sizeof(t_indexing));
+		if (node == NULL)
 			error(MEMOERROR);
 		ft_lstadd(&head, node);
 		--i;

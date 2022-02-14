@@ -89,7 +89,7 @@ char				is_min_max(t_stack *stack, int value);
 void				run_action(t_turn *turn, e_operation operation,
 									char add_action);
 void				add_action_list(t_list **actions_list, e_operation operation);
-void				print_lst_actions(t_turn *turn);
+void				add_lst_actions(t_turn *turn);
 void				find_middle_spot_a(t_turn *turn, t_stack *stack, int number);
 void				find_middle_spot_b(t_turn *turn, t_stack *stack, int number);
 int					find_max(t_stack *stack);

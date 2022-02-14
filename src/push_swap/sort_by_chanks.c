@@ -27,7 +27,7 @@ static void	place_in_best_position(t_turn *turn, int index)
 			turn->stack_a->array[turn->stack_a->top - 1]);
 	add_action_list(&(turn->a_actions->head), pb);
 	run_action(turn, pb, 0);
-	print_lst_actions(turn);
+	add_lst_actions(turn);
 }
 
 void	sort_by_chanks(t_turn *turn, int length)
