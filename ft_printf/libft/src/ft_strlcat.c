@@ -24,5 +24,7 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 		ft_bzero(dst + lend, size - lend);
 		ft_memccpy(dst + lend, src, 0, size - lend - 1);
 	}
-	return (size < lend ? lens + size : lend + lens);
+	if (size < lend)
+		return (lens + size);
+	return (lend + lens);
 }

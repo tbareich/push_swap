@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-int		bst_modify_addr(t_bst *node, void *content, size_t content_size)
+int	bst_modify_addr(t_bst *node, void *content, size_t content_size)
 {
 	if (node == NULL)
 		return (-1);

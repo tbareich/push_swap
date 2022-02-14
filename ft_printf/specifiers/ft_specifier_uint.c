@@ -29,8 +29,8 @@ static unsigned long long	switcher(va_list argp, t_printf_arg *arg)
 	return (nbr);
 }
 
-void						ft_specifier_uint(va_list argp, t_printf_arg *arg,
-								char specifier)
+void	ft_specifier_uint(va_list argp, t_printf_arg *arg,
+			char specifier)
 {
 	char					*str;
 	unsigned long long		nbr;
@@ -46,11 +46,12 @@ void						ft_specifier_uint(va_list argp, t_printf_arg *arg,
 		--arg->width;
 	if (arg->precision_set && arg->precision == 0 && nbr == 0)
 		len = 0;
-	if (arg->precision < len )
+	if (arg->precision < len)
 		arg->precision = len;
-	(arg->flags & ZERO) ? pad_zeros(arg->width, arg->precision,
-		!(arg->flags & MINUS), arg) : pad_spaces(arg->width, arg->precision,
-		!(arg->flags & MINUS), arg);
+	if (arg->flags & ZERO)
+		pad_zeros(arg->width, arg->precision, !(arg->flags & MINUS), arg);
+	else
+		pad_spaces(arg->width, arg->precision, !(arg->flags & MINUS), arg);
 	pad_zeros(arg->precision, len, 1, arg);
 	arg->printed += write(arg->fd, str, len);
 	if (str)

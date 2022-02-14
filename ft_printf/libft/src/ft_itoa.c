@@ -27,7 +27,7 @@ static int	numlen(int n)
 	return (i);
 }
 
-char		*ft_itoa(int n)
+char	*ft_itoa(int n)
 {
 	char	*str;
 	int		i;
