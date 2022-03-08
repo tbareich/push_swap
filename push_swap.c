@@ -92,31 +92,25 @@ int main(int ac, char **av)
 	t_turn *turn;
 	t_stack stack_a;
 	t_stack stack_b;
-	t_action_list best_actions;
 
 	init_turn(&turn, ac, av);
 	ac = ac - turn->options_length;
 	av = av + turn->options_length;
 	if (ac < 2)
 		return (free_turn(&turn));
-	turn->stack_b = &stack_b;
-	turn->stack_a = &stack_a;
 	if (init_stack(&stack_a, ac - 1))
 		error(MEMOERROR);
 	if (init_stack(&stack_b, ac - 1))
 		error(MEMOERROR);
-	// best_actions.head = NULL;
-	// best_actions.length = 0;
+	turn->stack_a = &stack_a;
+	turn->stack_b = &stack_b;
 	check_args(turn, ac, av);
-	if (is_sorted(*turn))
+	if (is_sorted(&stack_a))
 		return (0);
 	if (is_option_activated(turn->visualizator->options, V_OPTION))
 		init_visualisator(turn->visualizator);
-	// if (ac == 4 || ac == 6 || ac == 3)
-	// {
-	// 	simple_sort(turn);
-	// 	stack_del(&(turn->stack_a));
-	// }
+	if (ac == 4 || ac == 6 || ac == 3)
+		simple_sort(turn);
 	push_b(turn, 0, stack_a.length - 1);
 	if (is_option_activated(turn->visualizator->options, V_OPTION))
 		loop_program(turn->visualizator);

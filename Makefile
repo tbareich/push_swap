@@ -27,7 +27,8 @@ PUSH_SWAP_OBJS = push_swap.o src/push_swap/complex_sort.o\
 				src/push_swap/find_element_position.o\
 				src/push_swap/best_actions_list.o\
 				src/push_swap/copy_stack.o src/push_swap/sort.o\
-				src/push_swap/push_b.o src/push_swap/push_a.o 
+				src/push_swap/push_b.o src/push_swap/push_a.o \
+				src/push_swap/is_sorted_dir.o
 
 CHECKER_OBJS = checker.o src/checker/reader.o src/checker/check_opt.o
 OPERATIONS_OBJS = src/operations/sx.o src/operations/px.o\
@@ -55,13 +56,13 @@ all: subsystem $(PS_NAME) $(C_NAME)
 subsystem:
 	@$(MAKE) -C $(LIBFT)
 
-$(PS_NAME): $(OBJS) $(PUSH_SWAP_OBJS) $(VISUALIZATOR_OBJS)\
+$(PS_NAME): $(OBJS) $(PUSH_SWAP_OBJS) $(VISUALIZATOR_OBJS) \
 	$(OPERATIONS_OBJS) $(VISUALIZATOR_HEADER) $(PUSH_SWAP_HEADER) 
 	$(CC) $(CFLAGS) $(SDL_FLAGGS) $(SDL_INCLUDE) $(SDL_LIBS) $(OBJS) \
 	$(PUSH_SWAP_OBJS) $(OPERATIONS_OBJS) $(VISUALIZATOR_OBJS) $(LIBFT_LIB) \
 	-o $(PS_NAME) -I.
 
-$(C_NAME): $(OBJS) $(CHECKER_OBJS) $(PUSH_SWAP_HEADER)\
+$(C_NAME): $(OBJS) $(CHECKER_OBJS) $(PUSH_SWAP_HEADER) \
 	$(VISUALIZATOR_OBJS) $(VISUALIZATOR_HEADER) $(OPERATIONS_OBJS) 
 	$(CC) $(CFLAGS) $(SDL_FLAGGS) $(SDL_INCLUDE) $(SDL_LIBS) $(OBJS) \
 	$(VISUALIZATOR_OBJS) $(CHECKER_OBJS) $(OPERATIONS_OBJS) $(LIBFT_LIB) \

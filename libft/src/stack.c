@@ -6,7 +6,7 @@
 /*   By: tbareich <tbareich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 17:57:00 by tbareich          #+#    #+#             */
-/*   Updated: 2022/02/28 16:32:27 by tbareich         ###   ########.fr       */
+/*   Updated: 2022/03/08 01:30:50 by tbareich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	init_stack(t_stack *stack, int length)
 	stack->array = (t_stack_element *)ft_memalloc(length
 					* sizeof(t_stack_element));
 	if (stack->array == NULL)
-		return (1);
+		return (1);	
 	stack->top = 0;
 	stack->length = length;
 	return (0);

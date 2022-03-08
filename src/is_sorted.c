@@ -6,22 +6,22 @@
 /*   By: tbareich <tbareich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 21:18:55 by tbareich          #+#    #+#             */
-/*   Updated: 2022/02/28 13:51:19 by tbareich         ###   ########.fr       */
+/*   Updated: 2022/03/08 01:01:07 by tbareich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
 
-char	is_sorted(t_turn turn)
+char	is_sorted(t_stack *stack)
 {
 	int		i;
 
-	if (turn.stack_b->top != 0)
-		return (0);
-	i = turn.stack_a->top - 1;
+	if (stack->top < 2)
+		return (1);
+	i = stack->top - 1;
 	while (i > 0)
 	{
-		if (turn.stack_a->array[i].value > turn.stack_a->array[i - 1].value)
+		if (stack->array[i].value < stack->array[i - 1].value)
 			return (0);
 		--i;
 	}

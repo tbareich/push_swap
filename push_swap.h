@@ -25,7 +25,7 @@
 # endif
 
 # define MAXRETRY 20
-# define ft_between(v, min, max) (v >= min && v<= max)
+# define ft_between(v, min, max) (v >= min && v <= max)
 
 typedef enum e_operation
 {
@@ -83,7 +83,8 @@ void				check_args(t_turn *turn, int ac, char **av);
 t_operation			check_opt(char *opt);
 void				merge_sort(t_list **headRef);
 void				print_sorted_list(t_list *head);
-char				is_sorted(t_turn turn);
+char				is_sorted(t_stack *stack);
+char				is_sorted_dir(t_turn *turn, t_stack *stack, char name, int left, int right, int dir);
 void				complex_sort(t_turn *turn, int length);
 int					search_in_range(t_stack *stack, int min, int max);
 void				move_to_top_a_optimized(t_turn *turn, int index);
@@ -93,6 +94,7 @@ void				move_to_top(t_turn *turn, char stack_name,
 char				is_min_max(t_stack *stack, int value);
 void				run_action(t_turn *turn, t_operation operation,
 						char add_action);
+void				run_naction(t_turn *turn, t_operation operation, int length);
 void				add_action(t_turn *turn, t_operation operation);
 void				add_action_list(t_list **actions_list,
 						t_operation operation);

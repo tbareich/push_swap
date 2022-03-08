@@ -6,7 +6,7 @@
 /*   By: tbareich <tbareich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/18 20:16:39 by tbareich          #+#    #+#             */
-/*   Updated: 2022/03/05 16:21:05 by tbareich         ###   ########.fr       */
+/*   Updated: 2022/03/07 22:10:35 by tbareich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ static void	print_rev(t_turn *turn, t_list *list)
 void	start_sort(t_turn *turn, t_stack *stack_a,
 	t_action_list *best_actions, int ac)
 {
-	if (is_sorted(*turn))
-		return ;
-	else
-	{
+	// if (is_sorted(turn->stack_a, 0))
+	// 	return ;
+	// else
+	// {
 		setvbuf(stdout, NULL, _IONBF, 0);
 		if (ac == 4 || ac == 6 || ac == 3)
 		{
@@ -42,7 +42,7 @@ void	start_sort(t_turn *turn, t_stack *stack_a,
 		else
 			print_rev(turn, best_actions->head);
 		ft_lstdel(&(best_actions->head), ft_delcontent);
-	}
+	// }
 	if (is_option_activated(turn->visualizator->options, V_OPTION))
 		loop_program(turn->visualizator);
 	stack_del_content(stack_a);

@@ -57,6 +57,7 @@ void	check_args(t_turn *turn, int ac, char **av)
 		indexing_element.value = number;
 		indexing_element.index = turn->stack_a->top - 1;
 		node = ft_lstnew(&indexing_element, sizeof(t_indexing));
+
 		if (node == NULL)
 			error(MEMOERROR);
 		ft_lstadd(&head, node);

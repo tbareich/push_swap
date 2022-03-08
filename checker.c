@@ -6,7 +6,7 @@
 /*   By: tbareich <tbareich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/02 00:58:27 by tbareich          #+#    #+#             */
-/*   Updated: 2022/02/18 23:28:13 by tbareich         ###   ########.fr       */
+/*   Updated: 2022/03/08 01:37:22 by tbareich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	main(int ac, char **av)
 	turn.stack_a = &stack_a;
 	turn.stack_b = &stack_b;
 	reader(&turn, ac, av);
-	if (is_sorted(turn))
+	if (is_sorted(turn.stack_a))
 		ft_putendl("OK");
 	else
 		ft_putendl("KO");
