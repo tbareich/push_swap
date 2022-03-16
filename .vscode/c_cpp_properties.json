@@ -5,7 +5,8 @@
             "includePath": [
                 "${workspaceFolder}/**",
                 "/Users/tbareich/brew/Cellar/sdl2/2.0.20/include",
-                "/Users/tbareich/brew/Cellar/sdl2_ttf/2.0.18_1/include"
+                "/Users/tbareich/brew/Cellar/sdl2_ttf/2.0.18_1/include",
+                "${workspaceFolder}"
             ],
             "defines": [],
             "macFrameworkPath": [

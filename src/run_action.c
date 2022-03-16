@@ -6,7 +6,7 @@
 /*   By: tbareich <tbareich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 04:39:59 by tbareich          #+#    #+#             */
-/*   Updated: 2022/03/08 01:36:39 by tbareich         ###   ########.fr       */
+/*   Updated: 2022/03/08 22:05:02 by tbareich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,6 @@
 const char	*g_actions[12]
 	= {NULL, "sa", "sb", "ss", "ra", "rb", "rr",
 	"rra", "rrb", "rrr", "pa", "pb"};
-
-void	add_action(t_turn *turn, t_operation operation)
-{
-	t_list	*node;
-
-	if (operation != unkonwn)
-	{
-		node = ft_lstnew(&operation, sizeof(t_operation));
-		if (node == NULL)
-			error(MEMOERROR);
-		ft_lstadd(&(turn->actions->head), node);
-		turn->actions->length++;
-	}
-}
 
 void	run_action(t_turn *turn, t_operation operation, char append)
 {

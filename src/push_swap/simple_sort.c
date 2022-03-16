@@ -6,7 +6,7 @@
 /*   By: tbareich <tbareich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 04:00:30 by tbareich          #+#    #+#             */
-/*   Updated: 2022/03/03 17:28:33 by tbareich         ###   ########.fr       */
+/*   Updated: 2022/03/08 21:44:52 by tbareich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ static void	sort_five(t_turn *turn)
 		}
 		else
 		/// TODO: changed find middle need move top
-			find_middle_spot_a(turn->stack_a,
-				turn->stack_b->array[turn->stack_b->top - 1].value);
+			// find_middle_spot_a(turn->stack_a,
+			// 	turn->stack_b->array[turn->stack_b->top - 1].value);
 		run_action(turn, pa, 1);
 	}
 	index = find_min(turn->stack_a);

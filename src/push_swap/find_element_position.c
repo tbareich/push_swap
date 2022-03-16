@@ -6,7 +6,7 @@
 /*   By: tbareich <tbareich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/15 22:04:40 by tbareich          #+#    #+#             */
-/*   Updated: 2022/03/03 17:27:16 by tbareich         ###   ########.fr       */
+/*   Updated: 2022/03/08 21:46:49 by tbareich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	find_middle_spot_b(t_turn *turn, t_stack *stack, int number)
 		++i;
 	}
 	if (index != -1)
-		move_to_top_b_optimized(turn, index);
+		move_to_top(turn, 'b', index);
 }
 
 int	find_max(t_stack *stack)

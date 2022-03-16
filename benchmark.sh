@@ -6,7 +6,7 @@
 #    By: tbareich <tbareich@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/01/16 08:50:14 by tbareich          #+#    #+#              #
-#    Updated: 2022/03/02 18:21:29 by tbareich         ###   ########.fr        #
+#    Updated: 2022/03/16 22:03:19 by tbareich         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ SUM=0
 
 for i in {1..500}
 do
-		export ARG=`ruby -e "puts (1..500).to_a.shuffle.join(' ')"`
+		export ARG=`ruby -e "puts (1..100).to_a.shuffle.join(' ')"`
 		if ./push_swap $ARG | ./checker $ARG | grep -q KO
 		then
 			echo "Error!"
@@ -43,5 +43,8 @@ do
 		let ITERATIONS+=1
 done
 
-echo "AVG: $(($SUM / $ITERATIONS))"
+if [ "$ITERATIONS" -gt "0" ]
+	then
+	echo "AVG: $(($SUM / $ITERATIONS))"
+fi
 echo "MAX: " $MAX

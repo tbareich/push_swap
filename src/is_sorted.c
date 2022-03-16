@@ -6,7 +6,7 @@
 /*   By: tbareich <tbareich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 21:18:55 by tbareich          #+#    #+#             */
-/*   Updated: 2022/03/08 01:01:07 by tbareich         ###   ########.fr       */
+/*   Updated: 2022/03/08 22:07:47 by tbareich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	is_sorted(t_stack *stack)
 	i = stack->top - 1;
 	while (i > 0)
 	{
-		if (stack->array[i].value < stack->array[i - 1].value)
+		if (stack->array[i].value > stack->array[i - 1].value)
 			return (0);
 		--i;
 	}

@@ -12,14 +12,6 @@
 
 #include <push_swap.h>
 
- void	print_rev(t_turn *turn, t_list *list)
-{
-	if (list->next != NULL)
-		print_rev(turn, list->next);
-	++turn->visualizator->turn;
-	print_action(turn, *((t_operation *)list->content));
-}
-
 static int set_options(t_visualizator *visualizator, int ac, char **av)
 {
 	int i;

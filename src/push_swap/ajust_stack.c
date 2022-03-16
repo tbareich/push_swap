@@ -1,23 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   add_action.c                                       :+:      :+:    :+:   */
+/*   ajust_stack.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbareich <tbareich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/11 06:59:53 by tbareich          #+#    #+#             */
-/*   Updated: 2022/02/16 12:26:45 by tbareich         ###   ########.fr       */
+/*   Created: 2022/03/15 10:14:40 by tbareich          #+#    #+#             */
+/*   Updated: 2022/03/16 20:51:50 by tbareich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
 
-void	add_action_list(t_list **actions_list, t_operation operation)
+void	need_ra(t_turn *turn, t_stack *stack)
 {
-	t_list		*node;
+	if (stack->top < 2)
+		return ;
+	if (stack->array[stack->top - 1].value
+		== stack->array[stack->top - 2].value + 1)
+		run_action(turn, sa, 1);
+}
 
-	node = ft_lstnew(&operation, sizeof(t_operation));
-	if (node == NULL)
-		error(MEMOERROR);
-	ft_lstpush(actions_list, node);
+void	need_rb(t_turn *turn, t_stack *stack)
+{
+	if (stack->top < 2)
+		return ;
+	if (stack->array[stack->top - 1].value
+		== stack->array[stack->top - 2].value - 1)
+		run_action(turn, sb, 1);
 }
