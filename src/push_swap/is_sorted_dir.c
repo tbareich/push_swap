@@ -6,7 +6,7 @@
 /*   By: tbareich <tbareich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 00:58:29 by tbareich          #+#    #+#             */
-/*   Updated: 2022/03/15 16:59:58 by tbareich         ###   ########.fr       */
+/*   Updated: 2022/03/17 20:33:55 by tbareich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,74 +67,4 @@ char	is_sorted_dir(t_turn *turn, t_stack *stack, char name
 			run_action(turn, sb, 1);
 	}
 	return (1);
-}
-
-int	is_a_sorted(t_turn *turn, int left, int right)
-{
-	int 	min_index;
-	int		i;
-	t_stack	*stack;
-	int		new_right;
-
-	stack = turn->stack_a;
-	if (stack->top < 2)
-		return (right);
-	min_index = 0;
-	i = stack->top - 1;
-	while (i >= 0 && ft_between(stack->array[i].value, left, right))
-	{
-		min_index = i;
-		--i;
-	}
-	new_right = right;
-	i = min_index;
-	if (stack->array[i % stack->top].value == right)
-	{
-		while (ft_between(stack->array[i % stack->top].value, left, right))
-		{
-			if (stack->array[i % stack->top].value
-				!= stack->array[(i + 1) % stack->top].value + 1)
-				break ;
-			--new_right;
-			if (i == min_index)
-				--new_right;
-			++i;
-		}
-	}
-	return (new_right);
-}
-
-int	is_b_sorted(t_turn *turn, int left, int right)
-{
-	int 	max_index;
-	int		i;
-	t_stack	*stack;
-	int		new_right;
-
-	stack = turn->stack_b;
-	if (stack->top < 2)
-		return (right);
-	max_index = stack->top - 1;
-	i = stack->top;
-	while (ft_between(stack->array[i % stack->top].value, left, right))
-	{
-		max_index = i;
-		++i;
-	}
-	new_right = right;
-	i = max_index;
-	if (stack->array[i % stack->top].value == right)
-	{
-		while (ft_between(stack->array[i % stack->top].value, left, right))
-		{
-			if (stack->array[i % stack->top].value
-				!= stack->array[(i - 1) % stack->top].value + 1)
-				break ;
-			--new_right;
-			if (i == max_index)
-				--new_right;
-			--i;
-		}
-	}
-	return (new_right);
 }

@@ -6,7 +6,7 @@
 /*   By: tbareich <tbareich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 20:52:40 by tbareich          #+#    #+#             */
-/*   Updated: 2022/03/16 21:21:02 by tbareich         ###   ########.fr       */
+/*   Updated: 2022/03/17 18:45:39 by tbareich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,19 @@ t_operation	rotate_a(t_turn *turn, int left, int right, t_operation opt)
 			return (rr);
 	else
 		return (opt);
+}
+
+t_operation need_merge(t_turn *turn, t_operation operation)
+{
+	t_stack *stack_b;
+
+	stack_b = turn->stack_b;
+	if (stack_b->top > 1 && operation == rra
+		&& stack_b->array[0].value > stack_b->array[stack_b->top - 1].value)
+		return (rrr);
+	if (stack_b->top > 1 && 
+		operation == sa && stack_b->array[stack_b->top - 2].value 
+		> stack_b->array[stack_b->top - 1].value)
+		return (ss);
+	return (operation);
 }

@@ -117,5 +117,10 @@ void				push_b(t_turn *turn, int left, int right);
 void				push_a(t_turn *turn, int left, int right);
 t_operation			rotate_a(t_turn *turn, int left, int right,
 							t_operation opt);
+void				move_to_top_b(t_turn *turn, int left, int right, int index);
+void				move_to_top_a(t_turn *turn, int left, int right, int index);
+t_operation 		need_merge(t_turn *turn, t_operation operation);
+void 				sort_b_two_elements(t_turn *turn, int left, int right, int dist);
+void 				sort_b(t_turn *turn, int left, int right, int dist);
 
 #endif

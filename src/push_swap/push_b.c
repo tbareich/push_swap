@@ -6,7 +6,7 @@
 /*   By: tbareich <tbareich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 16:57:08 by tbareich          #+#    #+#             */
-/*   Updated: 2022/03/16 22:16:42 by tbareich         ###   ########.fr       */
+/*   Updated: 2022/03/18 21:59:19 by tbareich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,12 @@ static void	sort_two(t_turn *turn, int left, int right)
 	t_stack *stack;
 	int i = 0;
 
-	while (i < 2)
-	{
-		if (ft_between(turn->stack_a->array[0].value, left, right))
-			move_to_top(turn, 'a', 0);
-		i++;
-	}
 	stack = turn->stack_a;
 	top = stack->top;
+	if (stack->array[0].value <= right)
+		run_action(turn, rra, 1);
+	if (stack->array[0].value <= right)
+		run_action(turn, rra, 1);
 	if (stack->array[top - 1].value > stack->array[top - 2].value)
 		run_action(turn, sa, 1);
 }
@@ -49,39 +47,43 @@ static void sort_three(t_turn *turn, int left, int right)
 				(min_index + 1) % stack->top, (min_index + 2) % stack->top};
 	if (stack->array[idx[0]].value > stack->array[idx[1]].value
 		&& stack->array[idx[1]].value > stack->array[idx[2]].value)
-			return ;
+	{
+		move_to_top(turn, 'a', idx[2]);
+		return ;
+	}
 	if (stack->array[idx[0]].value == left)
 	{
 		move_to_top(turn, 'a', idx[0]);
 		run_action(turn, pb, 1);
-		sort_two(turn,
-			left + 1, right);
+		sort_two(turn, left + 1, right);
 		run_action(turn, pa, 1);
 		return ;
 	}
 	if (stack->array[idx[1]].value == left
-		&& stack->array[idx[0]].value == left + 1)
+		&& stack->array[idx[0]].value == right)
 	{
-		move_to_top(turn, 'a', idx[1]);
+		move_to_top(turn, 'a', idx[2]);
+		run_action(turn, need_merge(turn, sa), 1);
+		return ;
+	}
+	if (stack->array[idx[1]].value == left
+		&& stack->array[idx[2]].value == right)
+	{
+		move_to_top(turn, 'a', idx[2]);
+		run_action(turn, need_merge(turn, sa), 1);
 		run_action(turn, pb, 1);
 		sort_two(turn, left + 1, right);
 		run_action(turn, pa, 1);
 		return ;
 	}
-	if (stack->array[idx[0]].value == left + 1
-		&& stack->array[idx[1]].value == right)
+	if (stack->array[idx[2]].value == left)
 	{
-		if (idx[2] >= 3)
-			run_action(turn, pb, 1);
+		move_to_top(turn, 'a', idx[2]);
+		run_action(turn, pb, 1);
 		sort_two(turn, left + 1, right);
-		if (idx[2] < 3)
-			run_action(turn, rra, 1);
-		else
-			run_action(turn, pa, 1);		
+		run_action(turn, pa, 1);		
 		return ;
 	}
-	move_to_top(turn, 'a', idx[2]);
-	run_action(turn, sa, 1);
 }
 
 void	push_b(t_turn *turn, int left, int right)
@@ -94,9 +96,11 @@ void	push_b(t_turn *turn, int left, int right)
 	if (is_sorted_dir(turn, turn->stack_a, 'a', left, right, -1))
 		return ;
 	dist = right - left;
-	if (dist < 2)
+	if (dist < 3)
 	{
-		if (dist == 1)
+		if (dist == 2)
+			sort_three(turn, left, right);
+		else if (dist == 1)
 			sort_two(turn, left, right);
 		return ;
 	}
