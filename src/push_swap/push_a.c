@@ -6,7 +6,7 @@
 /*   By: tbareich <tbareich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/05 16:38:33 by tbareich          #+#    #+#             */
-/*   Updated: 2022/03/18 22:41:38 by tbareich         ###   ########.fr       */
+/*   Updated: 2022/03/19 05:03:29 by tbareich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,8 @@ void sort_b (t_turn *turn, int left, int right, int dist)
 
 	stack = turn->stack_b;
 	top = stack->top;
-	while (stack->array[top - 1].value < left && stack->array[0].value < left)
-		run_action(turn, rrb, 1);
 	i = 0;
-	if (dist == 1 && top > 0)
+	if (dist == 1)
 		sort_two(turn, left, right, dist);
 	else if (dist == 2 && top == 3)
 		sort_three(turn, left, right, dist);
@@ -95,39 +93,23 @@ void	push_a(t_turn *turn, int left, int right)
 	int	dist;
 	int i;
 	int	down;
-	int index;
+	int up_mid_length;
 
 	dist = right - left;
 	if (is_sorted_dir(turn, turn->stack_b, 'b', left, right, 1))
 	{
-		while (dist > -1)
-		{
+		while (dist-- > -1)
 			run_action(turn, pa, 1);
-			--dist;
-		}
 		return ;
 	}
 	if (dist < 3)
-	{
-		// if (dist == 2)
-		// 	sort_three(turn, left, right);
-		// else if (dist == 1)
-		// 	sort_two(turn, left, right);
-		// else
-		// {
-		// 	if (ft_between(turn->stack_b->array[0].value, left, right))
-		// 		move_to_top(turn, 'b', 0);
-		// 	run_action(turn, pa, 1);
-		// }
-		sort_b(turn, left, right, dist);
-		return ;
-	}
+		return (sort_b(turn, left, right, dist));
 	mid = left + dist / 2 + dist % 2;
 	i = 0;
 	down = 0;
-	while (i < ((dist + 1) / 2 + (dist + 1) % 2))
+	up_mid_length = right - mid + 1;
+	while (i < up_mid_length)
 	{
-		index = search_in_range(turn->stack_b, mid, right);
 		down = turn->stack_b->array[turn->stack_b->top - 1].value < left
 				|| down;
 		if (turn->stack_b->array[0].value >= mid || down)
