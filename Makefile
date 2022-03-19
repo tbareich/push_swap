@@ -26,8 +26,7 @@ PUSH_SWAP_OBJS = push_swap.o\
 				src/push_swap/find_element_position.o\
 				src/push_swap/is_min_max.o\
 				src/push_swap/is_sorted_dir.o\
-				src/push_swap/ajust_stack.o\
-				src/push_swap/rotate.o
+				src/push_swap/ajust_stack.o
 
 CHECKER_OBJS = checker.o src/checker/reader.o src/checker/check_opt.o
 OPERATIONS_OBJS = src/operations/sx.o src/operations/px.o\
@@ -37,7 +36,7 @@ LIBFT = libft
 LIBFT_LIB =  libft/libft.a
 
 CC = gcc
-# CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra
 SDL_INCLUDE    = -I/Users/$$USER/brew/Cellar/sdl2/2.0.20/include \
         -I/Users/$$USER/brew/Cellar/sdl2_ttf/2.0.18_1/include
 

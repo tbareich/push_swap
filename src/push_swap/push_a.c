@@ -6,13 +6,13 @@
 /*   By: tbareich <tbareich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/05 16:38:33 by tbareich          #+#    #+#             */
-/*   Updated: 2022/03/19 05:03:29 by tbareich         ###   ########.fr       */
+/*   Updated: 2022/03/19 06:14:30 by tbareich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
 
-static void sort_two(t_turn *turn, int left, int right, int dist)
+static void sort_two(t_turn *turn)
 {
 	t_stack *stack;
 	int		i;
@@ -61,7 +61,7 @@ void sort_b (t_turn *turn, int left, int right, int dist)
 	top = stack->top;
 	i = 0;
 	if (dist == 1)
-		sort_two(turn, left, right, dist);
+		sort_two(turn);
 	else if (dist == 2 && top == 3)
 		sort_three(turn, left, right, dist);
 	else if (top > 3)
@@ -71,7 +71,6 @@ void sort_b (t_turn *turn, int left, int right, int dist)
 void sort_b_two_elements(t_turn *turn, int left, int right, int dist)
 {
 	t_stack *stack;
-	int		i;
 	int 	top;
 
 	stack = turn->stack_b;

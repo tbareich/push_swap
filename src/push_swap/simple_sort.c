@@ -6,7 +6,7 @@
 /*   By: tbareich <tbareich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 04:00:30 by tbareich          #+#    #+#             */
-/*   Updated: 2022/03/18 22:52:21 by tbareich         ###   ########.fr       */
+/*   Updated: 2022/03/19 05:24:46 by tbareich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	sort_tree(t_turn *turn)
 
 static void	sort_five(t_turn *turn)
 {
-	int	index;
+	// int	index;
 
 	run_action(turn, pb, 1);
 	run_action(turn, pb, 1);

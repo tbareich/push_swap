@@ -6,17 +6,16 @@
 /*   By: tbareich <tbareich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 16:57:08 by tbareich          #+#    #+#             */
-/*   Updated: 2022/03/18 21:59:19 by tbareich         ###   ########.fr       */
+/*   Updated: 2022/03/19 05:29:03 by tbareich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <push_swap.h>
 
-static void	sort_two(t_turn *turn, int left, int right)
+static void	sort_two(t_turn *turn, int right)
 {
 	int		top;
 	t_stack *stack;
-	int i = 0;
 
 	stack = turn->stack_a;
 	top = stack->top;
@@ -55,7 +54,7 @@ static void sort_three(t_turn *turn, int left, int right)
 	{
 		move_to_top(turn, 'a', idx[0]);
 		run_action(turn, pb, 1);
-		sort_two(turn, left + 1, right);
+		sort_two(turn, right);
 		run_action(turn, pa, 1);
 		return ;
 	}
@@ -63,16 +62,16 @@ static void sort_three(t_turn *turn, int left, int right)
 		&& stack->array[idx[0]].value == right)
 	{
 		move_to_top(turn, 'a', idx[2]);
-		run_action(turn, need_merge(turn, sa), 1);
+		run_action(turn, sa, 1);
 		return ;
 	}
 	if (stack->array[idx[1]].value == left
 		&& stack->array[idx[2]].value == right)
 	{
 		move_to_top(turn, 'a', idx[2]);
-		run_action(turn, need_merge(turn, sa), 1);
+		run_action(turn, sa, 1);
 		run_action(turn, pb, 1);
-		sort_two(turn, left + 1, right);
+		sort_two(turn, right);
 		run_action(turn, pa, 1);
 		return ;
 	}
@@ -80,7 +79,7 @@ static void sort_three(t_turn *turn, int left, int right)
 	{
 		move_to_top(turn, 'a', idx[2]);
 		run_action(turn, pb, 1);
-		sort_two(turn, left + 1, right);
+		sort_two(turn, right);
 		run_action(turn, pa, 1);		
 		return ;
 	}
@@ -101,7 +100,7 @@ void	push_b(t_turn *turn, int left, int right)
 		if (dist == 2)
 			sort_three(turn, left, right);
 		else if (dist == 1)
-			sort_two(turn, left, right);
+			sort_two(turn, right);
 		return ;
 	}
 	mid = left + dist / 2 + dist % 2 ;
