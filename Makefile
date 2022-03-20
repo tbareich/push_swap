@@ -20,13 +20,13 @@ VISUALIZATOR_OBJS = visualizator/visualisator.o
 OBJS = src/check_args.o src/merge_sort.o src/is_sorted.o src/run_action.o
 
 PUSH_SWAP_OBJS = push_swap.o\
-				src/push_swap/search_in_range.o src/push_swap/move_to_top.o\
+				src/push_swap/move_to_top.o\
 				src/push_swap/simple_sort.o\
 				src/push_swap/push_b.o src/push_swap/push_a.o \
 				src/push_swap/find_element_position.o\
 				src/push_swap/is_min_max.o\
 				src/push_swap/is_sorted_dir.o\
-				src/push_swap/ajust_stack.o
+				src/push_swap/sort_b.o src/push_swap/sort_a.o
 
 CHECKER_OBJS = checker.o src/checker/reader.o src/checker/check_opt.o
 OPERATIONS_OBJS = src/operations/sx.o src/operations/px.o\

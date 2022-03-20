@@ -1,29 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_sorted.c                                        :+:      :+:    :+:   */
+/*   ft_between.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbareich <tbareich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/06 21:18:55 by tbareich          #+#    #+#             */
-/*   Updated: 2022/03/19 23:57:20 by tbareich         ###   ########.fr       */
+/*   Created: 2022/03/19 23:58:36 by tbareich          #+#    #+#             */
+/*   Updated: 2022/03/20 00:17:11 by tbareich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <push_swap.h>
-
-char	is_sorted(t_stack *stack)
+char	ft_between(int v, int min, int max)
 {
-	int		i;
-
-	if (stack->top < 2)
-		return (1);
-	i = stack->top - 1;
-	while (i > 0)
-	{
-		if (stack->array[i].value > stack->array[i - 1].value)
-			return (0);
-		--i;
-	}
-	return (1);
+	return (v >= min && v <= max);
 }

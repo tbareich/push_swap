@@ -70,7 +70,7 @@ typedef struct s_stack
 {
 	int				top;
 	int				length;
-	t_stack_element *array;
+	t_stack_element	*array;
 }	t_stack;
 
 /*
@@ -203,15 +203,17 @@ void				stack_del_content(t_stack *stack);
 unsigned int		ft_abs(int num);
 unsigned long		ft_labs(long num);
 unsigned long long	ft_llabs(long long num);
-char				is_int(char *number);
 int					max(int a, int b);
 int					min(int a, int b);
+char				ft_between(int v, int min, int max);
+int					ft_modulo(int i, int j);
 
 /*
  ** Extra Functions
  ** -----------------------
 */
 
+char				is_int(char *number);
 void				error(char *msg);
 char				*ft_strjoin_free(char const *s1, char const *s2,
 						int option);

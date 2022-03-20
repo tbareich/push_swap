@@ -25,7 +25,6 @@
 # endif
 
 # define MAXRETRY 20
-# define ft_between(v, min, max) (v >= min && v <= max)
 
 typedef enum e_operation
 {
@@ -64,17 +63,7 @@ typedef struct s_turn
 {
 	t_stack			*stack_a;
 	t_stack			*stack_b;
-	t_operation		b_rotate_type;
-	t_action_list	*a_actions;
-	t_action_list	*b_actions;
-	t_action_list	*actions;
 	t_visualizator	*visualizator;
-	int				b_rotate_length;
-	int				a_rotate_length;
-	int				low_min;
-	int				low_max;
-	int				up_min;
-	int				up_max;
 	int				current_turn;
 	int				options_length;
 }	t_turn;
@@ -85,26 +74,41 @@ typedef struct s_indexing
 	int				value;
 }	t_indexing;
 
+/*
+**	checker functions
+*/
 void				reader(t_turn *turn, int ac, char **av);
 void				check_args(t_turn *turn, int ac, char **av);
 t_operation			check_opt(char *opt);
 void				merge_sort(t_list **headRef);
+
+/*
+**	push_swap functions
+*/
+void				simple_sort(t_turn *turn);
 char				is_sorted(t_stack *stack);
-char				is_sorted_dir(t_turn *turn, t_stack *stack, char name, int left, int right, int dir);
-int					search_in_range(t_stack *stack, int min, int max);
-int					push_best_range(t_turn *turn, t_stack *stack, char name, int min, int max);
+char				is_sorted_dir_a(t_turn *turn, int left, int right, int dir);
+char				is_sorted_dir_b(t_turn *turn, int left, int right, int dir);
 void				move_to_top(t_turn *turn, char stack_name,
 						int index);
 char				is_min_max(t_stack *stack, int value);
 void				run_action(t_turn *turn, t_operation operation,
 						char add_action);
-void				run_naction(t_turn *turn, t_operation operation, int length);
-void				simple_sort(t_turn *turn);
 int					find_min(t_stack *stack);
-void				need_sa(t_turn *turn, t_stack *stack);
-void				need_sb(t_turn *turn, t_stack *stack);
 int					is_a_sorted(t_turn *turn, int left, int right);
 int					is_b_sorted(t_turn *turn, int left, int right);
+void				push_b(t_turn *turn, int left, int right);
+void				push_a(t_turn *turn, int left, int right);
+void				sort_b(t_turn *turn, int left, int right, int dist);
+void				sort_b_three(t_turn *turn, int left, int right, int dist);
+void				sort_a(t_turn *turn, int left, int right);
+void				sort_a_three(t_turn *turn, int left, int right);
+void				sort_a_two(t_turn *turn, int right);
+int					find_middle_spot_a(t_stack *stack, int number);
+
+/*
+**	operations functions
+*/
 void				sx(t_stack *stack);
 void				s_a_b(t_stack *stack1, t_stack *stack2);
 void				px(t_stack *destination_stack, t_stack *source_stack);
@@ -112,12 +116,5 @@ void				rx(t_stack *stack);
 void				r_a_b(t_stack *stack1, t_stack *stack2);
 void				rrx(t_stack *stack);
 void				rr_a_b(t_stack *stack1, t_stack *stack2);
-
-void				push_b(t_turn *turn, int left, int right);
-void				push_a(t_turn *turn, int left, int right);
-t_operation			rotate_a(t_turn *turn, int left, int right,
-							t_operation opt);
-void 				sort_b_two_elements(t_turn *turn, int left, int right, int dist);
-void 				sort_b(t_turn *turn, int left, int right, int dist);
 
 #endif

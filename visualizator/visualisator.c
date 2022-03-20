@@ -6,7 +6,7 @@
 /*   By: tbareich <tbareich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:03:07 by tbareich          #+#    #+#             */
-/*   Updated: 2022/03/05 19:40:30 by tbareich         ###   ########.fr       */
+/*   Updated: 2022/03/20 04:04:01 by tbareich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,18 +45,18 @@ void    event_listner()
 
 uint32_t rgb(double ratio)
 {
-    int normalized = (int)(ratio * 256 * 4);
+    int normalized = (int)(ratio * 256 * 5);
     int region = normalized / 256;
     int x = normalized % 256;
-
     uint8_t r = 0, g = 0, b = 0;
-
     switch (region)
     {
 		case 0: r = 255; g = 0;   b = 0;   g += x; break;
 		case 1: r = 255; g = 255; b = 0;   r -= x; break;
 		case 2: r = 0;   g = 255; b = 0;   b += x; break;
 		case 3: r = 0;   g = 255; b = 255; g -= x; break;
+		case 4: r = 0;   g = 0; b = 255; r += x; break;
+		case 5: r = 255;   g = 0; b = 255; b -= x; break;
     }
     return r | (g << 8) | (b << 16);
 }
@@ -90,7 +90,8 @@ static void		write_text(t_visualizator *data, char *str, int x, int y)
 	SDL_Color bcolor = { 0, 0, 0, 0};
 	SDL_Surface* surfaceMessage =
 		TTF_RenderText_Shaded(data->font, str, fcolor, bcolor); 
-	SDL_Texture* Message = SDL_CreateTextureFromSurface(data->rend, surfaceMessage);
+	SDL_Texture* Message = SDL_CreateTextureFromSurface(data->rend,
+		surfaceMessage);
 	SDL_Rect Message_rect;
 	Message_rect.w = surfaceMessage->w;
 	Message_rect.h = surfaceMessage->h ;
@@ -115,12 +116,12 @@ void            draw(t_visualizator *data, t_stack a, t_stack b)
 		sdl_error("Get color failed");
     if (SDL_RenderDrawLine(data->rend, WIN_W / 2, 0, WIN_W / 2, WIN_H) != 0)
         sdl_error("Get line failed");
-    if (SDL_RenderDrawLine(data->rend, 0, WIN_H - STACK_H, WIN_W, WIN_H - STACK_H) != 0)
+    if (SDL_RenderDrawLine(data->rend, 0, WIN_H - STACK_H, WIN_W,
+		WIN_H - STACK_H) != 0)
         sdl_error("Get line failed");
     SDL_RenderPresent(data->rend);
+	SDL_Delay(10);
     event_listner();
-    // SDL_Delay(1000);
-    // SDL_Delay(convert_range(a.length, 0, 500, 100, 0));
     event_listner();
 }
 
@@ -148,16 +149,18 @@ void			visualizator(t_visualizator *data, t_stack s, int x, int height)
         {
             if (is_option_activated(data->options, C_OPTION))
             {
-                color = rgb((double)(s.length - 1 - s.array[i].value) / height);
+                color = rgb((double)(height - s.array[i].value) / height);
                 if (SDL_SetRenderDrawColor(data->rend,
-                            color & 0x0000FF, (color & 0x00FF00) >> 8, (color & 0xFF0000) >> 16, 255) != 0)
+                            color & 0x0000FF, (color & 0x00FF00) >> 8,
+							(color & 0xFF0000) >> 16, 255) != 0)
                   sdl_error("Get color failed");
             }
             else
                 if (SDL_SetRenderDrawColor(data->rend,
                            255, 215, 0, 255) != 0)
                   sdl_error("Get color failed");
-            rec.w = convert_range(s.array[i].value, 0, height,  (STACK_W / height) * (height / 3), STACK_W);
+            rec.w = convert_range(s.array[i].value, 0, height,
+				STACK_W / height, STACK_W);
             rec.h = h;
             rec.x = x + WIN_W / 4 - rec.w / 2;
             rec.y = (s.top - i - 1) * h + (WIN_H - STACK_H);
