@@ -6,7 +6,7 @@
 /*   By: tbareich <tbareich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:02:18 by tbareich          #+#    #+#             */
-/*   Updated: 2022/03/20 21:13:45 by tbareich         ###   ########.fr       */
+/*   Updated: 2022/03/20 21:55:05 by tbareich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ void		draw(t_visualiser *data, t_stack a, t_stack b);
 void		visualiser(t_visualiser *data, t_stack s,
 				int x, int height);
 void		loop_program(t_visualiser *data);
-char		is_option_activated(char option, int option_index);
 void		sdl_error(char *message);
+char		is_option_activated(char option, int option_index);
+int			set_options(t_visualiser *visualizator, int ac, char **av);
 
 #endif
