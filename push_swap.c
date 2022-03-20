@@ -12,7 +12,7 @@
 
 #include <push_swap.h>
 
-static int	set_options(t_visualizator *visualizator, int ac, char **av)
+static int	set_options(t_visualiser *visualizator, int ac, char **av)
 {
 	int	i;
 	int	options_length;
@@ -41,7 +41,7 @@ static void	init_turn(t_turn **turn, int *ac, char ***av)
 	*turn = malloc(sizeof(t_turn));
 	if (*turn == NULL)
 		error(MEMOERROR);
-	(*turn)->visualizator = (t_visualizator *)malloc(sizeof(t_visualizator));
+	(*turn)->visualizator = (t_visualiser *)malloc(sizeof(t_visualiser));
 	if ((*turn)->visualizator == NULL)
 		error(MEMOERROR);
 	(*turn)->visualizator->turn = 0;
@@ -81,7 +81,7 @@ int	main(int ac, char **av)
 	if (is_sorted(&stack_a))
 		return (0);
 	if (is_option_activated(turn->visualizator->options, V_OPTION))
-		init_visualisator(turn->visualizator);
+		init_visualiser(turn->visualizator);
 	if (ac <= 6)
 		simple_sort(turn);
 	else

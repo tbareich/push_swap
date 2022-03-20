@@ -73,6 +73,12 @@ typedef struct s_stack
 	t_stack_element	*array;
 }	t_stack;
 
+typedef struct s_range
+{
+	int	min;
+	int	max;
+}	t_range;
+
 /*
  ** libc Functions
  ** --------------
@@ -207,6 +213,8 @@ int					max(int a, int b);
 int					min(int a, int b);
 char				ft_between(int v, int min, int max);
 int					ft_modulo(int i, int j);
+int					ft_convert_range(int value, t_range old_range,
+						t_range new_range);
 
 /*
  ** Extra Functions

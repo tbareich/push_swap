@@ -11,11 +11,16 @@
 # **************************************************************************** #
 
 PS_NAME = push_swap
-C_NAME = checker
-PUSH_SWAP_HEADER = push_swap.h
-VISUALIZATOR_HEADER = visualizator/visualisator.h
 
-VISUALIZATOR_OBJS = visualizator/visualisator.o
+C_NAME = checker
+
+PUSH_SWAP_HEADER = push_swap.h
+
+BONUS_FOLDER=bonus
+
+VISUALISER_HEADER = bonus/visualiser.h
+
+VISUALISER_OBJS = bonus/visualiser.o bonus/draw.o bonus/options.o 
 
 OBJS = src/check_args.o src/merge_sort.o src/is_sorted.o src/run_action.o
 
@@ -54,27 +59,27 @@ all: subsystem $(PS_NAME) $(C_NAME)
 subsystem:
 	@$(MAKE) -C $(LIBFT)
 
-$(PS_NAME): $(OBJS) $(PUSH_SWAP_OBJS) $(VISUALIZATOR_OBJS) \
-	$(OPERATIONS_OBJS) $(VISUALIZATOR_HEADER) $(PUSH_SWAP_HEADER) 
+$(PS_NAME): $(OBJS) $(PUSH_SWAP_OBJS) $(VISUALISER_OBJS) \
+	$(OPERATIONS_OBJS) $(VISUALISER_HEADER) $(PUSH_SWAP_HEADER) 
 	$(CC) $(CFLAGS) $(SDL_FLAGGS) $(SDL_INCLUDE) $(SDL_LIBS) $(OBJS) \
-	$(PUSH_SWAP_OBJS) $(OPERATIONS_OBJS) $(VISUALIZATOR_OBJS) $(LIBFT_LIB) \
+	$(PUSH_SWAP_OBJS) $(OPERATIONS_OBJS) $(VISUALISER_OBJS) $(LIBFT_LIB) \
 	-o $(PS_NAME) -I.
 
 $(C_NAME): $(OBJS) $(CHECKER_OBJS) $(PUSH_SWAP_HEADER) \
-	$(VISUALIZATOR_OBJS) $(VISUALIZATOR_HEADER) $(OPERATIONS_OBJS) 
+	$(VISUALISER_OBJS) $(VISUALISER_HEADER) $(OPERATIONS_OBJS) 
 	$(CC) $(CFLAGS) $(SDL_FLAGGS) $(SDL_INCLUDE) $(SDL_LIBS) $(OBJS) \
-	$(VISUALIZATOR_OBJS) $(CHECKER_OBJS) $(OPERATIONS_OBJS) $(LIBFT_LIB) \
+	$(VISUALISER_OBJS) $(CHECKER_OBJS) $(OPERATIONS_OBJS) $(LIBFT_LIB) \
 	-o $(C_NAME) -I.
 
-%.o: %.c $(VISUALIZATOR_HEADER) $(PUSH_SWAP_HEADER) 
-	$(CC) $(CFLAGS) $(SDL_INCLUDE) -c -o $@  $< -I. -Ivisualizator -I$(LIBFT)
+%.o: %.c $(VISUALISER_HEADER) $(PUSH_SWAP_HEADER) 
+	$(CC) $(CFLAGS) $(SDL_INCLUDE) -c -o $@  $< -I. -I$(BONUS_FOLDER) -I$(LIBFT)
 
 clean:
 	@rm -rf $(OBJS)
 	@rm -rf $(PUSH_SWAP_OBJS)
 	@rm -rf $(CHECKER_OBJS)
 	@rm -rf $(OPERATIONS_OBJS)
-	@rm -rf $(VISUALIZATOR_OBJS)
+	@rm -rf $(VISUALISER_OBJS)
 	@$(MAKE) -C $(LIBFT) clean
 
 fclean: clean

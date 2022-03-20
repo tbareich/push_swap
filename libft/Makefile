@@ -6,7 +6,7 @@
 #    By: tbareich <tbareich@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/24 14:13:12 by tbareich          #+#    #+#              #
-#    Updated: 2022/03/20 01:18:20 by tbareich         ###   ########.fr        #
+#    Updated: 2022/03/20 18:34:26 by tbareich         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,6 +43,7 @@ SRCS_NO_PATH= bst_delete.c bst_deletenode.c bst_find.c \
 		get_int_len.c get_next_line.c ft_swap.c\
 		ft_abs.c is_int.c\
 		ft_between.c ft_modulo.c\
+		ft_between.c ft_convert_range.c\
 		stack.c error.c min.c max.c
 SRCS = $(addprefix $(SRCS_DIR), $(SRCS_NO_PATH))
 OBJS = $(patsubst $(SRCS_DIR)%.c, $(OBJS_DIR)%.o, $(SRCS))

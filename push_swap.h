@@ -14,7 +14,7 @@
 # define PUSH_SWAP_H
 
 # include <libft.h>
-# include <visualisator.h>
+# include <visualiser.h>
 
 # ifndef MEMOERROR
 #  define MEMOERROR "INSUFFICIENT MEMORY\n"
@@ -25,6 +25,16 @@
 # endif
 
 # define MAXRETRY 20
+
+# ifndef V_OPTION
+#  define V_OPTION 0
+# endif
+
+# ifndef C_OPTION
+#  define C_OPTION 1
+# endif
+
+# define H_OPTION 2
 
 typedef enum e_operation
 {
@@ -42,12 +52,12 @@ typedef enum e_operation
 	pb
 }	t_operation;
 
-typedef enum e_range
+typedef enum e_stack_range
 {
 	none,
 	upper_half,
 	lower_half
-}	t_range;
+}	t_stack_range;
 
 typedef struct s_action_list
 {
@@ -63,7 +73,7 @@ typedef struct s_turn
 {
 	t_stack			*stack_a;
 	t_stack			*stack_b;
-	t_visualizator	*visualizator;
+	t_visualiser	*visualizator;
 	int				current_turn;
 	int				options_length;
 }	t_turn;
