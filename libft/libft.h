@@ -222,7 +222,6 @@ int					ft_convert_range(int value, t_range old_range,
 */
 
 char				is_int(char *number);
-void				error(char *msg);
 char				*ft_strjoin_free(char const *s1, char const *s2,
 						int option);
 char				*ft_strdup_free(char **s1);

@@ -6,7 +6,7 @@
 /*   By: tbareich <tbareich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 04:39:59 by tbareich          #+#    #+#             */
-/*   Updated: 2022/03/20 03:29:15 by tbareich         ###   ########.fr       */
+/*   Updated: 2022/03/22 02:26:22 by tbareich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ static void	display_operation(t_turn *turn, t_operation operation)
 		"rr", "rra", "rrb", "rrr", "pa", "pb"};
 
 	ft_putendl(g_actions[operation]);
-	++turn->visualizator->turn;
-	if (is_option_activated(turn->visualizator->options, V_OPTION))
-		draw(turn->visualizator, *(turn->stack_a), *(turn->stack_b));
+	++turn->visualizator.turn;
+	if (is_option_activated(turn->visualizator.options, V_OPTION))
+		draw(&(turn->visualizator), *(turn->stack_a), *(turn->stack_b));
 }
 
 void	run_action(t_turn *turn, t_operation operation, char append)

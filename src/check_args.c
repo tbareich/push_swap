@@ -12,7 +12,7 @@
 
 #include <push_swap.h>
 
-static void	indexing(t_stack *stack, t_list **head)
+static void	indexing(t_turn *turn, t_stack *stack, t_list **head)
 {
 	int			i;
 	t_indexing	*elem;
@@ -30,7 +30,7 @@ static void	indexing(t_stack *stack, t_list **head)
 		{
 			elem_cmp = (t_indexing *)(tmp->next->content);
 			if (elem->value == elem_cmp->value)
-				error(DEFAULTERROR);
+				error(turn, DEFAULTERROR);
 		}
 		tmp = tmp->next;
 		++i;
@@ -50,18 +50,18 @@ void	check_args(t_turn *turn, int ac, char **av)
 	while (i > 0)
 	{
 		if (is_int(av[i]) == 0)
-			error(DEFAULTERROR);
+			error(turn, DEFAULTERROR);
 		number = atoi(av[i]);
 		if (push_stack(turn->stack_a, number, 0))
-			error(DEFAULTERROR);
+			error(turn, DEFAULTERROR);
 		indexing_element.value = number;
 		indexing_element.index = turn->stack_a->top - 1;
 		node = ft_lstnew(&indexing_element, sizeof(t_indexing));
 		if (node == NULL)
-			error(MEMOERROR);
+			error(turn, MEMOERROR);
 		ft_lstadd(&head, node);
 		--i;
 	}
-	indexing(turn->stack_a, &head);
+	indexing(turn, turn->stack_a, &head);
 	ft_lstdel(&head, ft_delcontent);
 }

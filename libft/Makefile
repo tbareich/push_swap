@@ -6,7 +6,7 @@
 #    By: tbareich <tbareich@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/24 14:13:12 by tbareich          #+#    #+#              #
-#    Updated: 2022/03/20 18:34:26 by tbareich         ###   ########.fr        #
+#    Updated: 2022/03/22 03:18:36 by tbareich         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,15 +44,17 @@ SRCS_NO_PATH= bst_delete.c bst_deletenode.c bst_find.c \
 		ft_abs.c is_int.c\
 		ft_between.c ft_modulo.c\
 		ft_between.c ft_convert_range.c\
-		stack.c error.c min.c max.c
+		stack.c min.c max.c
 SRCS = $(addprefix $(SRCS_DIR), $(SRCS_NO_PATH))
 OBJS = $(patsubst $(SRCS_DIR)%.c, $(OBJS_DIR)%.o, $(SRCS))
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra
 
 # COLORS
-GREEN = \033[0;32m
+GREEN = \033[1;32m
 RED = \033[0;31m
+BLUE = \033[1;34m
+WHITE = \033[1;37m
 RESET = \033[0m
 
 all: $(NAME)
@@ -61,10 +63,12 @@ all: $(NAME)
 $(NAME): $(OBJS) $(LIBFT_HEADER)
 	@ar rc $(NAME) $(OBJS)
 	@ranlib $(NAME)
+	@echo "$(WHITE)\nlibft: $(BLUE)linked$(RESET)"
 
 $(OBJS_DIR)%.o: $(SRCS_DIR)%.c
 	@mkdir -p $(OBJS_DIR)
-	$(CC) $(CFLAGS) -c -o $@ $< -I.
+	@$(CC) $(CFLAGS) -c -o $@ $< -I.
+	@echo "$(GREEN).\c$(RESET)"
 
 clean:
 	@rm -rf $(OBJS_DIR)

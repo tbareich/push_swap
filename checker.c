@@ -6,7 +6,7 @@
 /*   By: tbareich <tbareich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/02 00:58:27 by tbareich          #+#    #+#             */
-/*   Updated: 2022/03/08 22:02:00 by tbareich         ###   ########.fr       */
+/*   Updated: 2022/03/22 00:13:40 by tbareich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ int	main(int ac, char **av)
 	if (ac < 2)
 		return (0);
 	if (init_stack(&stack_a, ac - 1))
-		error(MEMOERROR);
+		error(&turn, MEMOERROR);
 	if (init_stack(&stack_b, ac - 1))
-		error(MEMOERROR);
+		error(&turn, MEMOERROR);
 	turn.stack_a = &stack_a;
 	turn.stack_b = &stack_b;
 	reader(&turn, ac, av);

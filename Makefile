@@ -22,7 +22,8 @@ VISUALISER_HEADER = bonus/visualiser.h
 
 VISUALISER_OBJS = bonus/visualiser.o bonus/draw.o bonus/options.o 
 
-OBJS = src/check_args.o src/merge_sort.o src/is_sorted.o src/run_action.o
+OBJS = src/check_args.o src/merge_sort.o src/is_sorted.o src/run_action.o\
+		src/error.o src/free_turn.o
 
 PUSH_SWAP_OBJS = push_swap.o\
 				src/push_swap/move_to_top.o\
@@ -34,6 +35,7 @@ PUSH_SWAP_OBJS = push_swap.o\
 				src/push_swap/sort_b.o src/push_swap/sort_a.o
 
 CHECKER_OBJS = checker.o src/checker/reader.o src/checker/check_opt.o
+
 OPERATIONS_OBJS = src/operations/sx.o src/operations/px.o\
 				src/operations/rx.o src/operations/r_a_b.o src/operations/rrx.o\
 				src/operations/rr_a_b.o src/operations/s_a_b.o
@@ -49,30 +51,36 @@ SDL_LIBS = -L /Users/$$USER/brew/Cellar/sdl2/2.0.20/lib \
         -L /Users/$$USER/brew/Cellar/sdl2_ttf/2.0.18_1/lib
 
 SDL_FLAGGS= `sdl2-config --cflags --libs` -lSDL2 -lSDL2_ttf
+
 # COLORS
-GREEN = \033[0;32m
-RED = \033[0;31m
+GREEN = \033[1;32m
+RED = \033[1;31m
+BLUE = \033[1;34m
+WHITE = \033[1;37m
 RESET = \033[0m
 
-all: subsystem $(PS_NAME) $(C_NAME)
+all: libft $(PS_NAME) $(C_NAME)
 
-subsystem:
+libft:
 	@$(MAKE) -C $(LIBFT)
 
-$(PS_NAME): $(OBJS) $(PUSH_SWAP_OBJS) $(VISUALISER_OBJS) \
+$(PS_NAME): $(OBJS) $(PUSH_SWAP_OBJS) $(VISUALISER_OBJS) $(LIBFT_LIB) \
 	$(OPERATIONS_OBJS) $(VISUALISER_HEADER) $(PUSH_SWAP_HEADER) 
-	$(CC) $(CFLAGS) $(SDL_FLAGGS) $(SDL_INCLUDE) $(SDL_LIBS) $(OBJS) \
+	@$(CC) $(CFLAGS) $(SDL_FLAGGS) $(SDL_INCLUDE) $(SDL_LIBS) $(OBJS) \
 	$(PUSH_SWAP_OBJS) $(OPERATIONS_OBJS) $(VISUALISER_OBJS) $(LIBFT_LIB) \
 	-o $(PS_NAME) -I.
+	@echo "$(WHITE)\npush_swap: $(BLUE)linked$(RESET)"
 
-$(C_NAME): $(OBJS) $(CHECKER_OBJS) $(PUSH_SWAP_HEADER) \
+$(C_NAME): $(OBJS) $(CHECKER_OBJS) $(PUSH_SWAP_HEADER) $(LIBFT_LIB) \
 	$(VISUALISER_OBJS) $(VISUALISER_HEADER) $(OPERATIONS_OBJS) 
-	$(CC) $(CFLAGS) $(SDL_FLAGGS) $(SDL_INCLUDE) $(SDL_LIBS) $(OBJS) \
+	@$(CC) $(CFLAGS) $(SDL_FLAGGS) $(SDL_INCLUDE) $(SDL_LIBS) $(OBJS) \
 	$(VISUALISER_OBJS) $(CHECKER_OBJS) $(OPERATIONS_OBJS) $(LIBFT_LIB) \
 	-o $(C_NAME) -I.
+	@echo "$(WHITE)\nchecker: $(BLUE)linked$(RESET)"
 
 %.o: %.c $(VISUALISER_HEADER) $(PUSH_SWAP_HEADER) 
-	$(CC) $(CFLAGS) $(SDL_INCLUDE) -c -o $@  $< -I. -I$(BONUS_FOLDER) -I$(LIBFT)
+	@$(CC) $(CFLAGS) $(SDL_INCLUDE) -c -o $@  $< -I. -I$(BONUS_FOLDER) -I$(LIBFT)
+	@echo "$(GREEN).\c$(RESET)"
 
 clean:
 	@rm -rf $(OBJS)
@@ -87,6 +95,6 @@ fclean: clean
 	@rm -f $(C_NAME)
 	@$(MAKE) -C $(LIBFT) fclean
 
-re: fclean subsystem all
+re: fclean libft all
 
-.PHONY: all clean fclean re subsystem
+.PHONY: all clean fclean re libft

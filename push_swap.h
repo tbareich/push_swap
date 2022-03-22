@@ -73,7 +73,7 @@ typedef struct s_turn
 {
 	t_stack			*stack_a;
 	t_stack			*stack_b;
-	t_visualiser	*visualizator;
+	t_visualiser	visualizator;
 	int				current_turn;
 	int				options_length;
 }	t_turn;
@@ -88,22 +88,17 @@ typedef struct s_indexing
 **	checker functions
 */
 void				reader(t_turn *turn, int ac, char **av);
-void				check_args(t_turn *turn, int ac, char **av);
 t_operation			check_opt(char *opt);
-void				merge_sort(t_list **headRef);
 
 /*
 **	push_swap functions
 */
 void				simple_sort(t_turn *turn);
-char				is_sorted(t_stack *stack);
 char				is_sorted_dir_a(t_turn *turn, int left, int right, int dir);
 char				is_sorted_dir_b(t_turn *turn, int left, int right, int dir);
 void				move_to_top(t_turn *turn, char stack_name,
 						int index);
 char				is_min_max(t_stack *stack, int value);
-void				run_action(t_turn *turn, t_operation operation,
-						char add_action);
 int					find_min(t_stack *stack);
 int					is_a_sorted(t_turn *turn, int left, int right);
 int					is_b_sorted(t_turn *turn, int left, int right);
@@ -126,5 +121,16 @@ void				rx(t_stack *stack);
 void				r_a_b(t_stack *stack1, t_stack *stack2);
 void				rrx(t_stack *stack);
 void				rr_a_b(t_stack *stack1, t_stack *stack2);
+
+/*
+**	shared functions
+*/
+void				error(t_turn *turn, char *msg);
+void				check_args(t_turn *turn, int ac, char **av);
+void				merge_sort(t_list **headRef);
+char				is_sorted(t_stack *stack);
+void				run_action(t_turn *turn, t_operation operation,
+						char add_action);
+int					free_turn(t_turn *turn);
 
 #endif
