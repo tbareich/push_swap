@@ -12,9 +12,9 @@
 
 #include <push_swap.h>
 
-void	error(t_turn *turn, char *msg)
+void	error(t_data *data, char *msg)
 {
 	ft_putstr_fd(msg, 2);
-	free_turn(turn);
+	free_data(data);
 	exit(1);
 }

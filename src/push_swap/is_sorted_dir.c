@@ -6,7 +6,7 @@
 /*   By: tbareich <tbareich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 00:58:29 by tbareich          #+#    #+#             */
-/*   Updated: 2022/03/22 00:06:35 by tbareich         ###   ########.fr       */
+/*   Updated: 2022/03/22 18:18:10 by tbareich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,36 +53,36 @@ static int	is_sorted_dir(t_stack *stack, int left, int right,
 	return (up_index);
 }
 
-char	is_sorted_dir_a(t_turn *turn, int left, int right, int dir)
+char	is_sorted_dir_a(t_data *data, int left, int right, int dir)
 {
 	int	up_index;
 
-	up_index = is_sorted_dir(turn->stack_a, left, right, dir);
+	up_index = is_sorted_dir(data->stack_a, left, right, dir);
 	if (up_index < 0)
 		return (0);
-	if (turn->stack_a->array[up_index].value != left
-		&& turn->stack_a->array[up_index].value != left + 1)
+	if (data->stack_a->array[up_index].value != left
+		&& data->stack_a->array[up_index].value != left + 1)
 		return (0);
-	move_to_top(turn, 'a', up_index);
-	if ((turn->stack_a->array[turn->stack_a->top - 1].value
-			- turn->stack_a->array[turn->stack_a->top - 2].value) * dir < 0)
-		run_action(turn, sa, 1);
+	move_to_top(data, 'a', up_index);
+	if ((data->stack_a->array[data->stack_a->top - 1].value
+			- data->stack_a->array[data->stack_a->top - 2].value) * dir < 0)
+		run_action(data, sa, 1);
 	return (1);
 }
 
-char	is_sorted_dir_b(t_turn *turn, int left, int right, int dir)
+char	is_sorted_dir_b(t_data *data, int left, int right, int dir)
 {
 	int	up_index;
 
-	up_index = is_sorted_dir(turn->stack_b, left, right, dir);
+	up_index = is_sorted_dir(data->stack_b, left, right, dir);
 	if (up_index < 0)
 		return (0);
-	if (turn->stack_b->array[up_index].value != right
-		&& turn->stack_b->array[up_index].value != right - 1)
+	if (data->stack_b->array[up_index].value != right
+		&& data->stack_b->array[up_index].value != right - 1)
 		return (0);
-	move_to_top(turn, 'b', up_index);
-	if ((turn->stack_b->array[turn->stack_b->top - 1].value
-			- turn->stack_b->array[turn->stack_b->top - 2].value) * dir < 0)
-		run_action(turn, sb, 1);
+	move_to_top(data, 'b', up_index);
+	if ((data->stack_b->array[data->stack_b->top - 1].value
+			- data->stack_b->array[data->stack_b->top - 2].value) * dir < 0)
+		run_action(data, sb, 1);
 	return (1);
 }
