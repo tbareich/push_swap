@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft.h"
+#include <libft.h>
 
 void	ft_swap(t_stack_element *elem1, t_stack_element *elem2)
 {

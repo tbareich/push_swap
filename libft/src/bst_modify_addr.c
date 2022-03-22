@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <libft.h>
 
 int	bst_modify_addr(t_bst *node, void *content, size_t content_size)
 {

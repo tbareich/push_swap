@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <libft.h>
 
 t_bst	*bst_newnode(int key, void *content, size_t content_size)
 {

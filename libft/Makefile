@@ -6,12 +6,13 @@
 #    By: tbareich <tbareich@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/24 14:13:12 by tbareich          #+#    #+#              #
-#    Updated: 2022/03/22 03:52:55 by tbareich         ###   ########.fr        #
+#    Updated: 2022/03/22 04:26:28 by tbareich         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME := libft.a
-LIBFT_HEADER := libft.h
+INCLUDES := includes/
+LIBFT_HEADER := $(INCLUDES)libft.h
 OBJS_DIR := obj/
 SRCS_DIR := src/
 CC := gcc
@@ -72,7 +73,7 @@ $(NAME): $(OBJS) $(LIBFT_HEADER)
 
 $(OBJS_DIR)%.o: $(SRCS_DIR)%.c
 	@mkdir -p $(OBJS_DIR)
-	@$(CC) $(CFLAGS) -c -o $@ $< -I.
+	@$(CC) $(CFLAGS) -c -o $@ $< -I$(INCLUDES)
 	@echo "$(GREEN).\c$(RESET)"
 
 clean:
