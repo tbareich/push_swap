@@ -6,15 +6,28 @@
 #    By: tbareich <tbareich@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/24 14:13:12 by tbareich          #+#    #+#              #
-#    Updated: 2022/03/22 03:18:36 by tbareich         ###   ########.fr        #
+#    Updated: 2022/03/22 03:52:55 by tbareich         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libft.a
-LIBFT_HEADER = libft.h
-OBJS_DIR= obj/
-SRCS_DIR= src/
-SRCS_NO_PATH= bst_delete.c bst_deletenode.c bst_find.c \
+NAME := libft.a
+LIBFT_HEADER := libft.h
+OBJS_DIR := obj/
+SRCS_DIR := src/
+CC := gcc
+CFLAGS := -Wall -Werror -Wextra
+
+#################################### Colors ####################################
+
+GREEN := \033[1;32m
+RED := \033[0;31m
+BLUE := \033[1;34m
+WHITE := \033[1;37m
+RESET := \033[0m
+
+################################ Preprocessing #################################
+
+SRCS_NO_PATH := bst_delete.c bst_deletenode.c bst_find.c \
 		bst_inorder.c bst_insert.c bst_max.c \
 		bst_min.c bst_modify_addr.c bst_newnode.c \
 		ft_atoi.c ft_bzero.c ft_delcontent.c \
@@ -40,25 +53,17 @@ SRCS_NO_PATH= bst_delete.c bst_deletenode.c bst_find.c \
 		ft_strnew.c ft_strnstr.c ft_strrchr.c \
 		ft_strsplit.c ft_strstr.c ft_strsub.c \
 		ft_strtrim.c ft_tolower.c ft_toupper.c \
-		get_int_len.c get_next_line.c ft_swap.c\
-		ft_abs.c is_int.c\
-		ft_between.c ft_modulo.c\
-		ft_between.c ft_convert_range.c\
+		get_int_len.c get_next_line.c ft_swap.c \
+		ft_abs.c is_int.c \
+		ft_between.c ft_modulo.c \
+		ft_between.c ft_convert_range.c \
 		stack.c min.c max.c
-SRCS = $(addprefix $(SRCS_DIR), $(SRCS_NO_PATH))
-OBJS = $(patsubst $(SRCS_DIR)%.c, $(OBJS_DIR)%.o, $(SRCS))
-CC = gcc
-CFLAGS = -Wall -Werror -Wextra
+SRCS := $(addprefix $(SRCS_DIR), $(SRCS_NO_PATH))
+OBJS := $(patsubst $(SRCS_DIR)%.c, $(OBJS_DIR)%.o, $(SRCS))
 
-# COLORS
-GREEN = \033[1;32m
-RED = \033[0;31m
-BLUE = \033[1;34m
-WHITE = \033[1;37m
-RESET = \033[0m
+#################################### Rules #####################################
 
 all: $(NAME)
-
 
 $(NAME): $(OBJS) $(LIBFT_HEADER)
 	@ar rc $(NAME) $(OBJS)
@@ -77,3 +82,5 @@ fclean: clean
 	@rm -f $(NAME)
 
 re: fclean all
+
+.PHONY: all clean fclean re
